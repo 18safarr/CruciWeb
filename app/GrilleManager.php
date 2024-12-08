@@ -59,6 +59,41 @@ class GrilleManager {
         return $html;
     }
 
+
+    public function createGrille2($rs, $cs) {
+        $html = '';
+        $html .= '<table>';
+    
+        // Créer la ligne des lettres des colonnes
+        $html .= '<tr><th></th>';
+        for ($col = 1; $col <= $cs; $col++) {
+            $html .= '<th>' . chr(96 + $col) . '</th>'; // Lettres de 'a' à 'k'
+        }
+        $html .= '</tr>';
+    
+        // Générer les lignes de la grille
+        for ($row = 1; $row <= $rs; $row++) {
+            $html .= '<tr>';
+            $html .= '<td>' . $row . '</td>'; // Numéro de ligne
+    
+            for ($col = 1; $col <= $cs; $col++) {
+                $id = 'cell_' . $row . '_' . $col; // ID unique pour chaque cellule
+    
+                // Par défaut, toutes les cellules sont blanches
+                $html .= '<td id="' . $id . '" class="white-cell"></td>';
+            }
+    
+            $html .= '</tr>';
+        }
+    
+        $html .= '</table>';
+    
+        return $html;
+    }
+    
+
+
+
     public function getAllShareGrilles() {
         $data = $this->ex->getExemplelisteGrille();
         $html = '';

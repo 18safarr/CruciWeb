@@ -1,0 +1,238 @@
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    
+    padding: 20px;
+}
+
+.container-row{
+    margin-right: 20%;
+}
+
+
+/* Paramètres de la grille */
+.params {
+    display: flex;
+    flex-direction: column; /* Aligner les éléments en colonne */
+    align-items: flex-start; /* Aligner à gauche */
+    padding: 20px;
+    width: 100%; /* Assurez-vous que la largeur de la section est maximale */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    margin-right: 100px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="number"] {
+    width: 80px;
+    text-align: center;
+}
+
+/* Dimension inputs alignés côte à côte */
+.dimension {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Bouton générer la grille */
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: auto;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Espace entre les éléments */
+.params input[type="text"], .params input[type="number"], .params select {
+    margin-bottom: 15px;
+}
+
+/* Petite marge avant le bouton */
+.params button {
+    margin-top: 20px;
+}
+
+    
+
+.grid-size {
+    width:50px;
+}
+
+
+
+
+/* Conteneur pour les définitions avec scrollbars */
+.scrollable {
+    max-height: 200px; /* Limite la hauteur des définitions */
+    overflow-y: auto; /* Ajoute une scrollbar verticale */
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+/* Grille défilable horizontalement et verticalement */
+.scrollable-grid {
+    max-width: 100%;
+    max-height: 600px; /* Ajustez selon vos besoins */
+    overflow: auto; /* Scrollbars horizontales et verticales */
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+
+/* Table de la grille */
+.grid table {
+    border-collapse: collapse;
+    margin: 10px auto;
+    width: 100%;
+    min-width: 500px; /* Assure une scrollbar horizontale si nécessaire */
+}
+
+.grid th, .grid td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.grid .black-cell {
+    background-color: #000;
+}
+
+.grid input[type="text"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    background-color: transparent;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+.definitions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+}
+
+.defVertical, .defHorizontal {
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.more-def{
+    display: flex;
+}
+
+.definitions-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.definition {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.def-num{
+    width: 50px !important;
+    text-align: center;
+    
+}
+.def-sol{
+    width: 30% !important;
+}
+
+.supp-def {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: -2%;
+    border-radius: 3px;
+    
+}
+
+
+
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+
+button:hover {
+    background-color: #218838;
+}
+
+button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.logout {
+    background-color: #dc3545;
+}
+
+button.logout:hover {
+    background-color: #c82333;
+}
+
+#add-vertical-definition,#add-horizontal-definition{
+    padding: none;
+    height: 1%;
+    margin-left: 1%;
+}
