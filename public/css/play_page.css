@@ -1,0 +1,101 @@
+
+
+
+nav .logout {
+    background-color: #f44336;
+}
+
+nav button:hover {
+    opacity: 0.9;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.clues {
+    flex: 1;
+    margin: 10px;
+    text-align: left;
+}
+
+.clues h3 {
+    margin-bottom: 10px;
+}
+
+/* Conteneur pour les définitions avec scrollbars */
+.scrollable {
+    max-height: 200px; /* Limite la hauteur des définitions */
+    overflow-y: auto; /* Ajoute une scrollbar verticale */
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+/* Grille défilable horizontalement et verticalement */
+.scrollable-grid {
+    max-width: 100%;
+    max-height: 600px; /* Ajustez selon vos besoins */
+    overflow: auto; /* Scrollbars horizontales et verticales */
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+
+/* Table de la grille */
+.grid table {
+    border-collapse: collapse;
+    margin: 10px auto;
+    width: 100%;
+    min-width: 500px; /* Assure une scrollbar horizontale si nécessaire */
+}
+
+.grid th, .grid td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.grid .black-cell {
+    background-color: #000;
+}
+
+.grid input[type="text"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    background-color: transparent;
+    outline: none;
+}
+
+
+
+#save-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#save-button:hover {
+    background-color: #45a049;
+}
+
+

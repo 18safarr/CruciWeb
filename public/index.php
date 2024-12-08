@@ -11,6 +11,8 @@ if (isset($_GET['p'])){
 }
 
 if($p==="home_user"){
-    require '../pages/accueil_user.php';
+    require '../pages/home_user.php';
+}elseif ($p==="play") {
+    require '../pages/play_page.php';
 }
 ?>

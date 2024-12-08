@@ -1,0 +1,41 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+
+/* En-tête */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ccc;
+}
+
+nav button {
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+.logo img {
+    width: 80px;
+}
+
+
+/* Pied de page */
+footer {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 0.9em;
+    color: #666;
+}
