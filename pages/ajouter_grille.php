@@ -5,12 +5,12 @@ app\Autoloader::register();
 $gm = new app\GrilleManager();
 $dm = new app\DefinitionManager();
 
-if (isset($_GET['cols'])&&(isset($_GET['rows']))){
-    $cols = $_GET['cols'];
-    $rows = $_GET['rows'];
+if (isset($_POST['cols'])&&(isset($_POST['rows']))){
+    $cols = $_POST['cols'];
+    $rows = $_POST['rows'];
 }else{
     $cols = 13;
-    $rows = 13;
+    $rows = 12;
 }
 ?>
 
