@@ -3,8 +3,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background: linear-gradient(to bottom, #ffffff, #dbe6f6);
     color: #333;
+    height: 90%;
+    
 }
 
 
@@ -34,8 +36,10 @@ nav button {
 
 
 footer {
-    text-align: center;
+    margin-top: 30%; /* Pousse le footer vers le bas */
+    background-color: #333; /* Couleur du fond du footer */
+    color: white; /* Couleur du texte */
     padding: 10px;
-    background-color: #d1cdcd;
-    margin-top: 20px;
+    text-align: center;
+    width: 100%;
 }
