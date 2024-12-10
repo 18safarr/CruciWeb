@@ -12,8 +12,11 @@ $grille = new app\GrilleManager();
     <title>CrusiWeb - Accueil</title>
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/home_user.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <script src="js/sortTableElement.js" defer></script>
     <script src="js/load_form.js" defer></script>
+    <script src="js/load_liste_grille.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
 </head>
 <body>
     <!-- En-tête -->

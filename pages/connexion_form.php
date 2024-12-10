@@ -3,7 +3,7 @@
         <img src="images/auth.png" alt="Logo Crucigrille">
     </div>
     <h1>Se connecter</h1>
-    <form id="login-form">
+    <form id="login-form" method="post">
         <div class="form-group">
             <label for="username">Identifiant ou e-mail</label>
             <input type="text" id="username" name="username" placeholder="Entrez votre identifiant" required>

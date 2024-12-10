@@ -24,6 +24,7 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/ajouter_grille.css">
     <script src="js/ajouter_grille.js" defer></script>
+    <script src="js/load_grille.js" defer></script>
 </head>
 <body>
     <header>

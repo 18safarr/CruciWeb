@@ -114,6 +114,26 @@ class GrilleManager {
         return $html;
     }
 
+    public function getAllShareGrilles2() {
+        $data = $this->ex->getExemplelisteGrille();
+        $html = '';
+        foreach ($data as $row) {
+            $html .= '
+                <tr>
+                    <td>' . htmlspecialchars($row['id']) . '</td>
+                    <td>' . htmlspecialchars($row['name']) . '</td>
+                    <td>' . htmlspecialchars($row['score']) . '</td>
+                    <td>' . htmlspecialchars($row['level']) . '</td>
+                    <td>' . htmlspecialchars($row['date']) . '</td>
+                    <td>' . htmlspecialchars($row['username']) . '</td>
+                    <td><a href="#" class="edit-link">Modifier</a> | <a href="#" class="del-link">X</a></td>
+                </tr>
+            ';
+            
+        }
+        return $html;
+    }
+
     // Fonction pour traiter la soumission de la grille
     public function saveGrid() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
