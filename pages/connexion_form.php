@@ -1,4 +1,7 @@
 <div class="form-container">
+    <div class="logo">
+        <img src="images/auth.png" alt="Logo Crucigrille">
+    </div>
     <h1>Se connecter</h1>
     <form id="login-form">
         <div class="form-group">

@@ -109,61 +109,7 @@ class GrilleManager {
                     <td><a href="#" class="play-link">Jouer</a></td>
                 </tr>
             ';
-            $html .= '
-                <tr>
-                    <td>' . htmlspecialchars($row['id']) . '</td>
-                    <td>' . htmlspecialchars($row['name']) . '</td>
-                    <td>' . htmlspecialchars($row['score']) . '</td>
-                    <td>' . htmlspecialchars($row['level']) . '</td>
-                    <td>' . htmlspecialchars($row['date']) . '</td>
-                    <td>' . htmlspecialchars($row['username']) . '</td>
-                    <td><a href="#" class="play-link">Jouer</a></td>
-                </tr>
-            ';
-            $html .= '
-                <tr>
-                    <td>' . htmlspecialchars($row['id']) . '</td>
-                    <td>' . htmlspecialchars($row['name']) . '</td>
-                    <td>' . htmlspecialchars($row['score']) . '</td>
-                    <td>' . htmlspecialchars($row['level']) . '</td>
-                    <td>' . htmlspecialchars($row['date']) . '</td>
-                    <td>' . htmlspecialchars($row['username']) . '</td>
-                    <td><a href="#" class="play-link">Jouer</a></td>
-                </tr>
-            ';
-            $html .= '
-                <tr>
-                    <td>' . htmlspecialchars($row['id']) . '</td>
-                    <td>' . htmlspecialchars($row['name']) . '</td>
-                    <td>' . htmlspecialchars($row['score']) . '</td>
-                    <td>' . htmlspecialchars($row['level']) . '</td>
-                    <td>' . htmlspecialchars($row['date']) . '</td>
-                    <td>' . htmlspecialchars($row['username']) . '</td>
-                    <td><a href="#" class="play-link">Jouer</a></td>
-                </tr>
-            ';
-            $html .= '
-                <tr>
-                    <td>' . htmlspecialchars($row['id']) . '</td>
-                    <td>' . htmlspecialchars($row['name']) . '</td>
-                    <td>' . htmlspecialchars($row['score']) . '</td>
-                    <td>' . htmlspecialchars($row['level']) . '</td>
-                    <td>' . htmlspecialchars($row['date']) . '</td>
-                    <td>' . htmlspecialchars($row['username']) . '</td>
-                    <td><a href="#" class="play-link">Jouer</a></td>
-                </tr>
-            ';
-            $html .= '
-                <tr>
-                    <td>' . htmlspecialchars($row['id']) . '</td>
-                    <td>' . htmlspecialchars($row['name']) . '</td>
-                    <td>' . htmlspecialchars($row['score']) . '</td>
-                    <td>' . htmlspecialchars($row['level']) . '</td>
-                    <td>' . htmlspecialchars($row['date']) . '</td>
-                    <td>' . htmlspecialchars($row['username']) . '</td>
-                    <td><a href="#" class="play-link">Jouer</a></td>
-                </tr>
-            ';
+            
         }
         return $html;
     }

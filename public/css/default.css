@@ -34,9 +34,7 @@ nav button {
     width: 80px;
 }
 
-
 footer {
-    margin-top: 30%; /* Pousse le footer vers le bas */
     background-color: #333; /* Couleur du fond du footer */
     color: white; /* Couleur du texte */
     padding: 10px;

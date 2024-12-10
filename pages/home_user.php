@@ -28,9 +28,10 @@ $grille = new app\GrilleManager();
     </header>
 
   
-
+    <h1 class="title-table">Mots croisés en ligne gratuit</h1>
     <!-- Conteneur principal -->
     <div class="container">
+    
         <!-- Tableau des grilles -->
         <div class="table-container">
             <table id="grilleTable">
@@ -54,37 +55,9 @@ $grille = new app\GrilleManager();
             </table>
         </div>
 
-        <!-- Section de connexion -->
-        <!-- Conteneur droit -->
         <div class="right-container" id="right-container">
-            <!-- Le contenu chargé dynamiquement sera inséré ici -->
-            <div class="form-container">
-                <div class="logo">
-                    <img src="images/sign_in.png" alt="Logo Crucigrille">
-                </div>
-                <h1>Créer un compte</h1>
-                <form id="inscription-form">
-                    <div class="form-group">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" placeholder="Entrez votre adresse e-mail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" placeholder="Créez un mot de passe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirmer le mot de passe</label>
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
-                    </div>
-                    <div id="error-message" class="error hidden">
-                        <p>Les mots de passe ne correspondent pas.</p>
-                    </div>
-                    <button type="submit" class="btn">S'inscrire</button>
-                </form>
-                <div class="footer">
-                    <p>Vous avez déjà un compte ? <a href="#" onclick="loadForm('connexion')">Se connecter</a></p>
-                </div>
-            </div>
+            <!-- Le contenu chargé dynamiquement sera inséré ici par defaut il y'a la page connexion -->
+           <?php require_once '../pages/connexion_form.php'; ?>
         </div>
     </div>
 
@@ -93,5 +66,5 @@ $grille = new app\GrilleManager();
  <!-- Pied de page -->
  <footer>
         <p>Copyright © 2024 - 2025 Master 1 Génie de l'Informatique Logicielle CrusiWeb. Tous droits réservés.</p>
-    </footer>
+</footer>
 </html>
