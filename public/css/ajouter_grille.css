@@ -189,6 +189,11 @@ button.logout:hover {
     border-radius: 3px; 
     margin-top: -2%; /* Correction pour l'alignement du bouton */
 }
+.valider-def{
+    border-radius: 3px; 
+    margin-top: -2%; /* Correction pour l'alignement du bouton */
+    margin-left: 5px;
+}
 
 /* ========================
    Autres styles
