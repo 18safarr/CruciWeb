@@ -1,8 +1,7 @@
 <?php
-require_once '../app/Autoloader.php';
-// Enregistrer l'autoloader
-app\Autoloader::register();
-$grille = new app\GrilleManager();
+require_once '../app/GrilleManager.php';
+use app\GrilleManager;
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -51,7 +50,7 @@ $grille = new app\GrilleManager();
                 </thead>
                 <tbody>
                     <?php
-                    $gm = new app\GrilleManager();
+                    $gm = new GrilleManager();
                     echo $gm->getAllShareGrilles();
                     ?>
                 </tbody>

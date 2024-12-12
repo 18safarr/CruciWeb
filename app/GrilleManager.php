@@ -1,5 +1,8 @@
 <?php
 namespace app;
+require_once "../app/ExempleData.php";
+use app\ExempleData;
+
 
 class GrilleManager {
     private $rows;

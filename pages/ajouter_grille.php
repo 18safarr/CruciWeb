@@ -1,9 +1,10 @@
 <?php
-require_once  '../app/Autoloader.php';
-// Enregistrer l'autoloader
-app\Autoloader::register();
-$gm = new app\GrilleManager();
-$dm = new app\DefinitionManager();
+require_once  '../app/GrilleManager.php';
+require_once  '../app/DefinitionManager.php';
+use app\GrilleManager;
+use app\DefinitionManager;
+$gm = new GrilleManager();
+$dm = new DefinitionManager();
 
 if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $cols = $_POST['cols'];

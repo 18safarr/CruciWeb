@@ -1,12 +1,13 @@
 <?php
-require_once '../app/Autoloader.php';
-app\Autoloader::register();
+require_once  '../app/GrilleManager.php';
+require_once  '../app/DefinitionManager.php';
+use app\GrilleManager;
 
 if (isset($_POST['load-liste-grille'])) {
     $type = $_POST['load-liste-grille']; 
 
     if ($type=="privee") { 
-        $gm = new app\GrilleManager();
+        $gm = new GrilleManager();
        echo '<thead>
             <tr>
                 <th>N°</th>
@@ -20,7 +21,7 @@ if (isset($_POST['load-liste-grille'])) {
         </thead>
         <tbody>'.$gm->getAllShareGrilles2().'</tbody>';
     } else {
-        $gm = new app\GrilleManager();
+        $gm = new GrilleManager();
        echo '<thead>
             <tr>
                 <th>N°</th>
