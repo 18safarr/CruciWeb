@@ -14,7 +14,7 @@ use app\GrilleManager;
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="js/sortTableElement.js" defer></script>
     <script src="js/load_form.js" defer></script>
-    <script src="js/load_liste_grille.js" defer></script>
+    <script src="js/connexion_form.js" defer></script>
     <script src="js/dashboard.js" defer></script>
 </head>
 <body>
@@ -59,7 +59,7 @@ use app\GrilleManager;
 
         <div class="right-container" id="right-container">
             <!-- Le contenu chargé dynamiquement sera inséré ici par defaut il y'a la page connexion -->
-           <?php require_once '../pages/connexion_form.php'; ?>
+           <?php require_once '../pages/dashboard.php'; ?>
         </div>
     </div>
 

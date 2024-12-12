@@ -1,10 +1,15 @@
 <?php
+session_start();
 require_once  '../app/GrilleManager.php';
 require_once  '../app/DefinitionManager.php';
 use app\GrilleManager;
 use app\DefinitionManager;
 $gm = new GrilleManager();
 $dm = new DefinitionManager();
+if (!isset($_SESSION['user_id'])){
+    header("Location: http://localhost/CruciWeb/public/");
+} 
+
 
 if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $cols = $_POST['cols'];
@@ -26,6 +31,7 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     <link rel="stylesheet" href="css/ajouter_grille.css">
     <script src="js/ajouter_grille.js" defer></script>
     <script src="js/load_grille.js" defer></script>
+    <script src="js/nav.js" defer></script>
 </head>
 <body>
     <header>
@@ -33,10 +39,11 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
             <img src="images/logo.png" alt="Logo CruciWeb">
         </div>
         <nav>
-            <button>Mes parties</button>
-            <button>Mes grilles</button>
+            <button id="voir-grilles-public">HOME</button>
+            <button >Mes parties</button>
+            <button id="voir-mes-grilles" >Mes grilles</button>
             <button class="disabled">Ajouter grille</button>
-            <button class="logout">Déconnexion</button>
+            <button class="logout" id="logout">Déconnexion</button>
         </nav>
     </header>
 

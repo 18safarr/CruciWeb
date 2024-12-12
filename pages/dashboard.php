@@ -12,11 +12,11 @@ if (isset($_SESSION['user_id'])) { // Vérifiez si l'utilisateur est connecté.
             <button class="btn blue-btn" class="inactive" id="voir-grilles-public">Home</button>
             <button class="btn blue-btn" id="voir-mes-grilles">Mes grilles</button>
             <button class="btn blue-btn">Mes parties</button>
-            <button class="btn blue-btn">Ajouter grille</button>
+            <button class="btn blue-btn" id="add-grille">Ajouter grille</button>
         </div>
-        <button class="btn red-btn">Déconnexion</button>
+        <button class="btn red-btn" id="logout" >Déconnexion</button>
     </div>';
 } else {
-    echo '<p>Vous devez être connecté pour accéder à ce contenu.</p>';
+    require_once '../pages/connexion_form.php';
 }
 ?>
