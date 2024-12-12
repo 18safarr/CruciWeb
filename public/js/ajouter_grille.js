@@ -40,13 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
         newDef.innerHTML = `
-            <label>N°</label>
-            <input type="text" class="def-num" placeholder="a, b, c..." maxlength="1">
+            <label>Départ</label>
+            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
+            <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1">
             <label>Description</label>
             <input type="text" class="def-desc" placeholder="Définition">
             <label>Solution</label>
             <input type="text" class="def-sol" placeholder="Solution">
             <button class="supp-def">X</button>
+            <button class="valider-def">&#x2713;</button>
         `;
 
         // Ajoute la nouvelle définition au début de la liste des définitions verticales
@@ -66,13 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
         newDef.innerHTML = `
-            <label>N°</label>
-            <input type="text" class="def-num" placeholder="1, 2, 3..." maxlength="1">
+            <label>Départ</label>
+            <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
+            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
             <label>Description</label>
             <input type="text" class="def-desc" placeholder="Définition">
             <label>Solution</label>
             <input type="text" class="def-sol" placeholder="Solution">
             <button class="supp-def">X</button>
+            <button class="valider-def">&#x2713;</button>
         `;
 
         // Ajoute la nouvelle définition au début de la liste des définitions horizontales

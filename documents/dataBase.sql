@@ -17,7 +17,8 @@ CREATE TABLE Users (
 CREATE TABLE Grilles (
     idGrille INT AUTO_INCREMENT PRIMARY KEY,
     nomGrille VARCHAR(100) NOT NULL,
-    dimension INT NOT NULL,
+    dimX INT NOT NULL,
+    dimY INT NOT NULL,
     datePublication DATE,
     idAuteur INT,
     difficulte INT,

@@ -109,12 +109,14 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     <div class="definitions-scroll">
                         <div class="definition">
                             <label>N°</label>
-                            <input type="text" class="def-num" placeholder="a, b, c...">
+                            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
+                            <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1">
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>
                             <input type="text" class="def-sol" placeholder="Solution">
                             <button class="supp-def">X</button>
+                            <button class="valider-def">&#x2713;</button>
                         </div>
                     </div>
                     
@@ -129,12 +131,14 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     <div class="definitions-scroll">
                         <div class="definition">
                             <label>N°</label>
-                            <input type="text" class="def-num" placeholder="1, 2, 3...">
+                            <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
+                            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>
                             <input type="text" class="def-sol" placeholder="Solution">
                             <button class="supp-def">X</button>
+                            <button class="valider-def">&#x2713;</button>
                         </div>
                     </div>
                     
