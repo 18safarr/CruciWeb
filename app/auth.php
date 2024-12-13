@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
    
 
     if (Users::authenticateUser($id, $pass)) {
-        $_SESSION["user_id"] = $id; // L'identifiant utilisateur peut être dynamique.
+        $_SESSION["user_id"] = Users::getId($id); // L'identifiant utilisateur peut être dynamique.
         $response["success"] = true;
     }
 }

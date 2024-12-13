@@ -14,10 +14,32 @@ require_once '../app/Database.php';
 require_once '../app/table/Users.php';
 use app\table\Users;
 
+require_once '../app/GrilleManager.php';
+require_once '../app/table/Grilles.php';
+require_once '../app/table/Definitions.php';
+require_once '../app/table/Cases.php';
+require_once '../app/DefinitionManager.php';
+use app\GrilleManager;
+use app\DefinitionManager;
+use app\table\Grilles;
+use app\table\Definitions;
+use app\table\Cases;
+
 //$users = Users::insertUser("koundibr","root");// Appel de la méthode statique
 
-$user = Users::authenticateUser("koundibr", "root");
+// $user = Users::authenticateUser("koundibr", "root");
+// var_dump($user);
+
+$user = Users::getId("koundibr");
 var_dump($user);
+ // Insérer la grille dans la table Grilles
+//  $idGrille = Grilles::addGrille(
+//     'nomGrille', 
+//     2, 
+//     2, 
+//     2, 
+//     'Expert'
+// );
 
 
 ?>

@@ -21,7 +21,7 @@ CREATE TABLE Grilles (
     dimY INT NOT NULL,
     datePublication DATE,
     idAuteur INT,
-    difficulte INT,
+    difficulte ENUM('Débutant','Intermédiaire','Expert') NOT NULL,
     FOREIGN KEY (idAuteur) REFERENCES Users(idUser)
     ON DELETE CASCADE
 );

@@ -25,6 +25,18 @@ class GrilleManager {
         return false;
     }
 
+    // public function addGrille($nomGrille, $dimX, $dimY, $idAuteur, $difficulte) {
+    //     $stmt = $this->db->prepare("INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) VALUES (?, ?, ?, NOW(), ?, ?)");
+    //     $stmt->execute([$nomGrille, $dimX, $dimY, $idAuteur, $difficulte]);
+    //     return $this->db->lastInsertId();
+    // }
+    
+    // public function addCase($idGrille, $posX, $posY, $isBlack) {
+    //     $stmt = $this->db->prepare("INSERT INTO Cases (positionX, positionY, isBlack, idGrille) VALUES (?, ?, ?, ?)");
+    //     $stmt->execute([$posX, $posY, $isBlack, $idGrille]);
+    // }
+    
+
     // Fonction pour générer la grille HTML
     public function createGrille() {
         $html = '';

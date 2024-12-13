@@ -7,6 +7,7 @@ use app\DefinitionManager;
 $gm = new GrilleManager();
 $dm = new DefinitionManager();
 if (!isset($_SESSION['user_id'])){
+ 
     header("Location: http://localhost/CruciWeb/public/");
 } 
 
@@ -15,8 +16,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $cols = $_POST['cols'];
     $rows = $_POST['rows'];
 }else{
-    $cols = 13;
-    $rows = 12;
+    $cols = 5;
+    $rows = 5;
 }
 ?>
 
@@ -70,9 +71,9 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     <h2>Sauvegarde de la grille</h2>
                     <label for="difficulty">Niveau Difficulté :</label>
                     <select id="difficulty">
-                        <option value="Facile">Facile</option>
+                        <option value="Débutant">Débutant</option>
                         <option value="Intermédiaire" selected>Intermédiaire</option>
-                        <option value="Difficile">Difficile</option>
+                        <option value="Expert">Expert</option>
                     </select>
                     <label>Publiée :</label>
                     <input type="radio" name="publish" id="publish-no" checked> Non

@@ -117,4 +117,105 @@ document.addEventListener("DOMContentLoaded", function () {
     const blackCells = getBlackCells();
     console.log('Cellules noires:', blackCells);
 
+
+    document.addEventListener("click", function (event) {
+        if (event.target && event.target.id === "save-grid") {
+            const grilleData = collectGridData();
+            console.log(grilleData); // 🔍 Affiche les données collectées
+
+            // Envoi des données au serveur via AJAX
+        fetch('../app/save_grille.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(grilleData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Grille enregistrée avec succès !');
+            } else {
+                alert('Erreur lors de l\'enregistrement de la grille.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error,response => response.json() ));
+
+        }
+    });
+
+    // const saveGridButton = document.getElementById("save-grid");
+
+    // saveGridButton.addEventListener("click", function () {
+    //     const grilleData = collectGridData();
+    //     console.log(grilleData);
+    //     // Envoi des données au serveur via AJAX
+    //     fetch('../app/save_grille.php', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(grilleData)
+    //     })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if (data.success) {
+        //         alert('Grille enregistrée avec succès !');
+        //     } else {
+        //         alert('Erreur lors de l\'enregistrement de la grille.');
+        //     }
+        // })
+        // .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error,response => response.json() ));
+    //});
+
+    function collectGridData() {
+        const gridName = document.getElementById('grid-name').value;
+        const dimX = document.getElementById('grid-size-x').value;
+        const dimY = document.getElementById('grid-size-y').value;
+        const difficulty = document.getElementById('difficulty').value;
+        const published = document.getElementById('publish-yes').checked ? 1 : 0;
+
+        // Récupère les positions des cases noires
+        const blackCells = getBlackCells();
+
+        // Collecte des définitions verticales et horizontales
+        const verticalDefs = collectDefinitions('.defVertical .definition');
+        const horizontalDefs = collectDefinitions('.defHorizontal .definition');
+
+        return {
+            nomGrille: gridName,
+            dimX: dimX,
+            dimY: dimY,
+            difficulte: difficulty,
+            publiee: published,
+            blackCells: blackCells,
+            verticalDefs: verticalDefs,
+            horizontalDefs: horizontalDefs
+        };
+    }
+
+    function getBlackCells() {
+        const blackCells = document.querySelectorAll('#crossword td.black-cell');
+        const blackCellPositions = [];
+        
+        blackCells.forEach(cell => {
+            const row = cell.parentElement.rowIndex;
+            const col = cell.cellIndex;
+            blackCellPositions.push({ x: col + 1, y: row + 1 });
+        });
+
+        return blackCellPositions;
+    }
+
+    function collectDefinitions(selector) {
+        const definitions = [];
+        
+        document.querySelectorAll(selector).forEach(def => {
+            const posX = def.querySelector('#pos-x').value;
+            const posY = def.querySelector('#pos-y').value;
+            const description = def.querySelector('.def-desc').value;
+            const solution = def.querySelector('.def-sol').value;
+
+            definitions.push({ posX, posY, description, solution });
+        });
+
+        return definitions;
+    }
+
 });
