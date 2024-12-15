@@ -17,6 +17,12 @@
     public static function getLastId(){
         return App::getDb()->lastInsertId();
     }
+
+    public static function getGrilleById($idGrille) {
+        $requete = "SELECT * FROM Grilles WHERE idGrille = ?";
+        $attributes = [$idGrille];
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
+    }
  }
  
 ?>

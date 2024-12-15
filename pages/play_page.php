@@ -1,10 +1,17 @@
 <?php
 require_once  '../app/GrilleManager.php';
 require_once  '../app/DefinitionManager.php';
+require_once  '../app/GrilleManager2.php';
 use app\GrilleManager;
 use app\DefinitionManager;
+use app\GrilleManager2;
+
 $gm = new GrilleManager();
 $dm = new DefinitionManager();
+
+GrilleManager2::initParamsGridFor(70);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -50,7 +57,7 @@ $dm = new DefinitionManager();
                     <div class="scrollable-grid">
                         <div id="crossword">
                         <?php
-                            echo $gm->createGrille();
+                            echo GrilleManager2::createGridHTML();
                         ?>
                         </div>
                     </div>

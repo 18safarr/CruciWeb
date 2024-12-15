@@ -37,7 +37,7 @@ if ($inputData) {
     $idGrille = Grilles::getLastId();
     // Insérer les cases noires
     foreach ($inputData['blackCells'] as $cell) {
-        $data = Cases::addCase($idGrille, $cell['x'], $cell['y'], true);
+        $data = Cases::addCase($cell['x'], $cell['y'], $idGrille);
     }
 
     // // Insérer les définitions verticales

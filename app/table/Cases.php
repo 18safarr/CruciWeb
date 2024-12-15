@@ -4,11 +4,17 @@
  use app\App;
 class Cases{
 
-    public static function addCase($idGrille, $posX, $posY, $isBlack) {
-        $requete = "INSERT INTO Cases (positionX, positionY, isBlack, idGrille) VALUES (?, ?, ?, ?)";
-        $attributes = [$idGrille, $posX, $posY, $isBlack];
+    public static function addCase($posX, $posY,$idGrille) {
+        $requete = "INSERT INTO Cases (positionX, positionY, idGrille) VALUES (?, ?, ?)";
+        $attributes = [$posX, $posY,$idGrille];
         return App::getDb()->prepare($requete,$attributes,__CLASS__);
         
+    }
+
+    public static function getCasesByIdGrille($idGrille) {
+        $requete = "SELECT * FROM Cases WHERE idGrille = ?";
+        $attributes = [$idGrille];
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
 }
 

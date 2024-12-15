@@ -18,7 +18,7 @@ class GrilleManager {
     // Fonction pour vérifier si une cellule est noire
     private function isBlackCell($row, $col) {
         foreach ($this->blackCells as $cell) {
-            if ($cell[0] === $row && $cell[1] === $col) {
+            if ($cell===[$row,$col]) {
                 return true;
             }
         }

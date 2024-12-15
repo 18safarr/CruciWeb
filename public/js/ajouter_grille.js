@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     document.getElementById('crossword').addEventListener('click', function(event) {
         if (event.target.tagName === 'TD') {
-            
             event.target.classList.toggle('black-cell'); // Ajoute ou retire la classe "black-cell"
         }
     });
@@ -161,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
         blackCells.forEach(cell => {
             const row = cell.parentElement.rowIndex;
             const col = cell.cellIndex;
-            blackCellPositions.push({ x: col + 1, y: row + 1 });
+            blackCellPositions.push({ x: row + 1, y: col + 1 });
         });
 
         return blackCellPositions;
