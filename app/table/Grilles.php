@@ -9,8 +9,13 @@
         $requete = "INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) VALUES (?, ?, ?, NOW(), ?, ?)";
         $attributes = [$nomGrille, $dimX, $dimY, $idAuteur, $difficulte];
         
+        
         return App::getDb()->prepare($requete,$attributes,__CLASS__);
         
+    }
+
+    public static function getLastId(){
+        return App::getDb()->lastInsertId();
     }
  }
  

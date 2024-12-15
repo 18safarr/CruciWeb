@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     document.getElementById('crossword').addEventListener('click', function(event) {
         if (event.target.tagName === 'TD') {
+            
             event.target.classList.toggle('black-cell'); // Ajoute ou retire la classe "black-cell"
         }
     });
@@ -39,17 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
     addVertiDefinitionBtn.addEventListener("click", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
-        newDef.innerHTML = `
-            <label>Départ</label>
-            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
-            <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1">
-            <label>Description</label>
-            <input type="text" class="def-desc" placeholder="Définition">
-            <label>Solution</label>
-            <input type="text" class="def-sol" placeholder="Solution">
-            <button class="supp-def">X</button>
-            <button class="valider-def">&#x2713;</button>
-        `;
+        
+        // Contenu HTML généré par PHP au moment du rendu
+        newDef.innerHTML = document.getElementById('vertical-template').innerHTML;
 
         // Ajoute la nouvelle définition au début de la liste des définitions verticales
         verticalDefinitionsScroll.insertBefore(newDef, verticalDefinitionsScroll.firstChild);
@@ -67,17 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     addHoriDefinitionBtn.addEventListener("click", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
-        newDef.innerHTML = `
-            <label>Départ</label>
-            <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
-            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
-            <label>Description</label>
-            <input type="text" class="def-desc" placeholder="Définition">
-            <label>Solution</label>
-            <input type="text" class="def-sol" placeholder="Solution">
-            <button class="supp-def">X</button>
-            <button class="valider-def">&#x2713;</button>
-        `;
+        
+        // Contenu HTML généré par PHP au moment du rendu
+        newDef.innerHTML = document.getElementById('horizontal-template').innerHTML;
 
         // Ajoute la nouvelle définition au début de la liste des définitions horizontales
         horizontalDefinitionsScroll.insertBefore(newDef, horizontalDefinitionsScroll.firstChild);
@@ -131,38 +116,17 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
+            
             if (data.success) {
                 alert('Grille enregistrée avec succès !');
             } else {
                 alert('Erreur lors de l\'enregistrement de la grille.');
             }
         })
-        .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error,response => response.json() ));
+        .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error ));
 
         }
     });
-
-    // const saveGridButton = document.getElementById("save-grid");
-
-    // saveGridButton.addEventListener("click", function () {
-    //     const grilleData = collectGridData();
-    //     console.log(grilleData);
-    //     // Envoi des données au serveur via AJAX
-    //     fetch('../app/save_grille.php', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(grilleData)
-    //     })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if (data.success) {
-        //         alert('Grille enregistrée avec succès !');
-        //     } else {
-        //         alert('Erreur lors de l\'enregistrement de la grille.');
-        //     }
-        // })
-        // .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error,response => response.json() ));
-    //});
 
     function collectGridData() {
         const gridName = document.getElementById('grid-name').value;

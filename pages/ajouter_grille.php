@@ -108,10 +108,13 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     </div>
                     
                     <div class="definitions-scroll">
-                        <div class="definition">
+                        <div class="definition" id="vertical-template">
                             <label>N°</label>
-                            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
-                            <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1">
+                            <!-- <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
+                            <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1"> -->
+
+                            <?php echo $gm->getSelectorDefVertical();?>
+        
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>
@@ -130,10 +133,11 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                         <button id="add-horizontal-definition">+</button>
                     </div>
                     <div class="definitions-scroll">
-                        <div class="definition">
+                        <div class="definition" id="horizontal-template">
                             <label>N°</label>
-                            <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
-                            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
+                            <!-- <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
+                            <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1"> -->
+                            <?php echo $gm->getSelectorDefHorizontal();?>
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>

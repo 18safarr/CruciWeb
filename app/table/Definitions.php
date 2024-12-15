@@ -4,9 +4,9 @@
  use app\App;
 
  class Definitions{
-    public static function addDefinition($idGrille, $orientation, $posX, $posY, $description, $solution) {
-        $requete = "INSERT INTO Definitions (orientation, solution, caseDepart, idGrille) VALUES (?, ?, ?, ?)";
-        $attributes = [$idGrille, $orientation, $posX, $posY, $description, $solution];
+    public static function addDefinition($orientation, $posX, $posY, $description, $solution,$idGrille) {
+        $requete = "INSERT INTO Definitions (orientation, posDepX, posDepY, description,solution, idGrille) VALUES (?, ?, ?,?,?,?)";
+        $attributes = [$orientation, $posX, $posY, $description, $solution,$idGrille];
         return App::getDb()->prepare($requete,$attributes,__CLASS__);
        
     }

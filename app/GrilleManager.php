@@ -74,11 +74,36 @@ class GrilleManager {
         return $html;
     }
 
+    public function createSelector($type, $count) {
+        // Identifier si le type est "y" (colonnes) ou "x" (lignes)
+        $html = '<select class="def-num" id="pos-' . $type . '">';
+        for ($i = 1; $i <= $count; $i++) {
+            $value = ($type === 'y') ? chr(96 + $i) : $i; // Génère 'a', 'b', 'c'... pour les colonnes et 1, 2, 3... pour les lignes
+            $html .= '<option value="' . $value . '">' . $value . '</option>';
+        }
+
+        $html .= '</select>';
+        return $html;
+    }
+
+    public function getSelectorDefVertical() {
+        $html = $this->createSelector('y', $this->cols); // Sélecteur des colonnes (a, b, c, ...)
+        $html .= $this->createSelector('x', $this->rows); // Sélecteur des lignes (1, 2, 3, ...)
+        return $html;
+    }
+    
+    public function getSelectorDefHorizontal() {
+        $html = $this->createSelector('x', $this->rows); // Sélecteur des lignes (1, 2, 3, ...)
+        $html .= $this->createSelector('y', $this->cols); // Sélecteur des colonnes (a, b, c, ...)
+        return $html;
+    }
 
     public function createGrille2($rs, $cs) {
         $html = '';
         $html .= '<table>';
-    
+        $this->rows = $rs;
+        $this->cols = $cs;
+
         // Créer la ligne des lettres des colonnes
         $html .= '<tr><th></th>';
         for ($col = 1; $col <= $cs; $col++) {
@@ -89,7 +114,7 @@ class GrilleManager {
         // Générer les lignes de la grille
         for ($row = 1; $row <= $rs; $row++) {
             $html .= '<tr>';
-            $html .= '<td>' . $row . '</td>'; // Numéro de ligne
+            $html .= '<th>' . $row . '</th>'; // Numéro de ligne
     
             for ($col = 1; $col <= $cs; $col++) {
                 $id = 'cell_' . $row . '_' . $col; // ID unique pour chaque cellule

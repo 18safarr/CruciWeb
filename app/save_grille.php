@@ -16,7 +16,7 @@ use app\table\Cases;
 
 
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["success" => false, "message" => "Utilisateur non authentifié."]);
+    echo json_encode(["success" => false, "message" => "Utilisateur non authentifié.",]);
     exit;
 }
 
@@ -34,21 +34,24 @@ if ($inputData) {
         $_SESSION['user_id'],   
         $inputData['difficulte']
     );
-
+    $idGrille = Grilles::getLastId();
     // Insérer les cases noires
     foreach ($inputData['blackCells'] as $cell) {
         $data = Cases::addCase($idGrille, $cell['x'], $cell['y'], true);
     }
 
     // // Insérer les définitions verticales
-    // foreach ($inputData['verticalDefs'] as $def) {
-    //     Definitions::addDefinition($idGrille, 'VERTICAL', $def['posX'], $def['posY'], $def['description'], $def['solution']);
-    // }
+    foreach ($inputData['verticalDefs'] as $def) {
+        $posY= ord($def['posY']) - 96;
+        //Definitions::addDefinition('VERTICAL',$posX , $def['posY'], , ,$idGrille);
+        Definitions::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+    }
 
-    // // Insérer les définitions horizontales
-    // foreach ($inputData['horizontalDefs'] as $def) {
-    //     Definitions::addDefinition($idGrille, 'HORIZONTAL', $def['posX'], $def['posY'], $def['description'], $def['solution']);
-    // }
+    // Insérer les définitions horizontales
+    foreach ($inputData['horizontalDefs'] as $def) {
+        $posY= ord($def['posY']) - 96;
+        Definitions::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+    }
 
     echo json_encode(["success" => true]);
 } else {

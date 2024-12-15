@@ -32,14 +32,17 @@ use app\table\Cases;
 
 $user = Users::getId("koundibr");
 var_dump($user);
- // Insérer la grille dans la table Grilles
+ //Insérer la grille dans la table Grilles
 //  $idGrille = Grilles::addGrille(
 //     'nomGrille', 
-//     2, 
+//     null, 
 //     2, 
 //     2, 
 //     'Expert'
 // );
+
+$posX= ord('a') - 96;
+Definitions::addDefinition('VERTICAL',$posX , 2, "bonjour", "reveill",2);
 
 
 ?>

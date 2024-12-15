@@ -41,8 +41,10 @@ CREATE TABLE Cases (
 CREATE TABLE Definitions (
     idDefinition INT AUTO_INCREMENT PRIMARY KEY,
     orientation ENUM('VERTICAL', 'HORIZONTAL') NOT NULL,
+    posDepX INT NOT NULL,
+    posDepY INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
     solution VARCHAR(255) NOT NULL,
-    caseDepart INT NOT NULL,
     idGrille INT NOT NULL,
     FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille) 
     ON DELETE CASCADE

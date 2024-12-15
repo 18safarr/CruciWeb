@@ -36,7 +36,10 @@ class DataBase
         $datas = $req->fetchAll(PDO::FETCH_CLASS, $class_name); // Mapper les résultats à la classe
         return $datas;
     }
-
+    public function lastInsertId()
+    {
+        return $this->getPDO()->lastInsertId();
+    }
     public function prepare($statement, $attributes, $class_name)
     {
         // Préparer et exécuter la requête avec les attributs donnés
