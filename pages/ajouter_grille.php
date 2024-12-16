@@ -7,11 +7,11 @@ use app\GrilleManager;
 use app\DefinitionManager;
 use app\GrilleManager2;
 
-$gm = new GrilleManager();
+// $gm = new GrilleManager();
 $dm = new DefinitionManager();
 if (!isset($_SESSION['user_id'])){
  
-    header("Location: http://localhost/CruciWeb/public/");
+    header("Location: ../public/");
 } 
 
 
@@ -118,7 +118,7 @@ GrilleManager2::setDimension($rows,$cols);
                             <!-- <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1">
                             <input type="text" class="def-num"id="pos-x" placeholder="1, 2, 3..." maxlength="1"> -->
 
-                            <?php echo $gm->getSelectorDefVertical();?>
+                            <?php echo GrilleManager2::getSelectorDefVerticalHTML();?>
         
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
@@ -142,7 +142,7 @@ GrilleManager2::setDimension($rows,$cols);
                             <label>N°</label>
                             <!-- <input type="text" class="def-num" id="pos-x" placeholder="1, 2, 3..." maxlength="1">
                             <input type="text" class="def-num" id="pos-y" placeholder="a, b, c..." maxlength="1"> -->
-                            <?php echo $gm->getSelectorDefHorizontal();?>
+                            <?php echo GrilleManager2::getSelectorDefHorizontalHTML();?>
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>

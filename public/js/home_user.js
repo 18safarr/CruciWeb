@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const formData = new FormData(loginForm);
 
-            fetch("../app/ajax/auth.php", {
+            fetch("../app/ajax/login.php", {
                 method: "POST",
                 body: formData,
             })
@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     }
+
 
 //------------------------DASHBOARD----------------------------
 

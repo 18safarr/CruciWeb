@@ -3,11 +3,11 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once '../GrilleManager.php';
-require_once '../table/Grilles.php';
-require_once '../table/Definitions.php';
-require_once '../table/Cases.php';
-require_once '../DefinitionManager.php';
+require_once (__DIR__ . '/../GrilleManager.php');
+require_once (__DIR__ . '/../table/Grilles.php');
+require_once (__DIR__ . '/../table/Definitions.php');
+require_once (__DIR__ . '/../table/Cases.php');
+require_once (__DIR__ . '/../DefinitionManager.php');
 use app\GrilleManager;
 use app\DefinitionManager;
 use app\table\Grilles;

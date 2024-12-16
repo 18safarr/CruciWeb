@@ -1,8 +1,6 @@
 <?php
 session_start();
-require_once '../app/GrilleManager.php';
 require_once '../app/GrilleManager2.php';
-use app\GrilleManager;
 use app\GrilleManager2;
 ?>
 <!DOCTYPE html>

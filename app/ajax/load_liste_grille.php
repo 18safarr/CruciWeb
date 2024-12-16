@@ -1,6 +1,6 @@
 <?php
-require_once  (__DIR__ . '/../app/GrilleManager.php');
-require_once  (__DIR__ . '/../app/DefinitionManager.php');
+require_once  (__DIR__ . '/../GrilleManager.php');
+require_once  (__DIR__ . '/../DefinitionManager.php');
 
 use app\GrilleManager;
 

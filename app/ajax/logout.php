@@ -7,12 +7,12 @@ if (isset($_SESSION['user_id'])) {
     session_unset();
     session_destroy();
 
-    // Rediriger l'utilisateur vers la page de connexion ou d'accueil
-    header("Location: ../public/");
+    // // Rediriger l'utilisateur vers la page de connexion ou d'accueil
+    // header("Location: ../public/");
     exit();
 } else {
     // Si aucune session n'existe, redirigez également
-    header("Location: ../public/");
+    // header("Location: ../public/");
     exit();
 }
 ?>

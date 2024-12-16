@@ -70,7 +70,6 @@ class GrilleManager2 {
         }
     }
 
-    // Fonction pour vérifier si une cellule est noire
     private static function isBlackCell($row, $col) {
         
         foreach (self::$blackCells as $cell) {
@@ -164,6 +163,29 @@ class GrilleManager2 {
         return $html;
     }
 
+    private static function createSelectorHTML($type, $count) {
+        // Identifier si le type est "y" (colonnes) ou "x" (lignes)
+        $html = '<select class="def-num" id="pos-' . $type . '">';
+        for ($i = 1; $i <= $count; $i++) {
+            $value = ($type === 'y') ? chr(96 + $i) : $i; // Génère 'a', 'b', 'c'... pour les colonnes et 1, 2, 3... pour les lignes
+            $html .= '<option value="' . $value . '">' . $value . '</option>';
+        }
+
+        $html .= '</select>';
+        return $html;
+    }
+
+    public static function getSelectorDefVerticalHTML() {
+        $html = self::createSelectorHTML('y', self::$cols); // Sélecteur des colonnes (a, b, c, ...)
+        $html .= self::createSelectorHTML('x', self::$rows); // Sélecteur des lignes (1, 2, 3, ...)
+        return $html;
+    }
+
+    public static function getSelectorDefHorizontalHTML() {
+        $html = self::createSelectorHTML('x', self::$rows); // Sélecteur des lignes (1, 2, 3, ...)
+        $html .= self::createSelectorHTML('y', self::$cols); // Sélecteur des colonnes (a, b, c, ...)
+        return $html;
+    }
     
 }
 

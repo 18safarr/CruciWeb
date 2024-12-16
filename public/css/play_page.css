@@ -1,3 +1,70 @@
+/* 🌟 Conteneur du formulaire */
+nav {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-wrap: wrap; /* Pour garantir que les éléments se regroupent sur une nouvelle ligne si l'écran est petit */
+    gap: 10px; /* Espacement entre les éléments */
+    background-color: #ffffff; 
+    padding: 20px; 
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+}
+
+/* 🌟 Style des labels */
+nav label {
+    font-size: 16px; 
+    font-weight: bold;
+    margin-right: 5px; 
+}
+
+/* 🌟 Style des inputs */
+nav input[type="text"], 
+nav input[type="password"],nav input[type="email"] {
+    width: 150px; 
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s; 
+}
+
+nav input[type="text"]:focus, 
+nav input[type="password"]:focus {
+    border-color: #00bcd4; 
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+/* 🌟 Style du bouton de connexion */
+.btn {
+    background-color: #00bcd4; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+
+.btn:hover {
+    background-color: #0097a7; 
+}
+
+/* 🌟 Style du lien "Inscrivez-vous" */
+.register-link {
+    font-size: 16px; 
+    color: #00bcd4; 
+    text-decoration: none; 
+    margin-left: 10px; 
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+
 
 
 
