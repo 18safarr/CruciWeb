@@ -1,6 +1,6 @@
 <?php
  namespace app\table;
- require_once '../app/App.php';
+ require_once '../App.php';
  use app\App;
 
  class Definitions{

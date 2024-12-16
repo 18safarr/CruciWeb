@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once '../app/table/Users.php';
+require_once(__DIR__ . '/../table/Users.php');
+require_once(__DIR__ . '/../App.php');
 use app\table\Users;
-
-
 
 $id = $_POST["username"] ?? "";
 $pass = $_POST["password"] ?? "";

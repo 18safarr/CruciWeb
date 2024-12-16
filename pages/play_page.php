@@ -9,7 +9,11 @@ use app\GrilleManager2;
 $gm = new GrilleManager();
 $dm = new DefinitionManager();
 
-GrilleManager2::initParamsGridFor(70);
+if (isset($_GET["idGrille"])){
+    $idGrille = $_GET["idGrille"];
+    GrilleManager2::initParamsGridFor($idGrille);
+}
+   
 
 
 ?>

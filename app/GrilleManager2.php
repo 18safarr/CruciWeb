@@ -1,7 +1,7 @@
 <?php
 namespace app;
-require_once "../app/table/Grilles.php";
-require_once "../app/table/Cases.php";
+require_once (__DIR__ . '/table/Grilles.php');
+require_once (__DIR__ . '/table/Cases.php');
 use app\table\Grilles;
 use app\table\Cases;
 
@@ -13,7 +13,7 @@ class GrilleManager2 {
     private static $publicDate;
     private static $blackCells=[];
 
-    private static function setDimension($rows,$cols){
+    public static function setDimension($rows,$cols){
         self::$rows = $rows;
         self::$cols = $cols;
         
@@ -29,6 +29,10 @@ class GrilleManager2 {
 
     public static function getDimension(){
         return [self::$rows, self::$cols]; 
+    }
+
+    private static function getDataPublicGrid(){
+        return Grilles::getPublicGrids();
     }
 
     private static function getGridDatas(){
@@ -47,8 +51,6 @@ class GrilleManager2 {
         self::$publicDate = $grille->datePublication;
 
         self::setBlackCells();
-
-       
 
     }
 
@@ -79,9 +81,26 @@ class GrilleManager2 {
         return false;
     }
 
+    public static function createTablePublicGridHTML(){
+        $datas = self::getDataPublicGrid();
+        $html = '';
+        foreach($datas as $grille){
+            $html .= '
+                <tr>
+                    <td>' . htmlspecialchars($grille->idGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->nomGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
+                    <td>' . htmlspecialchars($grille->difficulte) .'</td>
+                    <td>' . htmlspecialchars($grille->datePublication).'</td>
+                    <td><a href="../public/?p=play&idGrille='.htmlspecialchars($grille->idGrille).'" class="play-link">Jouer</a></td>
+                </tr>
+            ';
+        }
+        return $html;
+    }
+
     public static function createGridHTML($withInput = true){
         
-        $html='';
         if($withInput){
             $html = '';
             $html .= '<table>';
@@ -116,7 +135,31 @@ class GrilleManager2 {
     
             $html .= '</table>';
         }else{
-
+            $html = '<table>';
+             // Créer la ligne des lettres des colonnes
+            $html .= '<tr><th></th>';
+            for ($col = 1; $col <= self::$cols; $col++) {
+                $html .= '<th>' . chr(96 + $col) . '</th>'; // Lettres de 'a' à 'k'
+            }
+            $html .= '</tr>';
+        
+            // Générer les lignes de la grille
+            for ($row = 1; $row <= self::$rows; $row++) {
+                $html .= '<tr>';
+                $html .= '<th>' . $row . '</th>'; // Numéro de ligne
+        
+                for ($col = 1; $col <= self::$cols; $col++) {
+                    $id = 'cell_' . $row . '_' . $col; // ID unique pour chaque cellule
+        
+                    // Par défaut, toutes les cellules sont blanches
+                    $html .= '<td id="' . $id . '" class="white-cell"></td>';
+                }
+        
+                $html .= '</tr>';
+            }
+        
+            $html .= '</table>';
+        
         }
         return $html;
     }

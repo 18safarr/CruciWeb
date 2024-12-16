@@ -1,6 +1,7 @@
 <?php
     namespace app\table;
-    require_once '../app/App.php';
+    // require_once '../app/App.php';
+    require_once (__DIR__ . '/../App.php');
     use app\App;
 
     class Users

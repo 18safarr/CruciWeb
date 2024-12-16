@@ -1,6 +1,6 @@
 <?php
 namespace app;
-require_once "../app/ExempleData.php";
+require_once (__DIR__ . '/ExempleData.php');
 use app\ExempleData;
 
 

@@ -1,9 +1,12 @@
 <?php
 session_start();
 require_once  '../app/GrilleManager.php';
+require_once  '../app/GrilleManager2.php';
 require_once  '../app/DefinitionManager.php';
 use app\GrilleManager;
 use app\DefinitionManager;
+use app\GrilleManager2;
+
 $gm = new GrilleManager();
 $dm = new DefinitionManager();
 if (!isset($_SESSION['user_id'])){
@@ -19,6 +22,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $cols = 5;
     $rows = 5;
 }
+
+GrilleManager2::setDimension($rows,$cols);
 ?>
 
 
@@ -31,7 +36,6 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/ajouter_grille.css">
     <script src="js/ajouter_grille.js" defer></script>
-    <script src="js/load_grille.js" defer></script>
     <script src="js/nav.js" defer></script>
 </head>
 <body>
@@ -90,7 +94,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            echo $gm->createGrille2($rows,$cols);
+                            //echo $gm->createGrille2($rows,$cols);
+                            echo GrilleManager2::createGridHTML(withInput:false)
                         ?>
                     </div>
                 </div>

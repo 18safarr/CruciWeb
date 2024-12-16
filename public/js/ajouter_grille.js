@@ -17,6 +17,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    /**
+     * Générer une nouvelle grille
+     * Ce bouton envoie une requête POST au serveur pour générer une grille.
+     * Les dimensions de la grille (colonnes et lignes) sont saisies par l'utilisateur.
+     * 
+     * La grille est ensuite affichée dans le conteneur #crossword.
+     */
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.id === "generate-grid") {
+            const cols = document.getElementById('grid-size-x').value; // Nombre de colonnes
+            const rows = document.getElementById('grid-size-y').value; // Nombre de lignes
+        
+            // Envoyer les données au serveur
+            fetch('../app/ajax/loadGrille.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `cols=${cols}&rows=${rows}` // Paramètres envoyés au serveur
+            })
+            .then(response => response.text()) // Récupération de la réponse sous forme de texte
+            .then(html => {
+                document.getElementById('crossword').innerHTML = html; // Injection de la grille reçue du serveur
+            })
+            .catch(error => console.error('Erreur lors du chargement de la grille:', error)); // Gestion des erreurs
+    
+        }
+    });
    
 
     /**
@@ -108,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(grilleData); // 🔍 Affiche les données collectées
 
             // Envoi des données au serveur via AJAX
-        fetch('../app/save_grille.php', {
+        fetch('../app/ajax/save_grille.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(grilleData)

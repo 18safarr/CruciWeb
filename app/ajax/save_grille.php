@@ -3,11 +3,11 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once '../app/GrilleManager.php';
-require_once '../app/table/Grilles.php';
-require_once '../app/table/Definitions.php';
-require_once '../app/table/Cases.php';
-require_once '../app/DefinitionManager.php';
+require_once '../GrilleManager.php';
+require_once '../table/Grilles.php';
+require_once '../table/Definitions.php';
+require_once '../table/Cases.php';
+require_once '../DefinitionManager.php';
 use app\GrilleManager;
 use app\DefinitionManager;
 use app\table\Grilles;
@@ -32,7 +32,8 @@ if ($inputData) {
         $inputData['dimX'], 
         $inputData['dimY'], 
         $_SESSION['user_id'],   
-        $inputData['difficulte']
+        $inputData['difficulte'],
+        $inputData['publiee']
     );
     $idGrille = Grilles::getLastId();
     // Insérer les cases noires

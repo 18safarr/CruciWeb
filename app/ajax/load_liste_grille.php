@@ -1,6 +1,7 @@
 <?php
-require_once  '../app/GrilleManager.php';
-require_once  '../app/DefinitionManager.php';
+require_once  (__DIR__ . '/../app/GrilleManager.php');
+require_once  (__DIR__ . '/../app/DefinitionManager.php');
+
 use app\GrilleManager;
 
 if (isset($_POST['load-liste-grille'])) {

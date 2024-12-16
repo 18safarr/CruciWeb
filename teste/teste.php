@@ -27,6 +27,12 @@ use app\table\Grilles;
 use app\table\Definitions;
 use app\table\Cases;
 
+
+// $data = Grilles::getPublicGrids();
+// var_dump($data);
+GrilleManager2::setDimension(5,5);
+echo GrilleManager2::createGridHTML(withInput:false);
+// echo GrilleManager2::createTablePublicGridHTML();
 //$users = Users::insertUser("koundibr","root");// Appel de la méthode statique
 
 // $user = Users::authenticateUser("koundibr", "root");
@@ -49,15 +55,16 @@ use app\table\Cases;
 // $data = Cases::getCasesByIdGrille(67);
 // var_dump($data);
 
-// $data = Grilles::getGrilleById(67);
-// var_dump($data);
+// // $data = Grilles::getGrilleById(67);
+// // var_dump($data);
 
-GrilleManager2::initParamsGridFor(69);
+// GrilleManager2::initParamsGridFor(69);
 
-var_dump( GrilleManager2::getBlackCells());
+// var_dump( GrilleManager2::getBlackCells());
 
-// var_dump(GrilleManager2::getDimension())
+// // var_dump(GrilleManager2::getDimension())
 
 
 
+// 
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once  '../app/GrilleManager.php';
-require_once  '../app/DefinitionManager.php';
+require_once  (__DIR__ . '/../GrilleManager.php');
+require_once  (__DIR__ . '/../DefinitionManager.php');
 use app\GrilleManager;
 
 if (isset($_POST['cols']) && isset($_POST['rows'])) {
