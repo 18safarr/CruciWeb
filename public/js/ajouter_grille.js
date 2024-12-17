@@ -17,6 +17,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    /**
+     * Générer une nouvelle grille
+     * Ce bouton envoie une requête POST au serveur pour générer une grille.
+     * Les dimensions de la grille (colonnes et lignes) sont saisies par l'utilisateur.
+     * 
+     * La grille est ensuite affichée dans le conteneur #crossword.
+     */
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.id === "generate-grid") {
+            const cols = document.getElementById('grid-size-x').value; // Nombre de colonnes
+            const rows = document.getElementById('grid-size-y').value; // Nombre de lignes
+        
+            // Envoyer les données au serveur
+            fetch('../app/ajax/loadGrille.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `cols=${cols}&rows=${rows}` // Paramètres envoyés au serveur
+            })
+            .then(response => response.text()) // Récupération de la réponse sous forme de texte
+            .then(html => {
+                document.getElementById('crossword').innerHTML = html; // Injection de la grille reçue du serveur
+            })
+            .catch(error => console.error('Erreur lors du chargement de la grille:', error)); // Gestion des erreurs
+    
+        }
+    });
    
 
     /**
@@ -40,15 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
         newDef.innerHTML = `
-            <label>Départ</label>
+            <label>N°</label>
             <input type="text" class="def-num" placeholder="a, b, c..." maxlength="1">
-            <input type="text" class="def-num" placeholder="1, 2, 3..." maxlength="1">
             <label>Description</label>
             <input type="text" class="def-desc" placeholder="Définition">
             <label>Solution</label>
             <input type="text" class="def-sol" placeholder="Solution">
             <button class="supp-def">X</button>
-            <button class="valider-def">&#x2713;</button>
         `;
 
         // Ajoute la nouvelle définition au début de la liste des définitions verticales
@@ -68,15 +92,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
         newDef.classList.add("definition"); // Ajoute la classe .definition
         newDef.innerHTML = `
-            <label>Départ</label>
+            <label>N°</label>
             <input type="text" class="def-num" placeholder="1, 2, 3..." maxlength="1">
-            <input type="text" class="def-num" placeholder="a, b, c..." maxlength="1">
             <label>Description</label>
             <input type="text" class="def-desc" placeholder="Définition">
             <label>Solution</label>
             <input type="text" class="def-sol" placeholder="Solution">
             <button class="supp-def">X</button>
-            <button class="valider-def">&#x2713;</button>
         `;
 
         // Ajoute la nouvelle définition au début de la liste des définitions horizontales
@@ -116,5 +138,85 @@ document.addEventListener("DOMContentLoaded", function () {
     // Exemple d'appel de la fonction
     const blackCells = getBlackCells();
     console.log('Cellules noires:', blackCells);
+
+
+    document.addEventListener("click", function (event) {
+        if (event.target && event.target.id === "save-grid") {
+            const grilleData = collectGridData();
+            console.log(grilleData); // 🔍 Affiche les données collectées
+
+            // Envoi des données au serveur via AJAX
+        fetch('../app/ajax/save_grille.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(grilleData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+            if (data.success) {
+                alert('Grille enregistrée avec succès !');
+            } else {
+                alert('Erreur lors de l\'enregistrement de la grille.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error ));
+
+        }
+    });
+
+    function collectGridData() {
+        const gridName = document.getElementById('grid-name').value;
+        const dimX = document.getElementById('grid-size-x').value;
+        const dimY = document.getElementById('grid-size-y').value;
+        const difficulty = document.getElementById('difficulty').value;
+        const published = document.getElementById('publish-yes').checked ? 1 : 0;
+
+        // Récupère les positions des cases noires
+        const blackCells = getBlackCells();
+
+        // Collecte des définitions verticales et horizontales
+        const verticalDefs = collectDefinitions('.defVertical .definition');
+        const horizontalDefs = collectDefinitions('.defHorizontal .definition');
+
+        return {
+            nomGrille: gridName,
+            dimX: dimX,
+            dimY: dimY,
+            difficulte: difficulty,
+            publiee: published,
+            blackCells: blackCells,
+            verticalDefs: verticalDefs,
+            horizontalDefs: horizontalDefs
+        };
+    }
+
+    function getBlackCells() {
+        const blackCells = document.querySelectorAll('#crossword td.black-cell');
+        const blackCellPositions = [];
+        
+        blackCells.forEach(cell => {
+            const row = cell.parentElement.rowIndex;
+            const col = cell.cellIndex;
+            blackCellPositions.push({ x: row + 1, y: col + 1 });
+        });
+
+        return blackCellPositions;
+    }
+
+    function collectDefinitions(selector) {
+        const definitions = [];
+        
+        document.querySelectorAll(selector).forEach(def => {
+            const posX = def.querySelector('#pos-x').value;
+            const posY = def.querySelector('#pos-y').value;
+            const description = def.querySelector('.def-desc').value;
+            const solution = def.querySelector('.def-sol').value;
+
+            definitions.push({ posX, posY, description, solution });
+        });
+
+        return definitions;
+    }
 
 });

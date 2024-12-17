@@ -1,8 +1,5 @@
 <?php
 
-require_once '../app/Autoloader.php';
-// Enregistrer l'autoloader
-app\Autoloader::register();
 
 // Définir les routes
 $routes = [

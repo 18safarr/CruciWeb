@@ -1,17 +1,26 @@
 <?php
-require_once  '../app/Autoloader.php';
-// Enregistrer l'autoloader
-app\Autoloader::register();
-$gm = new app\GrilleManager();
-$dm = new app\DefinitionManager();
+session_start();
+require_once  '../app/GrilleManager2.php';
+require_once  '../app/DefinitionManager.php';
+use app\DefinitionManager;
+use app\GrilleManager2;
+
+$dm = new DefinitionManager();
+if (!isset($_SESSION['user_id'])){
+ 
+    header("Location: ../public/");
+} 
+
 
 if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $cols = $_POST['cols'];
     $rows = $_POST['rows'];
 }else{
-    $cols = 13;
-    $rows = 12;
+    $cols = 5;
+    $rows = 5;
 }
+
+GrilleManager2::setDimension($rows,$cols);
 ?>
 
 
@@ -24,7 +33,7 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/ajouter_grille.css">
     <script src="js/ajouter_grille.js" defer></script>
-    <script src="js/load_grille.js" defer></script>
+    <script src="js/nav.js" defer></script>
 </head>
 <body>
     <header>
@@ -32,10 +41,11 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
             <img src="images/logo.png" alt="Logo CruciWeb">
         </div>
         <nav>
-            <button>Mes parties</button>
-            <button>Mes grilles</button>
+            <button id="voir-grilles-public">HOME</button>
+            <button >Mes parties</button>
+            <button id="voir-mes-grilles" >Mes grilles</button>
             <button class="disabled">Ajouter grille</button>
-            <button class="logout">Déconnexion</button>
+            <button class="logout" id="logout">Déconnexion</button>
         </nav>
     </header>
 
@@ -62,9 +72,9 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     <h2>Sauvegarde de la grille</h2>
                     <label for="difficulty">Niveau Difficulté :</label>
                     <select id="difficulty">
-                        <option value="Facile">Facile</option>
+                        <option value="Débutant">Débutant</option>
                         <option value="Intermédiaire" selected>Intermédiaire</option>
-                        <option value="Difficile">Difficile</option>
+                        <option value="Expert">Expert</option>
                     </select>
                     <label>Publiée :</label>
                     <input type="radio" name="publish" id="publish-no" checked> Non
@@ -81,7 +91,7 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            echo $gm->createGrille2($rows,$cols);
+                            echo GrilleManager2::createGridHTML(withInput:false)
                         ?>
                     </div>
                 </div>
@@ -100,9 +110,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     
                     <div class="definitions-scroll">
                         <div class="definition">
-                            <label>Départ</label>
+                            <label>N°</label>
                             <input type="text" class="def-num" placeholder="a, b, c...">
-                            <input type="text" class="def-num" placeholder="1, 2, 3...">
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>
@@ -122,9 +131,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
                     </div>
                     <div class="definitions-scroll">
                         <div class="definition">
-                            <label>Départ</label>
+                            <label>N°</label>
                             <input type="text" class="def-num" placeholder="1, 2, 3...">
-                            <input type="text" class="def-num" placeholder="a, b, c...">
                             <label>Description</label>
                             <input type="text" class="def-desc" placeholder="Définition">
                             <label>Solution</label>
