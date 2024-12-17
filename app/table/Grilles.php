@@ -33,6 +33,12 @@
         $requete = "SELECT * FROM Grilles WHERE datePublication IS NOT NULL";
         return App::getDb()->query($requete,__CLASS__);
     }
+
+    public static function getPrivateGridsFor($idAuteur) {
+        $requete = "SELECT * FROM Grilles WHERE idAuteur = ?";
+        $attributes = [$idAuteur];
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
+    }
  }
  
 ?>

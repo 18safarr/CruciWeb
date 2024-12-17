@@ -1,13 +1,10 @@
 <?php
 session_start();
-require_once  '../app/GrilleManager.php';
 require_once  '../app/GrilleManager2.php';
 require_once  '../app/DefinitionManager.php';
-use app\GrilleManager;
 use app\DefinitionManager;
 use app\GrilleManager2;
 
-// $gm = new GrilleManager();
 $dm = new DefinitionManager();
 if (!isset($_SESSION['user_id'])){
  
@@ -94,7 +91,6 @@ GrilleManager2::setDimension($rows,$cols);
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            //echo $gm->createGrille2($rows,$cols);
                             echo GrilleManager2::createGridHTML(withInput:false)
                         ?>
                     </div>

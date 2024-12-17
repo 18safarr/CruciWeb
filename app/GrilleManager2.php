@@ -2,8 +2,10 @@
 namespace app;
 require_once (__DIR__ . '/table/Grilles.php');
 require_once (__DIR__ . '/table/Cases.php');
+require_once (__DIR__ . '/UsersManager.php');
 use app\table\Grilles;
 use app\table\Cases;
+use app\UsersManager;
 
 class GrilleManager2 {
     private static $idGrille;
@@ -33,6 +35,10 @@ class GrilleManager2 {
 
     private static function getDataPublicGrid(){
         return Grilles::getPublicGrids();
+    }
+
+    private static function getDataPrivateGrid($idUser){
+        return Grilles::getPrivateGridsFor($idUser);
     }
 
     private static function getGridDatas(){
@@ -92,6 +98,25 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($grille->datePublication).'</td>
                     <td><a href="../public/?p=play&idGrille='.htmlspecialchars($grille->idGrille).'" class="play-link">Jouer</a></td>
+                </tr>
+            ';
+        }
+        return $html;
+    }
+
+    public static function createTablePrivateGridHTML($idUser){
+        $datas = self::getDataPrivateGrid($idUser);
+        
+        $html ='';
+        foreach($datas as $grille){
+            $html .= '
+                <tr>
+                    <td>' . htmlspecialchars($grille->idGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->nomGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
+                    <td>' . htmlspecialchars($grille->difficulte) .'</td>
+                    <td>' . htmlspecialchars($grille->datePublication).'</td>
+                   <td><a href="#" class="edit-link">Modifier</a> | <a href="#" class="del-link">X</a></td>
                 </tr>
             ';
         }

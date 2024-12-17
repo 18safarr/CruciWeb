@@ -1,18 +1,21 @@
 <?php
 session_start();
-require_once  '../app/GrilleManager.php';
 require_once  '../app/DefinitionManager.php';
 require_once  '../app/GrilleManager2.php';
-use app\GrilleManager;
+require_once  '../app/UsersManager.php';
 use app\DefinitionManager;
 use app\GrilleManager2;
+use app\UsersManager;
 
-$gm = new GrilleManager();
 $dm = new DefinitionManager();
 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
     GrilleManager2::initParamsGridFor($idGrille);
+
+    if (isset($_SESSION['user_id'])){
+        UsersManager::setIdUSer($_SESSION['user_id']);
+    }
 }
    
 
@@ -46,6 +49,7 @@ if (isset($_GET["idGrille"])){
             </nav>
         <?php } else if (!isset($_GET['demand'])) { ?>
             <nav>
+            <button id="voir-grilles-public">Home</button>
                 <form id="login-form" method="post">
                     
                     <label for="username">Identifiant</label>

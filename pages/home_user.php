@@ -2,6 +2,11 @@
 session_start();
 require_once '../app/GrilleManager2.php';
 use app\GrilleManager2;
+require_once '../app/UsersManager.php';
+use app\UsersManager;
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,8 +52,6 @@ use app\GrilleManager2;
                 </thead>
                 <tbody>
                     <?php
-                    // $gm = new GrilleManager();
-                    // echo $gm->getAllShareGrilles();
                     echo GrilleManager2::createTablePublicGridHTML();
                     ?>
                 </tbody>

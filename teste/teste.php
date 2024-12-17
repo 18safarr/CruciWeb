@@ -16,22 +16,28 @@ use app\table\Users;
 
 require_once '../app/GrilleManager.php';
 require_once '../app/GrilleManager2.php';
+require_once '../app/UsersManager.php';
 require_once '../app/table/Grilles.php';
 require_once '../app/table/Definitions.php';
 require_once '../app/table/Cases.php';
 require_once '../app/DefinitionManager.php';
 use app\GrilleManager;
 use app\GrilleManager2;
+use app\UsersManager;
 use app\DefinitionManager;
 use app\table\Grilles;
 use app\table\Definitions;
 use app\table\Cases;
 
 
+UsersManager::setIdUSer(2);
+
+echo GrilleManager2::createTablePrivateGridHTML(2);
+
 // $data = Grilles::getPublicGrids();
 // var_dump($data);
-GrilleManager2::setDimension(5,5);
-echo GrilleManager2::createGridHTML(withInput:false);
+// GrilleManager2::setDimension(5,5);
+// echo GrilleManager2::createGridHTML(withInput:false);
 // echo GrilleManager2::createTablePublicGridHTML();
 //$users = Users::insertUser("koundibr","root");// Appel de la méthode statique
 
