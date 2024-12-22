@@ -1,8 +1,7 @@
 <?php
-namespace app;
+namespace config;
 require_once(__DIR__ . '/Database.php');
-//require_once "../app/Database.php";
-use app\DataBase;
+use config\DataBase;
 class App{
     const DB_NAME = "CRUCIWEB";
     const DB_USER = "cruciweb";

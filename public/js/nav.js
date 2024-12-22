@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const formData = new FormData(loginForm);
 
-            fetch("../app/ajax/login.php", {
+            fetch("../app/controllers/ajax/login.php", {
                 method: "POST",
                 body: formData,
             })
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
         if (e.target && e.target.id === "voir-mes-grilles") {
 
-            window.location.href = '../public'; // Redirigez vers une page spécifique
+            window.location.href = 'index.php'; // Redirigez vers une page spécifique
             
 
             //apres  auto clique pour charger les grilles pivee
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (e) {
         // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
         if (e.target && e.target.id === "voir-grilles-public") {
-            window.location.href = '../public'; // Redirigez vers une page spécifique
+            window.location.href = 'index.php'; // Redirigez vers une page spécifique
 
     
         }
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target && e.target.id === "add-grille") {
            
            
-                window.location.href = '../public?p=ajouter_grille'; // Redirigez vers une page spécifique
+                window.location.href = 'index.php?p=ajouter_grille'; // Redirigez vers une page spécifique
                 
            
              
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
         if (e.target && e.target.id === "logout") {
            
-            fetch('../app/ajax/logout.php')
+            fetch('app/controllers/ajax/logout.php')
             .then(() => {
                 urlComplete = window.location.href; // page courant
                 window.location.href = urlComplete;

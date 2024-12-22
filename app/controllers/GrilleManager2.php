@@ -1,11 +1,11 @@
 <?php
-namespace app;
-require_once (__DIR__ . '/table/Grilles.php');
-require_once (__DIR__ . '/table/Cases.php');
+namespace controllers;
+require_once (__DIR__ . '/../model/Grilles.php');
+require_once (__DIR__ . '/../model/Cases.php');
 require_once (__DIR__ . '/UsersManager.php');
-use app\table\Grilles;
-use app\table\Cases;
-use app\UsersManager;
+use model\Grilles;
+use model\Cases;
+use controllers\UsersManager;
 
 class GrilleManager2 {
     private static $idGrille;
@@ -97,7 +97,7 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($grille->datePublication).'</td>
-                    <td><a href="../public/?p=play&idGrille='.htmlspecialchars($grille->idGrille).'" class="play-link">Jouer</a></td>
+                    <td><a href="?p=play&idGrille='.htmlspecialchars($grille->idGrille).'" class="play-link">Jouer</a></td>
                 </tr>
             ';
         }

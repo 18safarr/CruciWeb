@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const rows = document.getElementById('grid-size-y').value; // Nombre de lignes
         
             // Envoyer les données au serveur
-            fetch('../app/ajax/loadGrille.php', {
+            fetch('app/controllers/ajax/loadGrille.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `cols=${cols}&rows=${rows}` // Paramètres envoyés au serveur
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(grilleData); // 🔍 Affiche les données collectées
 
             // Envoi des données au serveur via AJAX
-        fetch('../app/ajax/save_grille.php', {
+        fetch('app/controllers/ajax/save_grille.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(grilleData)

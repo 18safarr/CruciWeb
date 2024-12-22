@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace config;
 use PDO;
 
 class DataBase

@@ -1,8 +1,8 @@
 <?php
-    namespace app\table;
+    namespace model;
     // require_once '../app/App.php';
-    require_once (__DIR__ . '/../App.php');
-    use app\App;
+    require_once (__DIR__ . '/../config/App.php');
+    use config\App;
 
     class Users
     {

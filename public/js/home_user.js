@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const formData = new FormData(loginForm);
 
-            fetch("../app/ajax/login.php", {
+            fetch("app/controllers/ajax/login.php", {
                 method: "POST",
                 body: formData,
             })
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        window.location.href = '../public/'
+                        window.location.href = 'index.php'
                     } else {
                         const errorMessage = document.querySelector(".error-message");
                         if (errorMessage) {
@@ -31,6 +31,61 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+ //------------------INSCRIPTION---------------------------------
+    document.getElementById("inscription-form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Empêche le rechargement de la page
+
+        // Récupération des valeurs des champs
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirmPassword = document.getElementById("confirm-password").value.trim();
+        const errorMessage = document.getElementById("error-message");
+
+        // Réinitialisation des messages d'erreur
+        errorMessage.classList.add("hidden");
+
+        // Validation des mots de passe
+        if (password !== confirmPassword) {
+            errorMessage.classList.remove("hidden");
+            return;
+        }
+
+        // Préparation des données à envoyer
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+
+        // Envoi des données via fetch (AJAX)
+        fetch("app/controllers/ajax/register.php", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Une erreur s'est produite lors de l'inscription.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.success) {
+                    alert("Inscription réussie ! Bienvenue !");
+                    // Redirection ou autres actions
+                    window.location.href = "index.php";
+                } else {
+                    alert(data.message || "Une erreur s'est produite.");
+                }
+            })
+            .catch((error) => {
+                console.error("Erreur :", error);
+                alert("Impossible de vous inscrire pour le moment. Veuillez réessayer plus tard.");
+            });
+    });
+
+
+
+ //---------------------------------------------
+
+
 //------------------------DASHBOARD----------------------------
 
     // Attacher un gestionnaire d'événements délégué pour les boutons dynamiques
@@ -39,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target && e.target.id === "voir-mes-grilles") {
 
             // Envoyer les données au serveur
-            fetch('../app/ajax/load_liste_grille.php', {
+            fetch('app/controllers/ajax/load_liste_grille.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `load-liste-grille=privee` // Paramètres envoyés au serveur
@@ -57,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target && e.target.id === "voir-grilles-public") {
 
             // Envoyer les données au serveur
-            fetch('../app/ajax/load_liste_grille.php', {
+            fetch('app/controllers/ajax/load_liste_grille.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `load-liste-grille=public` // Paramètres envoyés au serveur
@@ -75,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target && e.target.id === "add-grille") {
         
         
-                window.location.href = '../public?p=ajouter_grille'; // Redirigez vers une page spécifique
+                window.location.href = 'index.php?p=ajouter_grille'; // Redirigez vers une page spécifique
         
             
         }
@@ -85,9 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
         if (e.target && e.target.id === "logout") {
         
-            fetch('../app/ajax/logout.php')
+            fetch('app/controllers/ajax/logout.php')
             .then(() => {
-                window.location.href = '../public'; // Redirigez vers une page spécifique
+                window.location.href = 'index.php'; // Redirigez vers une page spécifique
             })
             .catch(error => console.error('Erreur lors de la déconnexion:', error));
             

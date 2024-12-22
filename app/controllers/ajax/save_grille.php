@@ -3,16 +3,16 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once (__DIR__ . '/../GrilleManager2.php');
-require_once (__DIR__ . '/../table/Grilles.php');
-require_once (__DIR__ . '/../table/Definitions.php');
-require_once (__DIR__ . '/../table/Cases.php');
-require_once (__DIR__ . '/../DefinitionManager.php');
-use app\GrilleManager2;
-use app\DefinitionManager;
-use app\table\Grilles;
-use app\table\Definitions;
-use app\table\Cases;
+require_once (__DIR__ . '/../../controllers/GrilleManager2.php');
+require_once (__DIR__ . '/../../model/Grilles.php');
+require_once (__DIR__ . '/../../model/Definitions.php');
+require_once (__DIR__ . '/../../model/Cases.php');
+require_once (__DIR__ . '/../../controllers/DefinitionManager.php');
+use controllers\GrilleManager2;
+use controllers\DefinitionManager;
+use model\Grilles;
+use model\Definitions;
+use model\Cases;
 
 
 if (!isset($_SESSION['user_id'])) {

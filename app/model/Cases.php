@@ -1,7 +1,7 @@
 <?php
- namespace app\table;
- require_once (__DIR__ . '/../App.php');
- use app\App;
+ namespace model;
+ require_once (__DIR__ . '/../config/App.php');
+ use config\App;
 class Cases{
 
     public static function addCase($posX, $posY,$idGrille) {
