@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace controllers;
 
 class DefinitionManager {
     // Simule une base de données avec des définitions verticales

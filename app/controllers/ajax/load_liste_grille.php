@@ -3,7 +3,7 @@ session_start();
 require_once  (__DIR__ . '/../GrilleManager2.php');
 require_once  (__DIR__ . '/../DefinitionManager.php');
 
-use app\GrilleManager2;
+use controllers\GrilleManager2;
 
 if (isset($_POST['load-liste-grille'])) {
     $type = $_POST['load-liste-grille']; 

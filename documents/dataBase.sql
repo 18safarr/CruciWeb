@@ -30,9 +30,6 @@ CREATE TABLE Cases (
     idCase INT AUTO_INCREMENT PRIMARY KEY,
     positionX INT NOT NULL,
     positionY INT NOT NULL,
-    isBlack BOOLEAN DEFAULT FALSE,
-    contenu CHAR(1),
-    solution CHAR(1),
     idGrille INT NOT NULL,
     FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille)
     ON DELETE CASCADE

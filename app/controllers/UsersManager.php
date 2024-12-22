@@ -1,7 +1,7 @@
 <?php
-namespace app;
-require_once (__DIR__ . '/table/Users.php');
-use app\table\Users;
+namespace controllers;
+require_once (__DIR__ . '/../model/Users.php');
+use model\Users;
 class UsersManager{
     private static $idUser;
 
