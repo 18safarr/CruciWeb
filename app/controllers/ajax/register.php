@@ -1,7 +1,8 @@
 <?php
-require_once(__DIR__ . '/../model/Users.php');
-require_once(__DIR__ . '/../App.php');
-use model\Users;
+require_once(__DIR__ . '/../UsersManager.php');
+
+use controllers\UsersManager;
+
 // Vérification que la requête est POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupération des données
@@ -14,22 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // // Vérification si l'utilisateur existe déjà
-    // $userModel = new Users();
-    // if ($userModel->emailExists($email)) {
-    //     echo json_encode(['success' => false, 'message' => 'Cet e-mail est déjà utilisé.']);
-    //     exit;
-    // }
+    // Vérification si l'utilisateur existe déjà
+    
+    if (UsersManager::isUserExist($email)) {
+        echo json_encode(['success' => false, 'message' => 'Cet e-mail est déjà utilisé.']);
+        exit;
+    }
 
-    // // Création d'un nouvel utilisateur
-    // $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hachage du mot de passe
-    // $success = $userModel->createUser($email, $hashedPassword);
+    $success = UsersManager::createUser($email, $password);
 
-    // if ($success) {
-    //     echo json_encode(['success' => true]);
-    // } else {
-    //     echo json_encode(['success' => false, 'message' => 'Erreur lors de la création de l\'utilisateur.']);
-    // }
+    if ($success==true) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la création de l\'utilisateur.']);
+    }
 } else {
     echo json_encode(['success' => false, 'message' => 'Requête invalide.']);
 }

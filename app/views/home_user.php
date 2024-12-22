@@ -81,7 +81,7 @@ use controllers\UsersManager;
                         </form>
                         <div class="footer">
                             <!-- <p>Vous n'avez pas de compte ? <a href="#" onclick="loadForm('inscription')">S'inscrire</a></p> -->
-                            <p>Vous n'avez pas de compte ? <a href="../public/?demand=inscription" >S'inscrire</a></p>
+                            <p>Vous n'avez pas de compte ? <a href="?demand=inscription" >S'inscrire</a></p>
                         </div>
                     </div>
                 <?php } else { ?>
@@ -106,11 +106,11 @@ use controllers\UsersManager;
                             <div id="error-message" class="error hidden">
                                 <p>Les mots de passe ne correspondent pas.</p>
                             </div>
-                            <button type="submit" class="btn">S'inscrire</button>
+                            <button type="submit" id="submit-inscription" class="btn">S'inscrire</button>
                         </form>
                         <div class="footer">
                             <!-- <p>Vous avez déjà un compte ? <a href="#" onclick="loadForm('connexion')">Se connecter</a></p> -->
-                            <p>Vous avez déjà un compte ? <a href="../public/">Se connecter</a></p>
+                            <p>Vous avez déjà un compte ? <a href="index.php">Se connecter</a></p>
                         </div>
                     </div>
                 <?php }?>

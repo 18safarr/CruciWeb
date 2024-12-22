@@ -32,53 +32,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
  //------------------INSCRIPTION---------------------------------
-    document.getElementById("inscription-form").addEventListener("submit", function (e) {
-        e.preventDefault(); // Empêche le rechargement de la page
+    document.addEventListener("click", function (e) {
 
-        // Récupération des valeurs des champs
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const confirmPassword = document.getElementById("confirm-password").value.trim();
-        const errorMessage = document.getElementById("error-message");
+        if (e.target && e.target.id==="submit-inscription"){
+            e.preventDefault(); // Empêche le rechargement de la page
 
-        // Réinitialisation des messages d'erreur
-        errorMessage.classList.add("hidden");
+            // Récupération des valeurs des champs
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirm-password").value.trim();
+            const errorMessage = document.getElementById("error-message");
 
-        // Validation des mots de passe
-        if (password !== confirmPassword) {
-            errorMessage.classList.remove("hidden");
-            return;
-        }
+            // Réinitialisation des messages d'erreur
+            errorMessage.classList.add("hidden");
 
-        // Préparation des données à envoyer
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
+            // Validation des mots de passe
+            if (password !== confirmPassword) {
+                errorMessage.classList.remove("hidden");
+                return;
+            }
 
-        // Envoi des données via fetch (AJAX)
-        fetch("app/controllers/ajax/register.php", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Une erreur s'est produite lors de l'inscription.");
-                }
-                return response.json();
+            // Préparation des données à envoyer
+            const formData = new FormData();
+            formData.append("email", email);
+            formData.append("password", password);
+
+            // Envoi des données via fetch (AJAX)
+            fetch("app/controllers/ajax/register.php", {
+                method: "POST",
+                body: formData,
             })
-            .then((data) => {
-                if (data.success) {
-                    alert("Inscription réussie ! Bienvenue !");
-                    // Redirection ou autres actions
-                    window.location.href = "index.php";
-                } else {
-                    alert(data.message || "Une erreur s'est produite.");
-                }
-            })
-            .catch((error) => {
-                console.error("Erreur :", error);
-                alert("Impossible de vous inscrire pour le moment. Veuillez réessayer plus tard.");
-            });
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Une erreur s'est produite lors de l'inscription.");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    if (data.success) {
+                        alert("Inscription réussie ! Bienvenue !");
+                        // Redirection ou autres actions
+                        window.location.href = "index.php";
+                    } else {
+                        alert(data.message || "Une erreur s'est produite.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erreur :", error);
+                    alert("Impossible de vous inscrire pour le moment. Veuillez réessayer plus tard.");
+                });
+            }
     });
 
 

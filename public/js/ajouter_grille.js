@@ -58,61 +58,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /**
      * Ajouter une nouvelle définition verticale
-     * Ce bouton permet d'ajouter une nouvelle définition pour la grille verticale.
-     * La définition comprend un champ "N°", un champ "Description" et un champ "Solution".
-     * Un bouton "X" permet de supprimer la définition.
      */
     addVertiDefinitionBtn.addEventListener("click", function () {
-        const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
-        newDef.classList.add("definition"); // Ajoute la classe .definition
-        newDef.innerHTML = `
-            <label>N°</label>
-            <input type="text" class="def-num" placeholder="a, b, c..." maxlength="1">
-            <label>Description</label>
-            <input type="text" class="def-desc" placeholder="Définition">
-            <label>Solution</label>
-            <input type="text" class="def-sol" placeholder="Solution">
-            <button class="supp-def">X</button>
-        `;
+        const vt = document.getElementById("vertical-template");
+    
+        // Clone le modèle pour créer une nouvelle définition
+        const newDef = vt.cloneNode(true);
+        newDef.removeAttribute("id"); // Supprime l'ID pour éviter les conflits
+        
+        // Vider le contenu des champs d'entrée dans le clone
+        const inputs = newDef.querySelectorAll("input");
+        inputs.forEach(input => {
+            input.value = ""; // Réinitialise le contenu
+        });
 
         // Ajoute la nouvelle définition au début de la liste des définitions verticales
         verticalDefinitionsScroll.insertBefore(newDef, verticalDefinitionsScroll.firstChild);
-
+    
         // Attache un gestionnaire d'événement pour le bouton de suppression
         handleRemoveDefinition(newDef);
     });
 
     /**
      * Ajouter une nouvelle définition horizontale
-     * Ce bouton permet d'ajouter une nouvelle définition pour la grille horizontale.
-     * La définition comprend un champ "N°", un champ "Description" et un champ "Solution".
-     * Un bouton "X" permet de supprimer la définition.
      */
     addHoriDefinitionBtn.addEventListener("click", function () {
-        const newDef = document.createElement("div"); // Crée un conteneur pour la nouvelle définition
-        newDef.classList.add("definition"); // Ajoute la classe .definition
-        newDef.innerHTML = `
-            <label>N°</label>
-            <input type="text" class="def-num" placeholder="1, 2, 3..." maxlength="1">
-            <label>Description</label>
-            <input type="text" class="def-desc" placeholder="Définition">
-            <label>Solution</label>
-            <input type="text" class="def-sol" placeholder="Solution">
-            <button class="supp-def">X</button>
-        `;
+        const hz = document.getElementById("horizontal-template");
+    
+        // Clone le modèle pour créer une nouvelle définition
+        const newDef = hz.cloneNode(true);
+        newDef.removeAttribute("id"); // Supprime l'ID pour éviter les conflits
 
+        // Vider le contenu des champs d'entrée dans le clone
+        const inputs = newDef.querySelectorAll("input");
+        inputs.forEach(input => {
+            input.value = ""; // Réinitialise le contenu
+        });
+    
         // Ajoute la nouvelle définition au début de la liste des définitions horizontales
         horizontalDefinitionsScroll.insertBefore(newDef, horizontalDefinitionsScroll.firstChild);
-
+    
         // Attache un gestionnaire d'événement pour le bouton de suppression
         handleRemoveDefinition(newDef);
+        
     });
 
     /**
-     * Fonction pour gérer la suppression d'une définition
-     * Lorsqu'on clique sur le bouton "X", la définition correspondante est supprimée de la liste.
-     * 
-     * @param {HTMLElement} definition - L'élément de définition à supprimer
+     * Fonction pour gérer la suppression d'une définition 
      */
     function handleRemoveDefinition(definition) {
         const removeBtn = definition.querySelector(".supp-def"); // Sélectionne le bouton de suppression

@@ -21,7 +21,7 @@ require_once '../app/model/Cases.php';
 require_once '../app/controllers/DefinitionManager.php';
 use app\GrilleManager;
 use app\GrilleManager2;
-use app\UsersManager;
+use controllers\UsersManager;
 use app\DefinitionManager;
 use app\model\Grilles;
 use app\model\Definitions;
@@ -41,10 +41,14 @@ use model\Users;
 // GrilleManager2::setDimension(5,5);
 // echo GrilleManager2::createGridHTML(withInput:false);
 // echo GrilleManager2::createTablePublicGridHTML();
-//$users = Users::insertUser("root","root");// Appel de la méthode statique
+$users = UsersManager::createUser("root2e","root");// Appel de la méthode statique
+if ($users){
+    var_dump($users);
+}
+
 
 //$user = Users::authenticateUser("koundibr", "root");
-var_dump($user);
+// var_dump($user);
 
 // $user = Users::getId("koundibr");
 // var_dump($user);

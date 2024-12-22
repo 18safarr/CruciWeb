@@ -1,25 +1,27 @@
 <?php
 session_start();
-require_once(__DIR__ .'/../../model/Users.php');
-require_once(__DIR__ .'/../../config/App.php');
-use model\Users;
+require_once(__DIR__ . '/../UsersManager.php');
+use controllers\UsersManager;
 
-$id = $_POST["username"] ?? "";
-$pass = $_POST["password"] ?? "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    
+    $email = $_POST["username"] ?? "";
+    $pass = $_POST["password"] ?? "";
 
-$response = ["success" => false];
+    $response = ["success" => false];
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-   
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
 
-    if (Users::authenticateUser($id, $pass)) {
-        $_SESSION["user_id"] = Users::getId($id); // L'identifiant utilisateur peut être dynamique.
-        $response["success"] = true;
+        if (UsersManager::isUserParamCorrect($email, $pass)) {
+            $_SESSION["user_id"] = UsersManager::getIdByEmail($email); // L'identifiant utilisateur peut être dynamique.
+            $response["success"] = true;
+        }
     }
-}
 
-echo json_encode($response);
+    echo json_encode($response);
+}
 ?>
 
 

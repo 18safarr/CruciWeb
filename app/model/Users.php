@@ -3,6 +3,7 @@
     // require_once '../app/App.php';
     require_once (__DIR__ . '/../config/App.php');
     use config\App;
+use LDAP\Result;
 
     class Users
     {
@@ -14,7 +15,7 @@
             return $data;
         }
 
-        public static function insertUser($identifiant, $motDePasse, $isPlayer = true)
+        public static function insertUser($email, $motDePasse, $isPlayer = true)
         {
             // Hachage du mot de passe pour plus de sécurité
             $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
@@ -22,17 +23,17 @@
             // Exécuter la requête d'insertion
             $query = 'INSERT INTO Users (identifiant, motDePasse, isPlayer) VALUES (?, ?, ?)';
             
-            return App::getDb()->prepare($query, [$identifiant, $hashedPassword, $isPlayer],__CLASS__);
+            return App::getDb()->prepare($query, [$email, $hashedPassword, $isPlayer],__CLASS__);
         }
 
-        public static function getId($identifiant)
+        public static function getId($email)
         {
             // Requête pour récupérer l'ID de l'utilisateur à partir de l'identifiant
             $query = 'SELECT idUser FROM Users WHERE identifiant = ?';
             
             // Préparer et exécuter la requête
             $db = App::getDb();
-            $stmt = $db->prepare($query, [$identifiant], __CLASS__);
+            $stmt = $db->prepare($query, [$email], __CLASS__);
             
             // Vérifier si un utilisateur a été trouvé
             if ($stmt) {
@@ -62,21 +63,21 @@
             return App::getDb()->execute($query);
         }
 
-        public static function userExists($identifiant)
+        public static function userExists($email)
         {
             // Vérifier si un utilisateur avec l'identifiant donné existe dans la base de données
-            $query = 'SELECT COUNT(*) FROM Users WHERE identifiant = ?';
+            $query = 'SELECT COUNT(*) AS nbUser FROM Users WHERE identifiant = ?';
             
-            $result = App::getDb()->prepare($query, [$identifiant],__CLASS__);
+            $result = App::getDb()->prepare($query, [$email],__CLASS__);
             
-            return $result["COUNT(*)"] > 0;
+            return $result[0]->nbUser > 0;
         }
 
-        public static function authenticateUser($identifiant, $motDePasse)
+        public static function authenticateUser($email, $motDePasse)
         {
             // Récupérer l'utilisateur correspondant à l'identifiant
             $query = 'SELECT * FROM Users WHERE identifiant = ?';
-            $user = App::getDb()->prepare($query, [$identifiant],__CLASS__);
+            $user = App::getDb()->prepare($query, [$email],__CLASS__);
             if ($user&&password_verify($motDePasse, $user[0]->motDePasse)) {
                 return true;
             } 

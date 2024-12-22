@@ -1,7 +1,6 @@
 <?php
-require_once  (__DIR__ . '/../../controllers/GrilleManager.php');
-require_once  (__DIR__ . '/../../controllers/GrilleManager2.php');
-require_once  (__DIR__ . '/../../controllers/DefinitionManager.php');
+require_once  (__DIR__ . '/../GrilleManager2.php');
+require_once  (__DIR__ . '/../DefinitionManager.php');
 use controllers\GrilleManager2; 
 if (isset($_POST['cols']) && isset($_POST['rows'])) {
     $cols = (int) $_POST['cols'];

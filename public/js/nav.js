@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const formData = new FormData(loginForm);
 
-            fetch("../app/controllers/ajax/login.php", {
+            fetch("app/controllers/ajax/login.php", {
                 method: "POST",
                 body: formData,
             })
