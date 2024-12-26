@@ -1,4 +1,6 @@
-/* 🌟 Conteneur du formulaire */
+/* ========================
+   Conteneur Nav
+======================== */
 nav {
     display: flex; 
     align-items: center; 
@@ -66,8 +68,6 @@ nav input[type="password"]:focus {
 
 
 
-
-
 nav .logout {
     background-color: #f44336;
 }
@@ -76,6 +76,10 @@ nav button:hover {
     opacity: 0.9;
 }
 
+/* ========================
+   Conteneur principal
+======================== */
+
 main {
     display: flex;
     justify-content: center;
@@ -83,13 +87,16 @@ main {
     flex-wrap: wrap;
 }
 
-
-
 .grid-container {
     display: flex;
     flex-direction: row;
     width: 90%;
+    /* background-color:white; */
 }
+
+/* ========================
+   Conteneur defintions
+======================== */
 
 .clues {
     flex: 1;
@@ -103,19 +110,82 @@ main {
 
 /* Conteneur pour les définitions avec scrollbars */
 .scrollable {
-    max-height: 200px; /* Limite la hauteur des définitions */
+    max-height: 500px; /* Limite la hauteur des définitions */
     overflow-y: auto; /* Ajoute une scrollbar verticale */
     padding: 5px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    margin-left: 0;
+    /* background-color: white; */
+    /* border: 1px solid #ddd; */
+    /* background-color: #f9f9f9; */
 }
 
+.scrollable::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    border-radius: 5px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #0097a7;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.horizontal{
+    margin-left: 20px;
+}
+.vertical{
+    margin-right: 20px;
+}
+
+
+/* Style de la liste */
+.styled-list {
+    list-style: none;
+    padding: 0;
+}
+
+.styled-list li {
+    background-color: white;
+    margin: 10px 0;
+    padding: 1px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.styled-list li:hover {
+    background-color: #d1d8e0;
+    font-weight: bold;
+    transform: scale(1.02);
+}
+
+/* Ajoute des puces personnalisées à la liste */
+.styled-list li::before {
+    content: "•";
+    color: #0097a7;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* ========================
+   Conteneur grille .grid
+======================== */
+
 /* Grille défilable horizontalement et verticalement */
-.scrollable-grid {
+.grid .scrollable-grid {
     max-width: 100%;
     max-height: 600px; /* Ajustez selon vos besoins */
     overflow: auto; /* Scrollbars horizontales et verticales */
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     margin: 0 auto;
 }
 
@@ -125,14 +195,18 @@ main {
     margin: 10px auto;
     width: 100%;
     min-width: 500px; /* Assure une scrollbar horizontale si nécessaire */
+    background-color:white;
 }
 
 .grid th, .grid td {
-    border: 1px solid #ddd;
+    border: 1px solid #030303;
     padding: 5px;
     text-align: center;
     width: 30px;
     height: 30px;
+}
+.grid th{
+    border: 0px solid #030303;
 }
 
 .grid .black-cell {
@@ -151,7 +225,7 @@ main {
 
 
 
-#save-button {
+.grid #save-button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -161,8 +235,10 @@ main {
     cursor: pointer;
 }
 
-#save-button:hover {
+.grid #save-button:hover {
     background-color: #45a049;
 }
+
+
 
 

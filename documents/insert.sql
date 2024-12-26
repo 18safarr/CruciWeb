@@ -1,27 +1,61 @@
--- -- Insérer la grille
--- INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) 
--- VALUES ('Grille 1', 5, 5, '2024-12-15', 1, 'Intermédiaire');
+USE CRUCIWEB;
 
-use CRUCIWEB;
--- -- Insérer les cases noires
+-- Insert the crossword grid
+INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) 
+VALUES ('Grille 1', 10, 10, '2024-12-15', 1, 'Intermédiaire');
+
+-- Retrieve the last inserted idGrille
+SET @last_idGrille = LAST_INSERT_ID();
+
+-- Insert the black squares using the last inserted idGrille
 INSERT INTO Cases (positionX, positionY, idGrille) VALUES 
-(3, 2, 53), 
-(3, 3, 53), 
-(3, 5, 53), 
-(3, 6, 53), 
-(5, 2, 53), 
-(5, 3, 53), 
-(5, 5, 53), 
-(5, 6, 53);
+(2+1, 5+1, @last_idGrille), 
+(3+1, 2+1, @last_idGrille), 
+(3+1, 5+1, @last_idGrille), 
+(4+1, 8+1, @last_idGrille), 
+(5+1, 5+1, @last_idGrille), 
+(5+1, 10+1, @last_idGrille), 
+(6+1, 4+1, @last_idGrille), 
+(6+1, 5+1, @last_idGrille), 
+(7+1, 3+1, @last_idGrille),
+(9+1, 6+1, @last_idGrille),
+(9+1, 7+1, @last_idGrille),
+(9+1, 9+1, @last_idGrille),
+(10+1, 2+1, @last_idGrille);
 
--- Insérer les définitions verticales
+-- Insert the vertical definitions using the last inserted idGrille
 INSERT INTO Definitions (orientation, posDepX, posDepY, description, solution, idGrille) VALUES 
-('VERTICAL', 2, 2, 'Un arbre', 'ARBRE', 53), 
-('VERTICAL', 4, 2, 'Objet qui vole', 'CIEL', 54), 
-('VERTICAL', 6, 2, 'Plante colorée', 'FLEUR', 53);
+('VERTICAL', 1, 1, 'Telle notre bonne vieille planète.', 'TELLURIQUE', @last_idGrille), 
+('VERTICAL', 1, 2, 'Les astronomes sont toujours à sa recherche', 'ET', @last_idGrille), 
+('VERTICAL', 4, 2, 'Le cadeau d’Herschel.', 'URANUS', @last_idGrille), 
+('VERTICAL', 1, 3, 'Brouillent la vision', 'LARMES', @last_idGrille),
+('VERTICAL', 8, 3, 'Odeur méridionale.', 'AIL', @last_idGrille),
+('VERTICAL', 1, 4, 'Pour éviter que le ciel ne nous tombe sur la tête', 'ATAIS', @last_idGrille), 
+('VERTICAL', 7, 4, 'En Moravie.', 'BRNO', @last_idGrille),
+('VERTICAL', 7, 5, 'Article.', 'ITEM', @last_idGrille),
+('VERTICAL', 1, 6, 'Boréale, australe ou solaire.', 'COURONNE', @last_idGrille),
+('VERTICAL', 1, 7, 'Décoreront.', 'ORNERONT', @last_idGrille),
+('VERTICAL', 1, 8, 'Celui du Midi est un haut lieu de l’astronomie française', 'PIC', @last_idGrille), 
+('VERTICAL', 5, 8, 'Les instruments astronomiques renversent les images, mais ce n’est pas une raison pour tourner le ciel de cette façon.', 'ENITER', @last_idGrille),
+('VERTICAL', 1, 9, 'Pour faire quelque chose avec du vent.', 'EOLIENNE', @last_idGrille),
+('VERTICAL', 1, 10, 'Aux quatre coins de la rose', 'SNEO', @last_idGrille), 
+('VERTICAL', 6, 10, 'Un gamin vraiment désordonné.', 'EGSOS', @last_idGrille);
 
--- Insérer les définitions horizontales
+-- Insert the horizontal definitions using the last inserted idGrille
 INSERT INTO Definitions (orientation, posDepX, posDepY, description, solution, idGrille) VALUES 
-('HORIZONTAL', 2, 2, 'Grand végétal', 'ARBRE', 53), 
-('HORIZONTAL', 2, 4, 'Bleu au-dessus', 'CIEL', 53), 
-('HORIZONTAL', 2, 6, 'Plante avec pétales', 'FLEUR', 53);
+('HORIZONTAL', 1, 1, 'Les outils des astronomes.', 'TELESCOPES', @last_idGrille), 
+('HORIZONTAL', 2, 1, 'Louis XIV, selon Louis XIV', 'ETAT', @last_idGrille), 
+('HORIZONTAL', 2, 6, 'Chasseur équatorial.', 'ORION', @last_idGrille), 
+('HORIZONTAL', 3, 3, 'Que ce soit le dieu ou le métal, il irradie', 'RA', @last_idGrille), 
+('HORIZONTAL', 3, 6, 'Sam ou Tom.', 'UNCLE', @last_idGrille),
+('HORIZONTAL', 4, 1, 'Porteuse de messages célestes', 'LUMIERE', @last_idGrille), 
+('HORIZONTAL', 4, 9, 'A une liaison avec Jupiter.', 'IO', @last_idGrille),
+('HORIZONTAL', 5, 1, 'Aurochs', 'URES', @last_idGrille), 
+('HORIZONTAL', 5, 6, 'Bout de bois.', 'OREE', @last_idGrille),
+('HORIZONTAL', 6, 1, 'Court', 'RAS', @last_idGrille), 
+('HORIZONTAL', 6, 6, 'Religieuse.', 'NONNE', @last_idGrille),
+('HORIZONTAL', 7, 1, 'À la mode', 'IN', @last_idGrille), 
+('HORIZONTAL', 7, 4, 'Technique utilisée par les virtuoses de l’imagerie électronique.', 'BINNING', @last_idGrille),
+('HORIZONTAL', 8, 1, 'Petits ensembles, battus d’une tête par celui de Stephan.', 'QUARTETTES', @last_idGrille),
+('HORIZONTAL', 9, 1, 'Local industriel.', 'USINE', @last_idGrille),
+('HORIZONTAL', 10, 3, 'On les trouve surtout dans le nord de l’Italie.', 'LOMBARDS', @last_idGrille);

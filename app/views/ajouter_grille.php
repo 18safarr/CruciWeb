@@ -1,11 +1,10 @@
 <?php
 session_start();
 require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../controllers/DefinitionManager.php');
-use controllers\DefinitionManager;
+require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
+use controllers\DefinitionManager2;
 use controllers\GrilleManager2;
 
-$dm = new DefinitionManager();
 if (!isset($_SESSION['user_id'])){
  
     header("Location:index.php");

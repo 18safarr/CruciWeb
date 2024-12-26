@@ -19,18 +19,20 @@ require_once '../app/model/Grilles.php';
 require_once '../app/model/Definitions.php';
 require_once '../app/model/Cases.php';
 require_once '../app/controllers/DefinitionManager.php';
+require_once '../app/controllers/DefinitionManager2.php';
 use app\GrilleManager;
 use app\GrilleManager2;
 use controllers\UsersManager;
-use app\DefinitionManager;
-use app\model\Grilles;
-use app\model\Definitions;
-use app\model\Cases;
+use controllers\DefinitionManager2;
+use model\Grilles;
+use model\Definitions;
+use model\Cases;
 use model\Users;
 
 
 
-// var_dump(Definitions::getDefinitionDatas(53));
+//var_dump(Definitions::getDefinitionDatas(9));
+echo DefinitionManager2::getDefinitionsHTML(15,"HORIZONTAL");
 
 // UsersManager::setIdUSer(2);
 
@@ -41,10 +43,10 @@ use model\Users;
 // GrilleManager2::setDimension(5,5);
 // echo GrilleManager2::createGridHTML(withInput:false);
 // echo GrilleManager2::createTablePublicGridHTML();
-$users = UsersManager::createUser("root2e","root");// Appel de la méthode statique
-if ($users){
-    var_dump($users);
-}
+// $users = UsersManager::createUser("root2e","root");// Appel de la méthode statique
+// if ($users){
+//     var_dump($users);
+// }
 
 
 //$user = Users::authenticateUser("koundibr", "root");

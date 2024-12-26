@@ -1,14 +1,13 @@
 <?php
 session_start();
 require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../controllers/DefinitionManager.php');
+require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
 require_once (__DIR__ . '/../controllers/UsersManager.php');
 
-use controllers\DefinitionManager;
+use controllers\DefinitionManager2;
 use controllers\GrilleManager2;
 use controllers\UsersManager;
 
-$dm = new DefinitionManager();
 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
@@ -99,21 +98,24 @@ if (isset($_GET["idGrille"])){
 
     <main>
         <div class="grid-container">
-            <!-- Définitions verticales -->
-            <div class="clues vertical scrollable">
-                <h3>Verticalement</h3>
-                <ul>
-                  <?php
-                    echo $dm->getVerticalDefinitions();
+
+            <!-- Définitions horizontales -->
+            <div class="clues horizontal scrollable">
+                <!-- <h3>Horizontalement</h3> -->
+                <ul class="styled-list ">
+                <?php
+                    echo DefinitionManager2::getDefinitionsHTML($idGrille,"HORIZONTAL");
                   ?>
                 </ul>
+                
             </div>
+           
 
             <!-- Grille principale -->
             <div class="grid">
                 <form method="POST" action="">
-                    <h3>N° : 13</h3>
-                    <h4>Niveau : Intermédiaire</h4>
+                    <h3>N° : <?php echo $idGrille; ?> |  Nom : Ma Grille</h3>
+                    <h3>Niveau : Intermédiaire</h3>
                     <div class="scrollable-grid">
                         <div id="crossword">
                         <?php
@@ -121,19 +123,24 @@ if (isset($_GET["idGrille"])){
                         ?>
                         </div>
                     </div>
-                    <button type="submit" name="save" id="save-button">Sauvegarder</button>
+                    <?php if (isset($_SESSION['user_id'])) { ?>
+                        <button type="submit" name="save" id="save-button">Sauvegarder</button>
+                    <?php }?>
                 </form>
             </div>
 
-            <!-- Définitions horizontales -->
-            <div class="clues horizontal scrollable">
-                <h3>Horizontalement</h3>
-                <ul>
-                <?php
-                    echo $dm->getHorizontalDefinitions();
-                  ?>
-                </ul>
+             <!-- Définitions verticales -->
+             <div class="clues vertical scrollable">
+                <!-- <h3>Verticalement</h3> -->
+                    <ul class="styled-list">
+                        <?php
+                            echo DefinitionManager2::getDefinitionsHTML($idGrille,"VERTICAL");
+                        ?>
+                    </ul>
+
             </div>
+
+            
         </div>
     </main>
 

@@ -139,7 +139,7 @@ class GrilleManager2 {
             // Générer les lignes de la grille
             for ($row = 1; $row <= self::$rows; $row++) {
                 $html .= '<tr>';
-                $html .= '<td>' . $row . '</td>'; // Numéro de ligne
+                $html .= '<th>' . $row . '</th>'; // Numéro de ligne
     
                 for ($col = 1; $col <= self::$cols; $col++) {
                     
