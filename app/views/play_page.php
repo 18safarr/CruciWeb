@@ -14,8 +14,8 @@ if (isset($_GET["idGrille"])){
 
     $test=GrilleManager2::initParamsGridFor($idGrille);
     #si l'id grille n'existe pas redirection vers la page daccueil
-    // if($test==false)
-    //     header("Location:index.php");
+    if(isset($test))
+        header("Location:index.php");
 
     if (isset($_SESSION['user_id'])){
         UsersManager::setIdUSer($_SESSION['user_id']);

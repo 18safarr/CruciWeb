@@ -49,21 +49,29 @@ class GrilleManager2 {
     public static function initParamsGridFor($idGrille){
         try{
             self::setGridId($idGrille);
+            
             $datas = self::getGridDatas();
-      
-            $grille = $datas[0];
+            if(isset( $datas[0])){
+                $grille = $datas[0];
 
-            self::$gridName = $grille->nomGrille;
-            self::setDimension($grille->dimX,$grille->dimY);
+                self::$gridName = $grille->nomGrille;
+                self::setDimension($grille->dimX,$grille->dimY);
 
-            self::$publicDate = $grille->datePublication;
+                self::$publicDate = $grille->datePublication;
 
-            self::setBlackCells();
+                self::setBlackCells();
+            }else{
+                return false;
+            }
 
         }catch(PDOException $e){
             return false;
         }
 
+    }
+
+    public static function deleteGrid($idGrille){
+        return Grilles::deleteGrille($idGrille);
     }
 
     private static function getBlackCellsData(){
@@ -122,7 +130,7 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($grille->datePublication).'</td>
-                   <td><a href="#" class="edit-link">Modifier</a> | <a href="#" class="del-link">X</a></td>
+                   <td><a href="#" class="edit-link">Modifier</a> | <a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">X</a></td>
                 </tr>
             ';
         }

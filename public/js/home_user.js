@@ -151,8 +151,13 @@ document.addEventListener("DOMContentLoaded", function () {
             
         }
     });
+    console.log("Grille à supprimer : ");
+    //-----------------TABLEAU DES GRILLES--------------
 
-
+  
+   
+    
+    
 
 
 

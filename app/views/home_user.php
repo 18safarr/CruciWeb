@@ -17,7 +17,8 @@ use controllers\UsersManager;
     <link rel="stylesheet" href="public/css/default.css">
     <link rel="stylesheet" href="public/css/home_user.css">
     <link rel="stylesheet" href="public/css/dashboard.css">
-    <script src="public/js/home_user.js" defer></script>
+    <script src="public/js/home_user.js"></script>
+    <script src="public/js/deleteGrille.js"></script>
     <script src="public/js/sortTableElement.js" defer></script>
 </head>
 <body>

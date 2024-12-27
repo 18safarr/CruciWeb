@@ -38,17 +38,24 @@ class DataBase
     {
         return $this->getPDO()->lastInsertId();
     }
-    public function prepare($statement, $attributes, $class_name)
+    public function prepare($statement, $attributes, $class_name = null)
     {
-        // Préparer et exécuter la requête avec les attributs donnés
+        // Préparer et exécuter la requête
         $req = $this->getPDO()->prepare($statement);
         $req->execute($attributes);
         
-        // Retourner le résultat en fonction de l'option 'single'
-        $datas = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+        // Vérifier si la requête est de type modification (DELETE, INSERT, UPDATE)
+        if (preg_match('/^(DELETE|INSERT|UPDATE)/i', trim($statement))) {
+            return $req->rowCount(); // Retourne le nombre de lignes affectées
+        }
         
-        return $datas;
+        // Pour les requêtes SELECT, retourner les résultats sous forme d'objets
+        if ($class_name) {
+            return $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+        }
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
 
   

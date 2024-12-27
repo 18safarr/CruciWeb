@@ -40,6 +40,14 @@
         $attributes = [$idAuteur];
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
+
+    public static function deleteGrille($idGrille){
+        // Requête SQL pour récupérer toutes les grilles avec une date de publication non nulle
+        $requete = "DELETE  FROM Grilles WHERE idGrille = ?";
+        $attributes = [$idGrille];
+    
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
+    }
  }
  
 ?>
