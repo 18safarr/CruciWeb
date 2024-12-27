@@ -109,7 +109,7 @@ if (isset($_GET["idGrille"])){
                 <!-- <h3>Horizontalement</h3> -->
                 <ul class="styled-list ">
                 <?php
-                    echo DefinitionManager2::getDefinitionsHTML($idGrille,"HORIZONTAL");
+                    echo DefinitionManager2::getlistDefinitionsHTML($idGrille,"HORIZONTAL");
                   ?>
                 </ul>
                 
@@ -139,7 +139,7 @@ if (isset($_GET["idGrille"])){
                 <!--   <h3>Verticalement</h3> -->
                     <ul class="styled-list">
                         <?php
-                            echo DefinitionManager2::getDefinitionsHTML($idGrille,"VERTICAL");
+                            echo DefinitionManager2::getlistDefinitionsHTML($idGrille,"VERTICAL");
                         ?>
                     </ul>
 

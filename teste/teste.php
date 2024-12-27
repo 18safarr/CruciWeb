@@ -18,10 +18,9 @@ require_once '../app/controllers/UsersManager.php';
 require_once '../app/model/Grilles.php';
 require_once '../app/model/Definitions.php';
 require_once '../app/model/Cases.php';
-require_once '../app/controllers/DefinitionManager.php';
 require_once '../app/controllers/DefinitionManager2.php';
 use app\GrilleManager;
-use app\GrilleManager2;
+use controllers\GrilleManager2;
 use controllers\UsersManager;
 use controllers\DefinitionManager2;
 use model\Grilles;
@@ -29,14 +28,18 @@ use model\Definitions;
 use model\Cases;
 use model\Users;
 
- var_dump(Grilles::deleteGrille(3));
-// var_dump(Cases::getBlackCases(1));
-// var_dump(Definitions::getDefinitionDatas(9));
-echo DefinitionManager2::getDefinitionsHTML(1,"HORIZONTAL");
+//  var_dump(Grilles::deleteGrille(3));
+// // var_dump(Cases::getBlackCases(1));
+// // var_dump(Definitions::getDefinitionDatas(9));
+// echo DefinitionManager2::getDefinitionsHTML(1,"HORIZONTAL");
 
 // UsersManager::setIdUSer(2);
 
-// echo GrilleManager2::createTablePrivateGridHTML(2);
+// var_dump( GrilleManager2::getAllData(5));
+
+GrilleManager2::initParamsGridFor(1);
+
+//var_dump(GrilleManager2::$defHoriData);
 
 // $data = Grilles::getPublicGrids();
 // var_dump($data);

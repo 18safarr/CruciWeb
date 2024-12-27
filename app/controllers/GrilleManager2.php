@@ -6,6 +6,7 @@ require_once (__DIR__ . '/UsersManager.php');
 use model\Grilles;
 use model\Cases;
 use controllers\UsersManager;
+use model\Definitions;
 use PDOException;
 
 class GrilleManager2 {
@@ -13,7 +14,10 @@ class GrilleManager2 {
     private static $gridName;
     private static $rows;
     private static $cols;
+    private static $difficulte;
     private static $publicDate;
+    private static $defHoriData;
+    private static $defVertiData;
     private static $blackCells=[];
 
     public static function setDimension($rows,$cols){
@@ -22,7 +26,7 @@ class GrilleManager2 {
         
     }
 
-    private  static function setGridId($idGrille){
+    public  static function setGridId($idGrille){
         self::$idGrille = $idGrille;
     }
 
@@ -46,6 +50,22 @@ class GrilleManager2 {
         return Grilles::getGrilleById(self::getGridId());
     }
 
+    public static function getAllData($idGrille){
+        
+        // //$data = self::getGridDatas();
+        // $grille = $data[0];
+        // $nomGrille=$grille->nomGrille;
+        // $difficulte = $grille->difficulte;
+        // $date = $grille->datePublication;
+        // $rows = $grille->dimX;
+        // $cols = $grille->dimX;
+
+        return [self::$gridName,self::$difficulte,self::$publicDate,self::$rows,self::$cols];
+
+    }
+
+    
+
     public static function initParamsGridFor($idGrille){
         try{
             self::setGridId($idGrille);
@@ -56,10 +76,13 @@ class GrilleManager2 {
 
                 self::$gridName = $grille->nomGrille;
                 self::setDimension($grille->dimX,$grille->dimY);
+                self::$difficulte = $grille->difficulte;
 
                 self::$publicDate = $grille->datePublication;
 
                 self::setBlackCells();
+
+                list(self::$defHoriData,self::$defVertiData) = DefinitionManager2::getAllDefinitionData($idGrille);
             }else{
                 return false;
             }
@@ -130,12 +153,14 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($grille->datePublication).'</td>
-                   <td><a href="#" class="edit-link">Modifier</a> | <a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">X</a></td>
+                   <td><a href="?p=edite_grille&idGrille='.htmlspecialchars($grille->idGrille).'" class="edit-link">Modifier</a> | <a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">X</a></td>
                 </tr>
             ';
         }
         return $html;
     }
+
+ 
 
     public static function createGridHTML($withInput = true){
         
@@ -188,9 +213,12 @@ class GrilleManager2 {
         
                 for ($col = 1; $col <= self::$cols; $col++) {
                     $id = 'cell_' . $row . '_' . $col; // ID unique pour chaque cellule
-        
-                    // Par défaut, toutes les cellules sont blanches
-                    $html .= '<td id="' . $id . '" class="white-cell"></td>';
+                     if (!self::isBlackCell($row, $col)) 
+                        $html .= '<td id="' . $id . '" class="white-cell"></td>';
+                    else
+                      
+                        $html .= '<td class="black-cell"></td>';
+                    
                 }
         
                 $html .= '</tr>';
@@ -213,6 +241,9 @@ class GrilleManager2 {
         $html .= '</select>';
         return $html;
     }
+
+
+  
 
     public static function getSelectorDefVerticalHTML() {
         $html = self::createSelectorHTML('y', self::$cols); // Sélecteur des colonnes (a, b, c, ...)

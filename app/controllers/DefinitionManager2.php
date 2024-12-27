@@ -10,8 +10,15 @@ class DefinitionManager2 {
         return Definitions::getDefinitionDatas($idGrille,$orientation);
    }
 
+   public static function getAllDefinitionData($idGrille){
+    	$dataDefVerti = Definitions::getDefinitionDatas($idGrille,"VERTICAL");
+    	$dataDefHori = Definitions::getDefinitionDatas($idGrille,"HORIZONTAL");
 
-   public static function getDefinitionsHTML($idGrille, $orientation) {
+    	return [$dataDefHori,$dataDefVerti];
+   }
+
+
+   public static function getlistDefinitionsHTML($idGrille, $orientation) {
         $datas = self::getDefinitionDatas($idGrille, $orientation);
         $html = '';
 
