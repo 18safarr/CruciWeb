@@ -9,19 +9,19 @@ SET @last_idGrille = LAST_INSERT_ID();
 
 -- Insert the black squares using the last inserted idGrille
 INSERT INTO Cases (positionX, positionY, idGrille) VALUES 
-(2+1, 5+1, @last_idGrille), 
-(3+1, 2+1, @last_idGrille), 
-(3+1, 5+1, @last_idGrille), 
-(4+1, 8+1, @last_idGrille), 
-(5+1, 5+1, @last_idGrille), 
-(5+1, 10+1, @last_idGrille), 
-(6+1, 4+1, @last_idGrille), 
-(6+1, 5+1, @last_idGrille), 
-(7+1, 3+1, @last_idGrille),
-(9+1, 6+1, @last_idGrille),
-(9+1, 7+1, @last_idGrille),
-(9+1, 9+1, @last_idGrille),
-(10+1, 2+1, @last_idGrille);
+(2, 5, @last_idGrille), 
+(3, 2, @last_idGrille), 
+(3, 5, @last_idGrille), 
+(4, 8, @last_idGrille), 
+(5, 5, @last_idGrille), 
+(5, 10, @last_idGrille), 
+(6, 4, @last_idGrille), 
+(6, 5, @last_idGrille), 
+(7, 3, @last_idGrille),
+(9, 6, @last_idGrille),
+(9, 7, @last_idGrille),
+(9, 9, @last_idGrille),
+(10, 2, @last_idGrille);
 
 -- Insert the vertical definitions using the last inserted idGrille
 INSERT INTO Definitions (orientation, posDepX, posDepY, description, solution, idGrille) VALUES 

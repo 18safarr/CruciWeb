@@ -11,11 +11,16 @@ use controllers\UsersManager;
 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
-    GrilleManager2::initParamsGridFor($idGrille);
+
+    $test=GrilleManager2::initParamsGridFor($idGrille);
+    #si l'id grille n'existe pas redirection vers la page daccueil
+    // if($test==false)
+    //     header("Location:index.php");
 
     if (isset($_SESSION['user_id'])){
         UsersManager::setIdUSer($_SESSION['user_id']);
     }
+
 }
    
 
@@ -52,8 +57,8 @@ if (isset($_GET["idGrille"])){
             <button id="voir-grilles-public">Home</button>
                 <form id="login-form" method="post">
                     
-                    <label for="username">Identifiant</label>
-                    <input type="text" id="username" name="username" placeholder="Entrez votre identifiant" required>
+                    <label for="username">email</label>
+                    <input type="text" id="username" name="username" placeholder="Entrez votre email" required>
 
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
@@ -61,9 +66,9 @@ if (isset($_GET["idGrille"])){
                     
                     <button type="submit" class="btn">Se connecter</button>
 
-                    <a href="?p=play&demand=inscription" class="register-link">Inscrivez-vous</a>
+                    <a href="?p=play&demand=inscription&idGrille=<?php echo $idGrille ?>" class="register-link">Inscrivez-vous</a>
 
-                    <p class="error-message" style="display:none;">Identifiant ou mot de passe incorrect</p>
+                    <p class="error-message" style="display:none;">email ou mot de passe incorrect</p>
                 </form>
             </nav>
             <?php } else if (isset($_GET['demand'])) { ?>
@@ -83,7 +88,7 @@ if (isset($_GET["idGrille"])){
 
                     <!-- Bouton d'inscription -->
                     <button type="submit" class="btn">S'inscrire</button>
-                    <a href="?p=play" class="register-link">J'ai un compte</a>
+                    <a href="?p=play&idGrille=<?php echo $idGrille ?>" class="register-link">J'ai un compte</a>
                     <!-- Message d'erreur -->
                     <div id="error-message" class="error hidden" style="height: 10px; margin:0px;">
                         <p class="error-message" style="display:none;">Les mots de passe ne correspondent pas.</p>
@@ -131,7 +136,7 @@ if (isset($_GET["idGrille"])){
 
              <!-- Définitions verticales -->
              <div class="clues vertical scrollable">
-                <!-- <h3>Verticalement</h3> -->
+                <!--   <h3>Verticalement</h3> -->
                     <ul class="styled-list">
                         <?php
                             echo DefinitionManager2::getDefinitionsHTML($idGrille,"VERTICAL");

@@ -30,9 +30,9 @@ use model\Cases;
 use model\Users;
 
 
-
-//var_dump(Definitions::getDefinitionDatas(9));
-echo DefinitionManager2::getDefinitionsHTML(15,"HORIZONTAL");
+// var_dump(Cases::getBlackCases(1));
+// var_dump(Definitions::getDefinitionDatas(9));
+echo DefinitionManager2::getDefinitionsHTML(1,"HORIZONTAL");
 
 // UsersManager::setIdUSer(2);
 

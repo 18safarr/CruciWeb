@@ -59,9 +59,9 @@ GrilleManager2::setDimension($rows,$cols);
 
                     <label for="grid-size-x">Dimension :</label>
                     <div class="dimension">
-                        <input type="number" id="grid-size-x" class="grid-size" value="<?php echo $cols ?>" min="5">
+                        <input type="number" id="grid-size-x" class="grid-size" value="<?php echo $cols ?>" min="5" max=15>
                         <span>x</span>
-                        <input type="number" id="grid-size-y" class="grid-size" value="<?php echo $rows ?>" min="5">
+                        <input type="number" id="grid-size-y" class="grid-size" value="<?php echo $rows ?>" min="5" max=15>
                     </div>
 
                     <button id="generate-grid">Générer grille</button>

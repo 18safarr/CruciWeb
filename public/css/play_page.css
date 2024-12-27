@@ -187,6 +187,8 @@ main {
     overflow: auto; /* Scrollbars horizontales et verticales */
     /* border: 1px solid #ddd; */
     margin: 0 auto;
+    background-color:white;
+    padding-right: 30px;
 }
 
 /* Table de la grille */
@@ -195,7 +197,7 @@ main {
     margin: 10px auto;
     width: 100%;
     min-width: 500px; /* Assure une scrollbar horizontale si nécessaire */
-    background-color:white;
+    /* background-color:white; */
 }
 
 .grid th, .grid td {

@@ -6,6 +6,7 @@ require_once (__DIR__ . '/UsersManager.php');
 use model\Grilles;
 use model\Cases;
 use controllers\UsersManager;
+use PDOException;
 
 class GrilleManager2 {
     private static $idGrille;
@@ -46,22 +47,27 @@ class GrilleManager2 {
     }
 
     public static function initParamsGridFor($idGrille){
-        self::setGridId($idGrille);
-        $datas = self::getGridDatas();
+        try{
+            self::setGridId($idGrille);
+            $datas = self::getGridDatas();
       
-        $grille = $datas[0];
+            $grille = $datas[0];
 
-        self::$gridName = $grille->nomGrille;
-        self::setDimension($grille->dimX,$grille->dimY);
+            self::$gridName = $grille->nomGrille;
+            self::setDimension($grille->dimX,$grille->dimY);
 
-        self::$publicDate = $grille->datePublication;
+            self::$publicDate = $grille->datePublication;
 
-        self::setBlackCells();
+            self::setBlackCells();
+
+        }catch(PDOException $e){
+            return false;
+        }
 
     }
 
     private static function getBlackCellsData(){
-        return Cases::getCasesByIdGrille(self::$idGrille);
+        return Cases::getBlackCases(self::$idGrille);
     }
     public static function getBlackCells(){
         return self::$blackCells;
@@ -79,7 +85,7 @@ class GrilleManager2 {
     private static function isBlackCell($row, $col) {
         
         foreach (self::$blackCells as $cell) {
-            if ($cell[0]-1 === $row && $cell[1]-1 === $col) {
+            if ($cell[0] === $row && $cell[1] === $col) {
                 return true;
             }
         }

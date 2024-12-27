@@ -11,8 +11,8 @@ class Cases{
         
     }
 
-    public static function getCasesByIdGrille($idGrille) {
-        $requete = "SELECT * FROM Cases WHERE idGrille = ?";
+    public static function getBlackCases($idGrille) {
+        $requete = "SELECT * FROM Cases WHERE idGrille = ? AND isBlack = 'YES'";
         $attributes = [$idGrille];
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }

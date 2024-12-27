@@ -21,15 +21,15 @@ use LDAP\Result;
             $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
             
             // Exécuter la requête d'insertion
-            $query = 'INSERT INTO Users (identifiant, motDePasse, isPlayer) VALUES (?, ?, ?)';
+            $query = 'INSERT INTO Users (email, motDePasse, isPlayer) VALUES (?, ?, ?)';
             
             return App::getDb()->prepare($query, [$email, $hashedPassword, $isPlayer],__CLASS__);
         }
 
         public static function getId($email)
         {
-            // Requête pour récupérer l'ID de l'utilisateur à partir de l'identifiant
-            $query = 'SELECT idUser FROM Users WHERE identifiant = ?';
+            // Requête pour récupérer l'ID de l'utilisateur à partir de l'email
+            $query = 'SELECT idUser FROM Users WHERE email = ?';
             
             // Préparer et exécuter la requête
             $db = App::getDb();
@@ -65,8 +65,8 @@ use LDAP\Result;
 
         public static function userExists($email)
         {
-            // Vérifier si un utilisateur avec l'identifiant donné existe dans la base de données
-            $query = 'SELECT COUNT(*) AS nbUser FROM Users WHERE identifiant = ?';
+            // Vérifier si un utilisateur avec l'email donné existe dans la base de données
+            $query = 'SELECT COUNT(*) AS nbUser FROM Users WHERE email = ?';
             
             $result = App::getDb()->prepare($query, [$email],__CLASS__);
             
@@ -75,8 +75,8 @@ use LDAP\Result;
 
         public static function authenticateUser($email, $motDePasse)
         {
-            // Récupérer l'utilisateur correspondant à l'identifiant
-            $query = 'SELECT * FROM Users WHERE identifiant = ?';
+            // Récupérer l'utilisateur correspondant à l'email
+            $query = 'SELECT * FROM Users WHERE email = ?';
             $user = App::getDb()->prepare($query, [$email],__CLASS__);
             if ($user&&password_verify($motDePasse, $user[0]->motDePasse)) {
                 return true;

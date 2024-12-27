@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         blackCells.forEach(cell => {
             const row = cell.parentElement.rowIndex;
             const col = cell.cellIndex;
-            blackCellPositions.push({ x: row + 1, y: col + 1 });
+            blackCellPositions.push({ x: row, y: col });
         });
 
         return blackCellPositions;

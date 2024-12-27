@@ -102,8 +102,27 @@ button.logout:hover {
     max-width: 100%; 
     max-height: 600px; /* Limite la hauteur du conteneur de la grille */
     overflow: auto; /* Ajoute des barres de défilement au besoin */
-    border: 1px solid #ddd; 
+    /* border: 1px solid #ddd;  */
     margin: 0 auto; 
+    background-color:white;
+    padding-right: 30px;
+}
+
+.scrollable-grid::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollable-grid::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    border-radius: 5px;
+}
+
+.scrollable-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #0097a7;
+}
+
+.scrollable-grid::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }
 
 .grid table {
@@ -111,15 +130,19 @@ button.logout:hover {
     margin: 10px auto; 
     width: 100%; 
     min-width: 500px; 
+    /* background-color:white; */
+    
 }
 
-.grid th, 
-.grid td {
-    border: 1px solid #ddd; 
+.grid th, .grid td {
+    border: 1px solid #050505; 
     padding: 5px; 
     text-align: center; 
     width: 30px; 
     height: 30px; 
+}
+.grid th{
+    border: 0px solid #030303;
 }
 
 .grid .black-cell {
