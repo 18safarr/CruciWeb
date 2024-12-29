@@ -37,7 +37,10 @@ use model\Users;
 
 // var_dump( GrilleManager2::getAllData(5));
 
-GrilleManager2::initParamsGridFor(1);
+//GrilleManager2::initParamsGridFor(1);
+$dm = new DefinitionManager2(1,10,10);
+
+var_dump(DefinitionManager2::$dataDefinitions);
 
 //var_dump(GrilleManager2::$defHoriData);
 

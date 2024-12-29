@@ -20,6 +20,7 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
 }
 
 GrilleManager2::setDimension($rows,$cols);
+DefinitionManager2::setDimension($rows,$cols);
 ?>
 
 
@@ -108,16 +109,9 @@ GrilleManager2::setDimension($rows,$cols);
                     </div>
                     
                     <div class="definitions-scroll">
-                        <div class="definition" id="vertical-template">
-                            <label>N°</label>
-                            <?php echo GrilleManager2::getSelectorDefVerticalHTML();?>
-                            <label>Description</label>
-                            <input type="text" class="def-desc" placeholder="Définition">
-                            <label>Solution</label>
-                            <input type="text" class="def-sol" placeholder="Solution">
-                            <button class="supp-def">X</button>
-                            <button class="valider-def">&#x2713;</button>
-                        </div>
+                        <!-- <div class="definition" id="vertical-template"> -->
+                            <?php echo DefinitionManager2::getDefintionFormHTML("VERTICAL"); ?>
+                        <!-- </div> -->
                     </div>
                     
                 </div>
@@ -129,16 +123,9 @@ GrilleManager2::setDimension($rows,$cols);
                         <button id="add-horizontal-definition">+</button>
                     </div>
                     <div class="definitions-scroll">
-                        <div class="definition" id="horizontal-template">
-                            <label>N°</label>
-                            <?php echo GrilleManager2::getSelectorDefHorizontalHTML();?>
-                            <label>Description</label>
-                            <input type="text" class="def-desc" placeholder="Définition">
-                            <label>Solution</label>
-                            <input type="text" class="def-sol" placeholder="Solution">
-                            <button class="supp-def">X</button>
-                            <button class="valider-def">&#x2713;</button>
-                        </div>
+                        <!-- <div class="definition" id="horizontal-template"> -->
+                            <?php echo DefinitionManager2::getDefintionFormHTML("HORIZONTAL"); ?>
+                        <!-- </div> -->
                     </div>
                     
                 </div>

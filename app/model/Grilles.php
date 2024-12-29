@@ -18,6 +18,19 @@
         
     }
 
+    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public) {
+        if ($public == 1) {
+            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NOW() WHERE idGrille = ?";
+            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $idGrille];
+        } else {
+            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NULL WHERE idGrille = ?";
+            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $idGrille];
+        }
+    
+        return App::getDb()->prepare($requete, $attributes, __CLASS__);
+    }
+    
+
     public static function getLastId(){
         return App::getDb()->lastInsertId();
     }

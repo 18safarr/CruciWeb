@@ -16,8 +16,6 @@ class GrilleManager2 {
     private static $cols;
     private static $difficulte;
     private static $publicDate;
-    private static $defHoriData;
-    private static $defVertiData;
     private static $blackCells=[];
 
     public static function setDimension($rows,$cols){
@@ -82,7 +80,7 @@ class GrilleManager2 {
 
                 self::setBlackCells();
 
-                list(self::$defHoriData,self::$defVertiData) = DefinitionManager2::getAllDefinitionData($idGrille);
+                
             }else{
                 return false;
             }
@@ -107,9 +105,10 @@ class GrilleManager2 {
     private static function setBlackCells(){
         $datas = self::getBlackCellsData() ?? []; // Assurez-vous que $datas est au moins un tableau vide
         foreach ($datas as $case) {
+            $id = $case->idCase;
             $x = (int) $case->positionX; // Convertir en entier au cas où ce soit une chaîne
             $y = (int) $case->positionY; // Convertir en entier
-            self::$blackCells[] = [$x, $y]; // Ajouter la position (x, y) au tableau
+            self::$blackCells[] = [$x, $y,$id];
         }
     }
 
@@ -230,32 +229,7 @@ class GrilleManager2 {
         return $html;
     }
 
-    private static function createSelectorHTML($type, $count) {
-        // Identifier si le type est "y" (colonnes) ou "x" (lignes)
-        $html = '<select class="def-num" id="pos-' . $type . '">';
-        for ($i = 1; $i <= $count; $i++) {
-            $value = ($type === 'y') ? chr(96 + $i) : $i; // Génère 'a', 'b', 'c'... pour les colonnes et 1, 2, 3... pour les lignes
-            $html .= '<option value="' . $value . '">' . $value . '</option>';
-        }
-
-        $html .= '</select>';
-        return $html;
-    }
-
-
-  
-
-    public static function getSelectorDefVerticalHTML() {
-        $html = self::createSelectorHTML('y', self::$cols); // Sélecteur des colonnes (a, b, c, ...)
-        $html .= self::createSelectorHTML('x', self::$rows); // Sélecteur des lignes (1, 2, 3, ...)
-        return $html;
-    }
-
-    public static function getSelectorDefHorizontalHTML() {
-        $html = self::createSelectorHTML('x', self::$rows); // Sélecteur des lignes (1, 2, 3, ...)
-        $html .= self::createSelectorHTML('y', self::$cols); // Sélecteur des colonnes (a, b, c, ...)
-        return $html;
-    }
+    
     
 }
 

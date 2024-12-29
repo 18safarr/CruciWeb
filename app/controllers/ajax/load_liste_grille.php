@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once  (__DIR__ . '/../GrilleManager2.php');
-require_once  (__DIR__ . '/../DefinitionManager.php');
 
 use controllers\GrilleManager2;
 

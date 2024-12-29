@@ -14,7 +14,8 @@ use model\Definitions;
 use model\Cases;
 
 
-if (!isset($_SESSION['user_id'])) {
+
+if (!isset($_SESSION['user_id']) && !isset($_SESSION["grille_id"])) {
     echo json_encode(["success" => false, "message" => "Utilisateur non authentifié.",]);
     exit;
 }
@@ -23,19 +24,20 @@ $inputData = json_decode(file_get_contents('php://input'), true);
 
 if ($inputData) {
    
+    $idGrille = $_SESSION["grille_id"];
+    // Update grille
 
-    // Insérer la grille dans la table Grilles
-
-    $idGrille = Grilles::addGrille(
+    $rc = Grilles::updateGrille(
+        $idGrille,
         $inputData['nomGrille'], 
         $inputData['dimX'], 
-        $inputData['dimY'], 
-        $_SESSION['user_id'],   
+        $inputData['dimY'],   
         $inputData['difficulte'],
         $inputData['publiee']
     );
-    $idGrille = Grilles::getLastId();
-    // Insérer les cases noires
+    
+    // // update les cases noires
+    $rc=Cases::deleteBlackCases($idGrille);
     foreach ($inputData['blackCells'] as $cell) {
         $data = Cases::addCase($cell['x'], $cell['y'], $idGrille);
     }
@@ -43,14 +45,13 @@ if ($inputData) {
     // // Insérer les définitions verticales
     foreach ($inputData['verticalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
-        //Definitions::addDefinition('VERTICAL',$posX , $def['posY'], , ,$idGrille);
-        Definitions::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+        Definitions::updateDefinition($def['id'],$def['posX'] ,$posY, $def['description'], $def['solution']);
     }
 
-    // Insérer les définitions horizontales
+    // // Insérer les définitions horizontales
     foreach ($inputData['horizontalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
-        Definitions::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+        Definitions::updateDefinition($def['id'],$def['posX'] ,$posY, $def['description'], $def['solution']);
     }
 
     echo json_encode(["success" => true]);

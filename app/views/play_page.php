@@ -13,6 +13,7 @@ if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
 
     $test=GrilleManager2::initParamsGridFor($idGrille);
+    DefinitionManager2::setIdGrille($idGrille);
     #si l'id grille n'existe pas redirection vers la page daccueil
     if(isset($test))
         header("Location:index.php");
@@ -109,7 +110,7 @@ if (isset($_GET["idGrille"])){
                 <!-- <h3>Horizontalement</h3> -->
                 <ul class="styled-list ">
                 <?php
-                    echo DefinitionManager2::getlistDefinitionsHTML($idGrille,"HORIZONTAL");
+                    echo DefinitionManager2::getlistDefinitionsHTML("HORIZONTAL");
                   ?>
                 </ul>
                 
@@ -139,7 +140,7 @@ if (isset($_GET["idGrille"])){
                 <!--   <h3>Verticalement</h3> -->
                     <ul class="styled-list">
                         <?php
-                            echo DefinitionManager2::getlistDefinitionsHTML($idGrille,"VERTICAL");
+                            echo DefinitionManager2::getlistDefinitionsHTML("VERTICAL");
                         ?>
                     </ul>
 

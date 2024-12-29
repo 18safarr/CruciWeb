@@ -6,8 +6,8 @@
  class Definitions{
 
     public static function getDefinitionDatas($idGrille,$orientation="VERTICAL") {
-        $requete = "SELECT * FROM Definitions WHERE idGrille = ? and orientation = ?";
-        $attributes = [$idGrille,$orientation];
+        $requete = "SELECT * FROM Definitions WHERE idGrille = ?";
+        $attributes = [$idGrille];
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
 
@@ -17,6 +17,18 @@
         return App::getDb()->prepare($requete,$attributes,__CLASS__);
        
     }
+
+    public static function updateDefinition($idDefinition, $posX, $posY, $description, $solution) {
+        // Requête de mise à jour
+        $requete = "UPDATE Definitions SET posDepX = ?, posDepY = ?, description = ?, solution = ? WHERE idDefinition = ?";
+        
+        // Les attributs à lier aux placeholders
+        $attributes = [$posX, $posY, $description, $solution, $idDefinition];
+        
+        // Exécution de la requête préparée
+        return App::getDb()->prepare($requete, $attributes, __CLASS__);
+    }
+    
     
  }
 ?>

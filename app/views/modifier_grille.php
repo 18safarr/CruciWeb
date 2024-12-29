@@ -5,16 +5,20 @@ require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
 use controllers\DefinitionManager2;
 use controllers\GrilleManager2;
 
-// if (!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])){
  
-//     header("Location:index.php");
-// } 
+    header("Location:index.php");
+} 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
     GrilleManager2::initParamsGridFor($idGrille);
     list($nomGrille,
     $difficulte,
     $date,$rows,$cols)= GrilleManager2::getAllData($idGrille);
+
+    $dm = new DefinitionManager2($idGrille,$rows,$cols);
+
+    $_SESSION["grille_id"] = $idGrille;
 
 
 
@@ -31,8 +35,8 @@ if (isset($_GET["idGrille"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CruciWeb</title>
     <link rel="stylesheet" href="public/css/default.css">
-    <link rel="stylesheet" href="public/css/ajouter_grille.css">
-    <script src="public/js/ajouter_grille.js" defer></script>
+    <link rel="stylesheet" href="public/css/modifier_grille.css">
+    <script src="public/js/modifier_grille.js" defer></script>
     <script src="public/js/nav.js" defer></script>
 </head>
 <body>
@@ -44,7 +48,7 @@ if (isset($_GET["idGrille"])){
             <button id="voir-grilles-public">HOME</button>
             <button >Mes parties</button>
             <button id="voir-mes-grilles" >Mes grilles</button>
-            <button class="disabled">Ajouter grille</button>
+            <button id="add-grille">Ajouter grille</button>
             <button class="logout" id="logout">Déconnexion</button>
         </nav>
     </header>
@@ -80,7 +84,7 @@ if (isset($_GET["idGrille"])){
                     <input type="radio" name="publish" id="publish-no" <?php echo isset($date) ? '' : 'checked'; ?>> Non
                     <input type="radio" name="publish" id="publish-yes" <?php echo isset($date)  ? 'checked' : ''; ?>> Oui 
 
-                    <button id="save-grid">Enrégistrer</button>
+                    <button id="save-grid">Modifier</button>
                 </div>
             </div>
                 
@@ -109,16 +113,9 @@ if (isset($_GET["idGrille"])){
                     </div>
                     
                     <div class="definitions-scroll">
-                        <div class="definition" id="vertical-template">
-                            <label>N°</label>
-                            <?php echo GrilleManager2::getSelectorDefVerticalHTML();?>
-                            <label>Description</label>
-                            <input type="text" class="def-desc" placeholder="Définition">
-                            <label>Solution</label>
-                            <input type="text" class="def-sol" placeholder="Solution">
-                            <button class="supp-def">X</button>
-                            <button class="valider-def">&#x2713;</button>
-                        </div>
+                        <!-- <div class="definition" id="vertical-template"> -->
+                        <?php echo DefinitionManager2::getDefintionFormHTML("VERTICAL",true); ?>
+                        <!-- </div> -->
                     </div>
                     
                 </div>
@@ -130,16 +127,9 @@ if (isset($_GET["idGrille"])){
                         <button id="add-horizontal-definition">+</button>
                     </div>
                     <div class="definitions-scroll">
-                        <div class="definition" id="horizontal-template">
-                            <label>N°</label>
-                            <?php echo GrilleManager2::getSelectorDefHorizontalHTML();?>
-                            <label>Description</label>
-                            <input type="text" class="def-desc" placeholder="Définition">
-                            <label>Solution</label>
-                            <input type="text" class="def-sol" placeholder="Solution">
-                            <button class="supp-def">X</button>
-                            <button class="valider-def">&#x2713;</button>
-                        </div>
+                        <!-- <div class="definition" id="horizontal-template"> -->
+                            <?php echo DefinitionManager2::getDefintionFormHTML("HORIZONTAL",true); ?>
+                        <!-- </div> -->
                     </div>
                     
                 </div>
