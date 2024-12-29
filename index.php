@@ -4,7 +4,8 @@ $routes = [
     'home_user' => 'app/views/home_user.php',
     'play' => 'app/views/play_page.php',
     'ajouter_grille' => 'app/views/ajouter_grille.php',
-    'edite_grille' => 'app/views/modifier_grille.php'
+    'edite_grille' => 'app/views/modifier_grille.php',
+    'admin' => 'app/views/admin_page.php'
 ];
 
 // Récupérer la route ou définir une route par défaut

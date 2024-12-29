@@ -2,7 +2,7 @@
 session_start();
 
 // Vérifier si une session existe
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) || isset( $_SESSION["admin_id"])) {
     // Détruire toutes les données de session
     session_unset();
     session_destroy();

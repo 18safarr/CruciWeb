@@ -35,7 +35,11 @@
         return App::getDb()->lastInsertId();
     }
 
-
+    public static function getAllGridData() {
+        $requete = "SELECT * FROM Grilles";
+        return App::getDb()->query($requete, __CLASS__);
+    }
+    
     public static function getGrilleById($idGrille) {
         $requete = "SELECT * FROM Grilles WHERE idGrille = ?";
         $attributes = [$idGrille];

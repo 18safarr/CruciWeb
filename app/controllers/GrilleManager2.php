@@ -49,14 +49,6 @@ class GrilleManager2 {
     }
 
     public static function getAllData($idGrille){
-        
-        // //$data = self::getGridDatas();
-        // $grille = $data[0];
-        // $nomGrille=$grille->nomGrille;
-        // $difficulte = $grille->difficulte;
-        // $date = $grille->datePublication;
-        // $rows = $grille->dimX;
-        // $cols = $grille->dimX;
 
         return [self::$gridName,self::$difficulte,self::$publicDate,self::$rows,self::$cols];
 
@@ -159,6 +151,39 @@ class GrilleManager2 {
         return $html;
     }
 
+
+    public static function createTableAllGridHTML(){
+        $datas = Grilles::getAllGridData();
+        $html = '<table id="grilleTable">';
+        $html .= '<thead>
+            <tr>
+                <th>N°</th>
+                <th>Nom grille</th>
+                <th>Dimension</th>
+                <th onclick="sortTableByLevel()"><span id="levelSortIcon">&#x25B2;&#x25BC;</span>Niveau</th>
+                <th onclick="sortTableByDate()"><span id="dateSortIcon">&#x25B2;&#x25BC;</span>Date de publication</th>
+                <th>Action</th>
+            </tr>
+        </thead>';
+        $html .='<tbody>';
+        foreach($datas as $grille){
+            $html .= '
+                <tr>
+                    <td>' . htmlspecialchars($grille->idGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->nomGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
+                    <td>' . htmlspecialchars($grille->difficulte) .'</td>
+                    <td>' . htmlspecialchars($grille->datePublication).'</td>
+                   <td><a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">supprimer</a></td>
+                </tr>
+            ';
+        }
+        $html .='</tbody>';
+        $html .='</table>';
+        return $html;
+
+
+    }
  
 
     public static function createGridHTML($withInput = true){

@@ -1,0 +1,186 @@
+
+.title-table{
+    margin-left: 1%;
+}
+/* Conteneur principal */
+.container {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    gap: 20px; /* Espacement entre les sections */
+
+}
+
+/* Tableau des grilles */
+.table-container {
+    flex: 2; /* Le tableau occupe plus d'espace */
+    max-width: 100%;
+   
+    margin: 0 auto;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+thead {
+    background-color: #00bcd4;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Conteneur droit */
+.right-container {
+    flex: 1; /* Occupe moins d'espace que le tableau */
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Formulaire */
+
+.form-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+.form-container .logo{
+    display: flex;
+    margin-left: 40%;
+}
+.form-container .logo img{
+    width: 35%;
+    
+}
+
+.form-container h1 {
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-container input:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+.form-container .btn {
+    width: 100%;
+    padding: 10px;
+    background: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container .btn:hover {
+    background-color: #0097a7;
+}
+
+/* Footer du formulaire */
+.form-container .footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-container .footer a {
+    color: #00bcd4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-container .footer a:hover {
+    text-decoration: underline;
+}
+
+/* Message d'erreur */
+.form-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.form-container .error.hidden {
+    display: none;
+}
+
+/* Effet de transition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar personnalisée */
+.table-container {
+    max-height: 600px;
+    overflow-y: auto;
+    height: 650px;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #0097a7;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+

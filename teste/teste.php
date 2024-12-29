@@ -35,7 +35,7 @@ use model\Users;
 
 // UsersManager::setIdUSer(2);
 
-// var_dump( GrilleManager2::getAllData(5));
+var_dump( Grilles::getAllGridData());
 
 //GrilleManager2::initParamsGridFor(1);
 $dm = new DefinitionManager2(1,10,10);

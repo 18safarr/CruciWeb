@@ -19,7 +19,7 @@ if (isset($_POST['load-liste-grille'])) {
             </tr>
         </thead>
         <tbody>'.GrilleManager2::createTablePrivateGridHTML($_SESSION['user_id']).'</tbody>';
-    } else {
+    } elseif($type=="public") {
        echo '<thead>
             <tr>
                 <th>N°</th>
@@ -32,6 +32,8 @@ if (isset($_POST['load-liste-grille'])) {
         </thead>
         <tbody>'.GrilleManager2::createTablePublicGridHTML().'</tbody>';
       
+    }elseif($type=="admin"){
+        echo GrilleManager2::createTableAllGridHTML();
     }
 }
 ?>
