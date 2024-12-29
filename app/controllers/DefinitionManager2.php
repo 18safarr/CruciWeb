@@ -40,7 +40,13 @@ class DefinitionManager2 {
     self::$cols = $cols;
    }
 
-  
+   public static function addDefinition($orientation,$x,$y,$desc,$sol,$idGrille){
+        Definitions::addDefinition($orientation,$x ,$y, $desc, $sol,$idGrille);
+   }
+   
+   public static function updateDefinition($idDefinition, $posX, $posY, $description, $solution) {
+        Definitions::updateDefinition($idDefinition,$posX ,$posY, $description, $solution);
+   }
 
 
     public static function getlistDefinitionsHTML($orientation) {
@@ -62,15 +68,6 @@ class DefinitionManager2 {
             return $html;
         }
 
-        // foreach ($datas as $index => $definition) {
-        //     // Génère une ligne avec la description formatée en lettre (a, b, c, etc.)
-        //     if($orientation == "VERTICAL")
-        //         $html .= '<li>' . chr(96+$definition->posDepY) . ' - ' . htmlspecialchars($definition->description) . '</li>';
-        //     else
-        //         $html .= '<li>' .$definition->posDepX . ' - ' . htmlspecialchars($definition->description) . '</li>';
-        // }
-
-        // return $html;
    }
 
    private static function createSelectorHTML($type, $count,$selectVal=null) {

@@ -83,8 +83,38 @@ class GrilleManager2 {
 
     }
 
+    public static function addGrille($nomGrille,$dimX,$dimY,$idUser,$difficulte,$publiee){
+        $rc = Grilles::addGrille(
+            $nomGrille, 
+            $dimX, 
+            $dimY, 
+            $idUser,   
+            $difficulte,
+            $publiee
+        );
+        return Grilles::getLastId();
+    }
+
+    public static function addCase($x,$y,$idGrille){
+        $rc = Cases::addCase($x,$y,$idGrille);
+    }
+    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public) {
+        $rc = Grilles::updateGrille(
+            $idGrille,
+            $nomGrille, 
+            $dimX, 
+            $dimY,   
+            $difficulte,
+            $public
+        );
+    }
+
     public static function deleteGrid($idGrille){
         return Grilles::deleteGrille($idGrille);
+    }
+
+    public static function deleteBlackCases($idGrille){
+        $rc=Cases::deleteBlackCases($idGrille);
     }
 
     private static function getBlackCellsData(){
@@ -116,8 +146,19 @@ class GrilleManager2 {
 
     public static function createTablePublicGridHTML(){
         $datas = self::getDataPublicGrid();
-        $html = '';
+        $html =  '<thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom grille</th>
+                        <th>Dimension</th>
+                        <th onclick="sortTableByLevel()"><span id="levelSortIcon">&#x25B2;&#x25BC;</span>Niveau</th>
+                        <th onclick="sortTableByDate()"><span id="dateSortIcon">&#x25B2;&#x25BC;</span>Date de publication</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>';
+        $html .= '<tbody>';
         foreach($datas as $grille){
+         
             $html .= '
                 <tr>
                     <td>' . htmlspecialchars($grille->idGrille) .'</td>
@@ -129,13 +170,24 @@ class GrilleManager2 {
                 </tr>
             ';
         }
+        $html .= '</tbody>';
         return $html;
     }
 
     public static function createTablePrivateGridHTML($idUser){
         $datas = self::getDataPrivateGrid($idUser);
         
-        $html ='';
+        $html = '<thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom grille</th>
+                        <th>Dimension</th>
+                        <th onclick="sortTableByLevel()"><span id="levelSortIcon">&#x25B2;&#x25BC;</span>Niveau</th>
+                        <th onclick="sortTableByDate()"><span id="dateSortIcon">&#x25B2;&#x25BC;</span>Date de publication</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>';
+        $html .= '<tbody>';
         foreach($datas as $grille){
             $html .= '
                 <tr>
@@ -148,6 +200,7 @@ class GrilleManager2 {
                 </tr>
             ';
         }
+        $html .= '</tbody>';
         return $html;
     }
 

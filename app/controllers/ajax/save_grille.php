@@ -4,14 +4,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once (__DIR__ . '/../../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../../model/Grilles.php');
-require_once (__DIR__ . '/../../model/Definitions.php');
-require_once (__DIR__ . '/../../model/Cases.php');
+require_once (__DIR__ . '/../../controllers/DefinitionManager2.php');
 use controllers\GrilleManager2;
-use controllers\DefinitionManager;
-use model\Grilles;
-use model\Definitions;
-use model\Cases;
+use controllers\DefinitionManager2;
 
 
 if (!isset($_SESSION['user_id'])) {
@@ -26,7 +21,7 @@ if ($inputData) {
 
     // Insérer la grille dans la table Grilles
 
-    $idGrille = Grilles::addGrille(
+    $idGrille = GrilleManager2::addGrille(
         $inputData['nomGrille'], 
         $inputData['dimX'], 
         $inputData['dimY'], 
@@ -34,23 +29,23 @@ if ($inputData) {
         $inputData['difficulte'],
         $inputData['publiee']
     );
-    $idGrille = Grilles::getLastId();
+    //$idGrille = Grilles::getLastId();
     // Insérer les cases noires
     foreach ($inputData['blackCells'] as $cell) {
-        $data = Cases::addCase($cell['x'], $cell['y'], $idGrille);
+        $data = GrilleManager2::addCase($cell['x'], $cell['y'], $idGrille);
     }
 
     // // Insérer les définitions verticales
     foreach ($inputData['verticalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
         //Definitions::addDefinition('VERTICAL',$posX , $def['posY'], , ,$idGrille);
-        Definitions::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+        DefinitionManager2::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
     }
 
     // Insérer les définitions horizontales
     foreach ($inputData['horizontalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
-        Definitions::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+        DefinitionManager2::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
     }
 
     echo json_encode(["success" => true]);

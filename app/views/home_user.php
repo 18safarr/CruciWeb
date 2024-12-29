@@ -41,21 +41,7 @@ use controllers\UsersManager;
         <!-- Tableau des grilles -->
         <div class="table-container">
             <table id="grilleTable">
-                <thead>
-                    <tr>
-                        <th>N°</th>
-                        <th>Nom grille</th>
-                        <th>Dimension</th>
-                        <th onclick="sortTableByLevel()"><span id="levelSortIcon">&#x25B2;&#x25BC;</span>Niveau</th>
-                        <th onclick="sortTableByDate()"><span id="dateSortIcon">&#x25B2;&#x25BC;</span>Date de publication</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    echo GrilleManager2::createTablePublicGridHTML();
-                    ?>
-                </tbody>
+                <?php echo GrilleManager2::createTablePublicGridHTML(); ?>
             </table>
         </div>
 
