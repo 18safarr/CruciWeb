@@ -1,6 +1,5 @@
 // Attendre que le DOM soit entièrement chargé avant d'exécuter le script
 document.addEventListener("DOMContentLoaded", function () {
-
     // Sélection de la table de la grille
     const table = document.querySelector("table");
     

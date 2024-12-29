@@ -40,13 +40,19 @@ if ($inputData) {
     // // Insérer les définitions verticales
     foreach ($inputData['verticalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
-        DefinitionManager2::updateDefinition($def['id'],$def['posX'] ,$posY, $def['description'], $def['solution']);
+        if($def['idDef']!="new")
+            DefinitionManager2::updateDefinition($def['idDef'],$def['posX'] ,$posY, $def['description'], $def['solution']);
+        else
+            DefinitionManager2::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
     }
 
     // // Insérer les définitions horizontales
     foreach ($inputData['horizontalDefs'] as $def) {
         $posY= ord($def['posY']) - 96;
-        DefinitionManager2::updateDefinition($def['id'],$def['posX'] ,$posY, $def['description'], $def['solution']);
+        if($def['idDef']!="new")
+            DefinitionManager2::updateDefinition($def['idDef'],$def['posX'] ,$posY, $def['description'], $def['solution']);
+        else
+            DefinitionManager2::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
     }
 
     echo json_encode(["success" => true]);

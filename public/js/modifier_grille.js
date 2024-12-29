@@ -1,6 +1,13 @@
 // Attendre que le DOM soit entièrement chargé avant d'exécuter le script
 document.addEventListener("DOMContentLoaded", function () {
 
+        const definitions = document.querySelectorAll(".definitions-scroll > div"); // Select all divs inside .definitions-scroll
+        definitions.forEach(definition => {
+          handleRemoveDefinition(definition); // Attach the event listener to each definition
+        });
+
+      
+      
     // Sélection de la table de la grille
     const table = document.querySelector("table");
     
@@ -65,6 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clone le modèle pour créer une nouvelle définition
         const newDef = vt.cloneNode(true);
         newDef.removeAttribute("id"); // Supprime l'ID pour éviter les conflits
+        console.log(newDef.getAttribute('data-id'));
+        
+        newDef.setAttribute("data-id", "new");
         
         // Vider le contenu des champs d'entrée dans le clone
         const inputs = newDef.querySelectorAll("input");
@@ -88,7 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clone le modèle pour créer une nouvelle définition
         const newDef = hz.cloneNode(true);
         newDef.removeAttribute("id"); // Supprime l'ID pour éviter les conflits
-
+        newDef.setAttribute("data-id", "new");
+        //console.log(newDef.getAttribute("data-id"));
         // Vider le contenu des champs d'entrée dans le clone
         const inputs = newDef.querySelectorAll("input");
         inputs.forEach(input => {
@@ -103,6 +114,13 @@ document.addEventListener("DOMContentLoaded", function () {
         
     });
 
+    // function checkSingleDefinition() {
+    //     const definitions = document.querySelectorAll(".definitions-scroll > div");
+    //     if (definitions.length === 1) {
+    //       handleRemoveDefinition(definitions[0]); // Attach event listener to the remaining div
+    //     }
+    //   }
+
     /**
      * Fonction pour gérer la suppression d'une définition 
      */
@@ -110,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const removeBtn = definition.querySelector(".supp-def"); // Sélectionne le bouton de suppression
         removeBtn.addEventListener("click", function () {
             definition.remove(); // Supprime la définition du DOM
+            // checkSingleDefinition();
         });
     }
 
@@ -201,16 +220,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const definitions = [];
         
         document.querySelectorAll(selector).forEach(def => {
-            const id = def.getAttribute('data-id'); // Récupère l'attribut data-id
+            const idDef = def.getAttribute('data-id'); // Récupère l'attribut data-id
             const posX = def.querySelector('#pos-x').value;
             const posY = def.querySelector('#pos-y').value;
             const description = def.querySelector('.def-desc').value;
             const solution = def.querySelector('.def-sol').value;
 
-            definitions.push({id, posX, posY, description, solution });
+            definitions.push({idDef, posX, posY, description, solution });
         });
 
         return definitions;
     }
+
+
 
 });
