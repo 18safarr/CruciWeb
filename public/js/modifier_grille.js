@@ -166,9 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             
             if (data.success) {
-                alert('Grille enregistrée avec succès !');
+                alert('Grille modifier avec succès !');
             } else {
-                alert('Erreur lors de l\'enregistrement de la grille.');
+                alert(data.message);
                 console.log(data.message);
             }
         })

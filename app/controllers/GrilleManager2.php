@@ -189,6 +189,7 @@ class GrilleManager2 {
                 </thead>';
         $html .= '<tbody>';
         foreach($datas as $grille){
+           $droitModif =  (!isset($grille->datePublication))? "?p=edite_grille&idGrille=".htmlspecialchars($grille->idGrille)."" : "#";
             $html .= '
                 <tr>
                     <td>' . htmlspecialchars($grille->idGrille) .'</td>
@@ -196,7 +197,7 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($grille->datePublication).'</td>
-                   <td><a href="?p=edite_grille&idGrille='.htmlspecialchars($grille->idGrille).'" class="edit-link">Modifier</a> | <a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">X</a></td>
+                   <td><a href="'.$droitModif.'" class="edit-link">Modifier</a> | <a href="#" class="del-link"  onclick="deleteGrid(' . htmlspecialchars($grille->idGrille) . ')">X</a></td>
                 </tr>
             ';
         }
@@ -307,6 +308,44 @@ class GrilleManager2 {
         return $html;
     }
 
+
+   public function validerGrille($casesNoires, $definitions) {
+        $grille = [];
+    
+        foreach ($definitions as $definition) {
+            $x = $definition['posDepX'];
+            $y = $definition['posDepY'];
+            $solution = $definition['solution'];
+            $orientation = $definition['orientation'];
+    
+            for ($i = 0; $i < strlen($solution); $i++) {
+                $case = "$x,$y";
+    
+                // Vérification des cases noires
+                if (in_array($case, $casesNoires)) {
+                    return "Erreur : La définition passe par une case noire en position $case.";
+                }
+    
+                // Vérification des intersections
+                if (isset($grille[$case])) {
+                    if ($grille[$case] !== $solution[$i]) {
+                        return "Erreur : Conflit de lettres en position $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").";
+                    }
+                } else {
+                    $grille[$case] = $solution[$i];
+                }
+    
+                // Avancer à la case suivante
+                if ($orientation === "HORIZONTAL") {
+                    $y++;
+                } else if ($orientation === "VERTICAL") {
+                    $x++;
+                }
+            }
+        }
+    
+        return "Succès : Toutes les définitions sont valides.";
+    }
     
     
 }

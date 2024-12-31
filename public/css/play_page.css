@@ -227,7 +227,7 @@ main {
 
 
 
-.grid #save-button {
+.grid #save-button, .grid #check-button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -237,7 +237,7 @@ main {
     cursor: pointer;
 }
 
-.grid #save-button:hover {
+.grid #save-button:hover  {
     background-color: #45a049;
 }
 

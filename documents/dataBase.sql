@@ -106,7 +106,7 @@ INSERT INTO Definitions (orientation, posDepX, posDepY, description, solution, i
 ('VERTICAL', 4, 2, 'Le cadeau d’Herschel.', 'URANUS', @last_idGrille), 
 ('VERTICAL', 1, 3, 'Brouillent la vision', 'LARMES', @last_idGrille),
 ('VERTICAL', 8, 3, 'Odeur méridionale.', 'AIL', @last_idGrille),
-('VERTICAL', 1, 4, 'Pour éviter que le ciel ne nous tombe sur la tête', 'ATAIS', @last_idGrille), 
+('VERTICAL', 1, 4, 'Pour éviter que le ciel ne nous tombe sur la tête', 'ETAIS', @last_idGrille), 
 ('VERTICAL', 7, 4, 'En Moravie.', 'BRNO', @last_idGrille),
 ('VERTICAL', 7, 5, 'Article.', 'ITEM', @last_idGrille),
 ('VERTICAL', 1, 6, 'Boréale, australe ou solaire.', 'COURONNE', @last_idGrille),

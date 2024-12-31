@@ -147,8 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (data.success) {
                 alert('Grille enregistrée avec succès !');
+                console.log(data.message)
             } else {
-                alert('Erreur lors de l\'enregistrement de la grille.');
+                alert(data.message);
+               
             }
         })
         .catch(error => console.error('Erreur lors de l\'enregistrement de la grille :', error ));

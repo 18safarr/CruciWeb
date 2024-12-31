@@ -17,10 +17,91 @@ if (!isset($_SESSION['user_id']) && !isset($_SESSION["grille_id"])) {
 
 $inputData = json_decode(file_get_contents('php://input'), true);
 
+function verifierGrille($inputData) {
+    $grille = [];
+    $casesNoires = $inputData['blackCells'];
+    $definitionsVert = $inputData['verticalDefs'];
+    $definitionsHori = $inputData['horizontalDefs'];
+
+    // Marquer les cases noires
+    foreach ($casesNoires as $case) {
+        $grille["{$case['x']},{$case['y']}"] = 'NOIRE';
+    }
+
+    // // Vérifier les définitions
+    foreach ($definitionsVert as $def) {
+        $x = $def['posX'];
+        $y = ord($def['posY']) - 96; // Convertir 'a', 'b', etc. en numéros
+        $solution = $def['solution'];
+        $orientation = "VERTICAL";
+
+        for ($i = 0; $i < strlen($solution); $i++) {
+            $case = "$x,$y";
+
+            // Vérifier si la case est une case noire
+            if (isset($grille[$case]) && $grille[$case] === 'NOIRE') {
+                
+                throw new Exception("Erreur : La définition traverse une case noire en $case.");
+            }
+
+            // Vérifier les intersections
+            if (isset($grille[$case]) && $grille[$case] !== $solution[$i]) {
+                //return "Erreur : Conflit de lettres en $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").";
+                throw new Exception("Erreur : Conflit de lettres en $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").");
+                
+            }
+
+            // Marquer la case avec la lettre
+            $grille[$case] = $solution[$i];
+
+            // Passer à la case suivante
+            if ($orientation === 'HORIZONTAL') {
+                $y++;
+            } else if ($orientation === 'VERTICAL') {
+                $x++;
+            }
+        }
+    }
+    foreach ($definitionsHori as $def) {
+        $x = $def['posX'];
+        $y = ord($def['posY']) - 96; // Convertir 'a', 'b', etc. en numéros
+        $solution = $def['solution'];
+        $orientation = "HORIZONTAL";
+
+        for ($i = 0; $i < strlen($solution); $i++) {
+            $case = "$x,$y";
+
+            // Vérifier si la case est une case noire
+            if (isset($grille[$case]) && $grille[$case] === 'NOIRE') {
+                throw new Exception("Erreur : La définition traverse une case noire en $case.");
+            }
+
+            // Vérifier les intersections
+            if (isset($grille[$case]) && $grille[$case] !== $solution[$i]) {
+                // return "Erreur : Conflit de lettres en $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").";
+                throw new Exception("Erreur : Conflit de lettres en $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").");
+            }
+
+            // Marquer la case avec la lettre
+            $grille[$case] = $solution[$i];
+
+            // Passer à la case suivante
+            if ($orientation === 'HORIZONTAL') {
+                $y++;
+            } else if ($orientation === 'VERTICAL') {
+                $x++;
+            }
+        }
+    }
+
+    return "good"; // La grille est valide
+}
+
 if ($inputData) {
-   
+   try{
     $idGrille = $_SESSION["grille_id"];
-    // Update grille
+    
+    $resulat = verifierGrille($inputData);
 
     $rc = GrilleManager2::updateGrille(
         $idGrille,
@@ -56,6 +137,9 @@ if ($inputData) {
     }
 
     echo json_encode(["success" => true]);
+    }catch(Exception $e){
+        echo json_encode(["success" => false, "message" => $e->getMessage()]);
+    }
 } else {
    echo json_encode(["success" => false, "message" => "Données manquantes"]);
 }

@@ -36,6 +36,7 @@ if (isset($_GET["idGrille"])){
     <link rel="stylesheet" href="public/css/default.css">
     <link rel="stylesheet" href="public/css/play_page.css">
     <script src="public/js/nav.js" ></script>
+    <script src="public/js/check.js" defer></script>
 </head>
 <body>
     <!-- En-tête -->
@@ -130,8 +131,9 @@ if (isset($_GET["idGrille"])){
                         </div>
                     </div>
                     <?php if (isset($_SESSION['user_id'])) { ?>
-                        <button type="submit" name="save" id="save-button">Sauvegarder</button>
+                        <button type="button" name="save" id="save-button">Sauvegarder</button>
                     <?php }?>
+                    <button type="button" name="check" id="check-button">Vérifier</button>
                 </form>
             </div>
 

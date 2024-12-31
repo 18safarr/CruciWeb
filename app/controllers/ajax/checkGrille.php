@@ -1,32 +1,5 @@
 <?php
-// require_once '../app/Autoloader.php';
-// // Enregistrer l'autoloader
-// app\Autoloader::register();
 
-//var_dump(app\App::getDb()->teste('Users'));
-
-// var_dump(new app\table\Users());
-
-// var_dump(app\table\Users::getAllUsers());
-
-require_once '../app/config/App.php';
-require_once '../app/config/Database.php';
-require_once '../app/model/Users.php';
-
-require_once '../app/controllers/GrilleManager2.php';
-require_once '../app/controllers/UsersManager.php';
-require_once '../app/model/Grilles.php';
-require_once '../app/model/Definitions.php';
-require_once '../app/model/Cases.php';
-require_once '../app/controllers/DefinitionManager2.php';
-use app\GrilleManager;
-use controllers\GrilleManager2;
-use controllers\UsersManager;
-use controllers\DefinitionManager2;
-use model\Grilles;
-use model\Definitions;
-use model\Cases;
-use model\Users;
 
 // Données des cases noires
 $casesNoires = [
@@ -67,7 +40,7 @@ $definitions = [
     ["orientation" => "VERTICAL", "posDepX" => 5, "posDepY" => 8, "solution" => "ENITER"],
     ["orientation" => "VERTICAL", "posDepX" => 1, "posDepY" => 9, "solution" => "EOLIENNE"],
     ["orientation" => "VERTICAL", "posDepX" => 1, "posDepY" => 10, "solution" => "SNEO"],
-    ["orientation" => "VERTICAL", "posDepX" => 6, "posDepY" => 10, "solution" => "EGSOS"],
+    // ["orientation" => "VERTICAL", "posDepX" => 6, "posDepY" => 10, "solution" => "EGSOS"],
 ];
 
 function validerGrille($casesNoires, $definitions) {
