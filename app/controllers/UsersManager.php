@@ -24,8 +24,8 @@ class UsersManager{
         return Users::getId($email);
     }
 
-    public static function isUserParamCorrect($email,$password){
-        return Users::authenticateUser($email, $password);
+    public static function isUserParamCorrect($email,$password,$role="player"){
+        return Users::authenticateUser($email, $password,$role);
     }
 
     public static function createUser($email,$password){

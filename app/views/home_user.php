@@ -112,7 +112,7 @@ use controllers\UsersManager;
                     <div class="actions">
                         <button class="btn blue-btn" class="inactive" id="voir-grilles-public">Home</button>
                         <button class="btn blue-btn" id="voir-mes-grilles">Mes grilles</button>
-                        <button class="btn blue-btn">Mes parties</button>
+                        <button class="btn blue-btn" id="voir-mes-parties">Mes parties</button>
                         <button class="btn blue-btn" id="add-grille">Ajouter grille</button>
                     </div>
                     <button class="btn red-btn" id="logout" >Déconnexion</button>

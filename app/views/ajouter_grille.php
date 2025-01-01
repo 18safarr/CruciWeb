@@ -42,7 +42,7 @@ DefinitionManager2::setDimension($rows,$cols);
         </div>
         <nav>
             <button id="voir-grilles-public">HOME</button>
-            <button >Mes parties</button>
+            <button id="voir-mes-parties">Mes parties</button>
             <button id="voir-mes-grilles" >Mes grilles</button>
             <button class="disabled">Ajouter grille</button>
             <button class="logout" id="logout">Déconnexion</button>

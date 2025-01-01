@@ -25,13 +25,13 @@ class Cases{
     }    
 
     public static function getBlackCases($idGrille) {
-        $requete = "SELECT * FROM Cases WHERE idGrille = ? AND isBlack = 'YES'";
+        $requete = "SELECT * FROM Cases WHERE idGrille = ?";
         $attributes = [$idGrille];
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
 
     public static function deleteBlackCases($idGrille) {
-        $requete = "DELETE FROM Cases WHERE idGrille = ? AND isBlack = 'YES'";
+        $requete = "DELETE FROM Cases WHERE idGrille = ?";
         $attributes = [$idGrille];
         return App::getDb()->prepare($requete, $attributes, __CLASS__);
     }

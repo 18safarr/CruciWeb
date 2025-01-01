@@ -46,7 +46,7 @@ if (isset($_GET["idGrille"])){
         </div>
         <nav>
             <button id="voir-grilles-public">HOME</button>
-            <button >Mes parties</button>
+            <button id="voir-mes-parties">Mes parties</button>
             <button id="voir-mes-grilles" >Mes grilles</button>
             <button id="add-grille">Ajouter grille</button>
             <button class="logout" id="logout">Déconnexion</button>

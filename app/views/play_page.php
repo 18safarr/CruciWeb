@@ -20,8 +20,27 @@ if (isset($_GET["idGrille"])){
 
     if (isset($_SESSION['user_id'])){
         UsersManager::setIdUSer($_SESSION['user_id']);
+        $_SESSION["grille_id"] = $idGrille;
     }
 
+}elseif(isset($_GET["idPartie"])&&isset($_SESSION['user_id'])){
+    $idPartie = $_GET["idPartie"];
+    $idGrille=GrilleManager2::getIdGrilleBy($idPartie);
+    $test=GrilleManager2::initParamsGridFor($idGrille);
+    #si l'id grille n'existe pas redirection vers la page daccueil
+    if(isset($test))
+        header("Location:index.php");
+    DefinitionManager2::setIdGrille($idGrille);
+    GrilleManager2::setIdPartie($idPartie);
+    
+
+    UsersManager::setIdUSer($_SESSION['user_id']);
+    $_SESSION["grille_id"] = $idGrille;
+    $_SESSION["partie_id"] = $idPartie;
+
+
+}else{
+    header("Location:index.php");
 }
    
 
@@ -36,7 +55,7 @@ if (isset($_GET["idGrille"])){
     <link rel="stylesheet" href="public/css/default.css">
     <link rel="stylesheet" href="public/css/play_page.css">
     <script src="public/js/nav.js" ></script>
-    <script src="public/js/check.js" defer></script>
+    <script src="public/js/play_page.js"></script>
 </head>
 <body>
     <!-- En-tête -->
@@ -50,7 +69,7 @@ if (isset($_GET["idGrille"])){
             <nav>
                 <button id="voir-grilles-public">Home</button>
                 <button id="voir-mes-grilles">Mes grilles</button>
-                <button>Mes parties</button>
+                <button id="voir-mes-parties">Mes parties</button>
                 <button id="add-grille">Ajouter grille</button>
                 <button id="logout" class="logout">Déconnexion</button>
             </nav>
@@ -126,7 +145,7 @@ if (isset($_GET["idGrille"])){
                     <div class="scrollable-grid">
                         <div id="crossword">
                         <?php
-                            echo GrilleManager2::createGridHTML();
+                            echo GrilleManager2::createGridPartieHTML();
                         ?>
                         </div>
                     </div>

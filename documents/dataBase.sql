@@ -31,22 +31,7 @@ CREATE TABLE Cases (
     positionX INT NOT NULL,
     positionY INT NOT NULL,
     idGrille INT NOT NULL,
-    isBlack ENUM('YES', 'NO') DEFAULT 'YES',
-    contenue VARCHAR(1),
-    FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille) ON DELETE CASCADE,
-    CHECK (isBlack = 'YES' OR contenue IS NOT NULL)
-);
-
-CREATE TABLE Definitions (
-    idDefinition INT AUTO_INCREMENT PRIMARY KEY,
-    orientation ENUM('VERTICAL', 'HORIZONTAL') NOT NULL,
-    posDepX INT NOT NULL,
-    posDepY INT NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    solution VARCHAR(255) NOT NULL,
-    idGrille INT NOT NULL,
-    FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille) 
-    ON DELETE CASCADE
+    FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille) ON DELETE CASCADE
 );
 
 CREATE TABLE Parties (
@@ -63,19 +48,35 @@ CREATE TABLE Parties (
 );
 
 
+CREATE TABLE Definitions (
+    idDefinition INT AUTO_INCREMENT PRIMARY KEY,
+    orientation ENUM('VERTICAL', 'HORIZONTAL') NOT NULL,
+    posDepX INT NOT NULL,
+    posDepY INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    solution VARCHAR(255) NOT NULL,
+    idGrille INT NOT NULL,
+    FOREIGN KEY (idGrille) REFERENCES Grilles(idGrille) 
+    ON DELETE CASCADE
+);
+
+
+
 -- Si l'utilisateur n'existe pas, on le crée
 CREATE USER IF NOT EXISTS 'cruciweb'@'localhost' IDENTIFIED BY 'root';
 
 
 GRANT ALL PRIVILEGES ON `CRUCIWEB`.* TO 'cruciweb'@'localhost' WITH GRANT OPTION;
 
-INSERT INTO Users (email,motDePasse) VALUES("root","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei");
-INSERT INTO Users (email,motDePasse) VALUES("sudouser","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei");
+INSERT INTO Users (email,motDePasse,isPlayer) VALUES("root","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei",'0');
+INSERT INTO Users (email,motDePasse) VALUES("koundia@univ.fr","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei");
 
+-- Retrieve the last inserted 
+SET @last_idUser = LAST_INSERT_ID();
 
 -- Insert the crossword grid
 INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) 
-VALUES ('Grille 1', 10, 10, '2024-12-15', 1, 'Intermédiaire');
+VALUES ('Grille 1', 10, 10, '2024-12-15', @last_idUser, 'Intermédiaire');
 
 -- Retrieve the last inserted idGrille
 SET @last_idGrille = LAST_INSERT_ID();

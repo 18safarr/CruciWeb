@@ -43,6 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Attacher un gestionnaire d'événements délégué pour les boutons dynamiques
+    document.addEventListener("click", function (e) {
+        // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
+        if (e.target && e.target.id === "voir-mes-parties") {
+
+            window.location.href = 'index.php'; // Redirigez vers une page spécifique
+            
+
+            //apres  auto clique pour charger les grilles pivee
+        }
+    });
+
     document.addEventListener("click", function (e) {
         // Vérifiez si l'élément cliqué est le bouton avec l'ID 'voir-mes-grilles'
         if (e.target && e.target.id === "voir-grilles-public") {

@@ -11,7 +11,10 @@ if (isset($_POST['load-liste-grille'])) {
        echo GrilleManager2::createTablePrivateGridHTML($_SESSION['user_id']);
     } elseif($type=="public") {
        echo GrilleManager2::createTablePublicGridHTML();
-    }elseif($type=="admin"){
+    }elseif($type=="partie"){
+        echo GrilleManager2::createTablePartieHTML($_SESSION["user_id"]);
+    }
+    elseif($type=="admin"){
         echo GrilleManager2::createTableAllGridHTML();
     }
 }

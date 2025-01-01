@@ -3,7 +3,6 @@
     // require_once '../app/App.php';
     require_once (__DIR__ . '/../config/App.php');
     use config\App;
-use LDAP\Result;
 
     class Users
     {
@@ -73,10 +72,12 @@ use LDAP\Result;
             return $result[0]->nbUser > 0;
         }
 
-        public static function authenticateUser($email, $motDePasse)
+        public static function authenticateUser($email, $motDePasse,$role)
         {
-            // Récupérer l'utilisateur correspondant à l'email
-            $query = 'SELECT * FROM Users WHERE email = ?';
+            if ($role!="admin")
+                $query = 'SELECT * FROM Users WHERE email = ? and isPlayer="1"';
+            else
+                $query = 'SELECT * FROM Users WHERE email = ? and isPlayer="0"';
             $user = App::getDb()->prepare($query, [$email],__CLASS__);
             if ($user&&password_verify($motDePasse, $user[0]->motDePasse)) {
                 return true;

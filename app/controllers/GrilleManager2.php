@@ -1,13 +1,16 @@
 <?php
 namespace controllers;
 require_once (__DIR__ . '/../model/Grilles.php');
+require_once (__DIR__ . '/../model/Parties.php');
 require_once (__DIR__ . '/../model/Cases.php');
 require_once (__DIR__ . '/UsersManager.php');
 use model\Grilles;
+use model\Parties;
 use model\Cases;
 use controllers\UsersManager;
 use model\Definitions;
 use PDOException;
+use Exception;
 
 class GrilleManager2 {
     private static $idGrille;
@@ -17,7 +20,7 @@ class GrilleManager2 {
     private static $difficulte;
     private static $publicDate;
     private static $blackCells=[];
-
+    private static $idPartie;
     public static function setDimension($rows,$cols){
         self::$rows = $rows;
         self::$cols = $cols;
@@ -81,6 +84,10 @@ class GrilleManager2 {
             return false;
         }
 
+    }
+
+    public static function setIdPartie($idPartie){
+        self::$idPartie = $idPartie;
     }
 
     public static function addGrille($nomGrille,$dimX,$dimY,$idUser,$difficulte,$publiee){
@@ -238,7 +245,52 @@ class GrilleManager2 {
 
 
     }
- 
+
+    public static function getIdGrilleBy($idPartie){
+        try{
+            $data = Parties::getPartie($idPartie);
+            if(isset($data[0]))
+                return $data[0]->idGrille;
+            else
+                return false;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+    
+    public static function createTablePartieHTML($idUser){
+        $datasPart = Parties::getPartiesFor($idUser);
+        $html =  '<thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom grille</th>
+                        <th>Dimension</th>
+                        <th onclick="sortTableByLevel()"><span id="levelSortIcon">&#x25B2;&#x25BC;</span>Niveau</th>
+                        <th onclick="sortTableByDate()"><span id="dateSortIcon">&#x25B2;&#x25BC;</span>Date Enrégistrement</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>';
+        $html .= '<tbody>';
+        foreach($datasPart as $partie){
+            $dataGrille = Grilles::getGrilleById($partie->idGrille);
+            foreach($dataGrille as $grille){
+            $html .= '
+                <tr>
+                    <td>' . htmlspecialchars($grille->idGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->nomGrille) .'</td>
+                    <td>' . htmlspecialchars($grille->dimX.'X'.$grille->dimY).'</td>
+                    <td>' . htmlspecialchars($grille->difficulte) .'</td>
+                    <td>' . htmlspecialchars($partie->dateEnregistrement).'</td>
+                    <td>' . htmlspecialchars($partie->statut).'</td>
+                    <td><a href="?p=play&idPartie='.htmlspecialchars($partie->idPartie).'" class="play-link">Reprendre</a></td>
+                </tr>
+            ';
+            }
+        }
+        $html .= '</tbody>';
+        return $html;
+    }
 
     public static function createGridHTML($withInput = true){
         
@@ -264,7 +316,7 @@ class GrilleManager2 {
                         $html .= '<td class="black-cell"></td>';
                     } else {
                         // Le nom de l'input est basé sur la position (row_col) pour l'identifier facilement
-                        $name = 'cell_' . $row . '_' . $col;
+                        $name =   $row . '_' . $col;
                         $html .= '<td><input type="text" name="' . $name . '" maxlength="1" value="' . 
                             (isset($_POST[$name]) ? htmlspecialchars($_POST[$name]) : '') . 
                             '"></td>';
@@ -308,45 +360,100 @@ class GrilleManager2 {
         return $html;
     }
 
+    public static function createGridPartieHTML(){
+        $dataPartie = Parties::getPartie(self::$idPartie);
+        $contenu= json_decode($dataPartie[0]->contenu, true);;
 
-   public function validerGrille($casesNoires, $definitions) {
-        $grille = [];
+        $html = '';
+            $html .= '<table>';
     
-        foreach ($definitions as $definition) {
-            $x = $definition['posDepX'];
-            $y = $definition['posDepY'];
-            $solution = $definition['solution'];
-            $orientation = $definition['orientation'];
+            // Créer la ligne des lettres des colonnes
+            $html .= '<tr><th></th>';
+            for ($col = 1; $col <= self::$cols; $col++) {
+                $html .= '<th>' . chr(96 + $col) . '</th>'; // Lettres de 'a' à 'k'
+            }
+            $html .= '</tr>';
     
-            for ($i = 0; $i < strlen($solution); $i++) {
-                $case = "$x,$y";
+            // Générer les lignes de la grille
+            for ($row = 1; $row <= self::$rows; $row++) {
+                $html .= '<tr>';
+                $html .= '<th>' . $row . '</th>'; // Numéro de ligne
     
-                // Vérification des cases noires
-                if (in_array($case, $casesNoires)) {
-                    return "Erreur : La définition passe par une case noire en position $case.";
-                }
-    
-                // Vérification des intersections
-                if (isset($grille[$case])) {
-                    if ($grille[$case] !== $solution[$i]) {
-                        return "Erreur : Conflit de lettres en position $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").";
+                for ($col = 1; $col <= self::$cols; $col++) {
+                    
+                    if (self::isBlackCell($row, $col)) {
+                        $html .= '<td class="black-cell"></td>';
+                    } else {
+                        // Le nom de l'input est basé sur la position (row_col) pour l'identifier facilement
+                        $name =   $row . '_' . $col;
+                        $html .= '<td><input type="text" name="' . $name . '" maxlength="1" value="' . 
+                            (isset($contenu[$name]) ? htmlspecialchars($contenu[$name]) : '') . 
+                            '"></td>';
                     }
-                } else {
-                    $grille[$case] = $solution[$i];
                 }
     
-                // Avancer à la case suivante
-                if ($orientation === "HORIZONTAL") {
-                    $y++;
-                } else if ($orientation === "VERTICAL") {
-                    $x++;
+                $html .= '</tr>';
+            }
+    
+            $html .= '</table>';
+
+            return $html;
+
+    }
+
+
+
+    public static function verifierGrille($inputData) {
+        $grille = [];
+        $casesNoires = $inputData['blackCells'];
+        $definitions = [
+            'VERTICAL' => $inputData['verticalDefs'],
+            'HORIZONTAL' => $inputData['horizontalDefs']
+        ];
+    
+        // Marquer les cases noires
+        foreach ($casesNoires as $case) {
+            $grille["{$case['x']},{$case['y']}"] = 'NOIRE';
+        }
+    
+        // Vérifier les définitions
+        foreach ($definitions as $orientation => $defs) {
+            foreach ($defs as $def) {
+                $x = $def['posX'];
+                $y = ord($def['posY']) - 96; // Convertir 'a', 'b', etc. en numéros
+                $solution = $def['solution'];
+    
+                for ($i = 0; $i < strlen($solution); $i++) {
+                    $case = "$x,$y";
+    
+                    // Vérifier si la case est une case noire
+                    if (isset($grille[$case]) && $grille[$case] === 'NOIRE') {
+                        throw new Exception("Erreur : La définition traverse une case noire en $case.");
+                    }
+    
+                    // Vérifier les intersections
+                    if (isset($grille[$case]) && $grille[$case] !== $solution[$i]) {
+                        throw new Exception("Erreur : Conflit de lettres en $case (\"{$grille[$case]}\" vs \"{$solution[$i]}\").");
+                    }
+    
+                    // Marquer la case avec la lettre
+                    $grille[$case] = $solution[$i];
+    
+                    // Passer à la case suivante
+                    if ($orientation === 'HORIZONTAL') {
+                        $y++;
+                    } else { // VERTICAL
+                        $x++;
+                    }
                 }
             }
         }
-    
-        return "Succès : Toutes les définitions sont valides.";
     }
     
+
+    public static function savePartie($contenu,$statut,$idGrille,$idAuteur){
+       return Parties::savePartie($contenu,$statut,$idGrille,$idAuteur);
+    }
     
 }
 
