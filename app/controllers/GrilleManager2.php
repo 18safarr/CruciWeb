@@ -18,6 +18,7 @@ class GrilleManager2 {
     private static $rows;
     private static $cols;
     private static $difficulte;
+    private static $solutionGrid;
     private static $publicDate;
     private static $blackCells=[];
     private static $idPartie;
@@ -57,6 +58,10 @@ class GrilleManager2 {
 
     }
 
+    public static function getSolutionGrille(){
+        return self::$solutionGrid;
+    }
+
     
 
     public static function initParamsGridFor($idGrille){
@@ -70,7 +75,7 @@ class GrilleManager2 {
                 self::$gridName = $grille->nomGrille;
                 self::setDimension($grille->dimX,$grille->dimY);
                 self::$difficulte = $grille->difficulte;
-
+                self::$solutionGrid = $grille->solution;
                 self::$publicDate = $grille->datePublication;
 
                 self::setBlackCells();
@@ -90,13 +95,14 @@ class GrilleManager2 {
         self::$idPartie = $idPartie;
     }
 
-    public static function addGrille($nomGrille,$dimX,$dimY,$idUser,$difficulte,$publiee){
+    public static function addGrille($nomGrille,$dimX,$dimY,$idUser,$difficulte,$solution,$publiee){
         $rc = Grilles::addGrille(
             $nomGrille, 
             $dimX, 
             $dimY, 
             $idUser,   
             $difficulte,
+            $solution,
             $publiee
         );
         return Grilles::getLastId();
@@ -105,15 +111,19 @@ class GrilleManager2 {
     public static function addCase($x,$y,$idGrille){
         $rc = Cases::addCase($x,$y,$idGrille);
     }
-    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public) {
+    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public,$solution) {
         $rc = Grilles::updateGrille(
             $idGrille,
             $nomGrille, 
             $dimX, 
             $dimY,   
             $difficulte,
-            $public
+            $public,
+            $solution
         );
+    }
+    public static function updatePartie($idPartie,$contenu) {
+        return Parties::updatePartie($idPartie,$contenu);
     }
 
     public static function deleteGrid($idGrille){
@@ -323,7 +333,7 @@ class GrilleManager2 {
                         $name =   $row . '_' . $col;
                         $html .= '<td><input type="text" name="' . $name . '" maxlength="1" value="' . 
                             (isset($_POST[$name]) ? htmlspecialchars($_POST[$name]) : '') . 
-                            '"></td>';
+                            '" style="color: black;"></td>';
                     }
                 }
     
@@ -408,7 +418,17 @@ class GrilleManager2 {
 
 
     public static function verifierGrille($inputData) {
+        $rows = $inputData['dimX']; // Nombre de lignes de la grille
+        $cols = $inputData['dimY']; // Nombre de colonnes de la grille
+    
+        // Initialiser la grille avec des valeurs par défaut
         $grille = [];
+        for ($x = 1; $x <= $rows; $x++) {
+            for ($y = 1; $y <= $cols; $y++) {
+                $grille["{$x}_{$y}"] = null; // Par défaut, toutes les cases sont vides
+            }
+        }
+
         $casesNoires = $inputData['blackCells'];
         $definitions = [
             'VERTICAL' => $inputData['verticalDefs'],
@@ -417,7 +437,7 @@ class GrilleManager2 {
     
         // Marquer les cases noires
         foreach ($casesNoires as $case) {
-            $grille["{$case['x']},{$case['y']}"] = 'NOIRE';
+            $grille["{$case['x']}_{$case['y']}"] = 'NOIRE';
         }
     
         // Vérifier les définitions
@@ -428,7 +448,7 @@ class GrilleManager2 {
                 $solution = $def['solution'];
     
                 for ($i = 0; $i < strlen($solution); $i++) {
-                    $case = "$x,$y";
+                    $case = "{$x}_{$y}";
     
                     // Vérifier si la case est une case noire
                     if (isset($grille[$case]) && $grille[$case] === 'NOIRE') {
@@ -452,6 +472,16 @@ class GrilleManager2 {
                 }
             }
         }
+
+        // Vérifier que toutes les cases non noires sont remplies
+        foreach ($grille as $position => $contenu) {
+            if ($contenu === null) {
+                throw new Exception("Erreur : La case $position est vide alors qu'elle doit être remplie.");
+            }
+        }
+
+        return $grille;
+        
     }
     
 

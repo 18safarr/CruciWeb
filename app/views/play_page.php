@@ -18,6 +18,8 @@ if (isset($_GET["idGrille"])){
     if(isset($test))
         header("Location:index.php");
 
+    $solution = GrilleManager2::getSolutionGrille();
+
     if (isset($_SESSION['user_id'])){
         UsersManager::setIdUSer($_SESSION['user_id']);
         $_SESSION["grille_id"] = $idGrille;
@@ -34,7 +36,7 @@ if (isset($_GET["idGrille"])){
         header("Location:index.php");
     DefinitionManager2::setIdGrille($idGrille);
     GrilleManager2::setIdPartie($idPartie);
-    
+    $solution = GrilleManager2::getSolutionGrille();
 
     UsersManager::setIdUSer($_SESSION['user_id']);
     $_SESSION["grille_id"] = $idGrille;
@@ -60,6 +62,7 @@ if (isset($_GET["idGrille"])){
     <link rel="stylesheet" href="public/css/play_page.css">
     <script src="public/js/nav.js" ></script>
     <script src="public/js/play_page.js"></script>
+    <script src="public/js/checkGrille.js" defer></script>
 </head>
 <body>
     <!-- En-tête -->
@@ -157,7 +160,7 @@ if (isset($_GET["idGrille"])){
                     <?php if (isset($_SESSION['user_id'])) { ?>
                         <button type="button" name="save" id="save-button">Sauvegarder</button>
                     <?php }?>
-                    <button type="button" name="check" id="check-button">Vérifier</button>
+                    <button type="button" name="check" id="check-button" onclick="checkGrille(<?php echo htmlspecialchars(json_encode($solution), ENT_QUOTES, 'UTF-8');?>)">Vérifier</button>
                 </form>
             </div>
 

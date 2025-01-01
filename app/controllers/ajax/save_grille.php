@@ -31,7 +31,9 @@ if ($inputData) {
                 $inputData['dimY'], 
                 $_SESSION['user_id'],   
                 $inputData['difficulte'],
+                json_encode($resulat),
                 $inputData['publiee']
+
             );
             //$idGrille = Grilles::getLastId();
             // Insérer les cases noires

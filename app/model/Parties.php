@@ -29,6 +29,12 @@ class Parties{
     
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
+
+    public static function updatePartie($idPartie,$contenu){
+        $requete = "UPDATE Parties SET contenu = ?, statut = 'Terminée' WHERE idPartie = ?";
+        $attributes = [$contenu,$idPartie];
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
+    }
 }
 
 ?>

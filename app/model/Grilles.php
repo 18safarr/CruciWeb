@@ -4,13 +4,14 @@
  use config\App;
  class Grilles{
 
-    public static function addGrille($nomGrille, $dimX, $dimY, $idAuteur, $difficulte,$public) {
+    public static function addGrille($nomGrille, $dimX, $dimY, $idAuteur, $difficulte,$solution,$public) {
         if($public==1){
-            $requete = "INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) VALUES (?, ?, ?, NOW(), ?, ?)";
-            $attributes = [$nomGrille, $dimX, $dimY, $idAuteur, $difficulte];
+            $requete = "INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte, solution) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+
+            $attributes = [$nomGrille, $dimX, $dimY, $idAuteur, $difficulte, $solution];
         }else{
-            $requete = "INSERT INTO Grilles (nomGrille, dimX, dimY, idAuteur, difficulte) VALUES (?, ?, ?, ?, ?)";
-            $attributes = [$nomGrille, $dimX, $dimY, $idAuteur, $difficulte];
+            $requete = "INSERT INTO Grilles (nomGrille, dimX, dimY, idAuteur, difficulte, solution) VALUES (?, ?, ?, ?, ?, ?)";
+            $attributes = [$nomGrille, $dimX, $dimY, $idAuteur, $difficulte,$solution];
         }
         
         
@@ -18,13 +19,13 @@
         
     }
 
-    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public) {
+    public static function updateGrille($idGrille, $nomGrille, $dimX, $dimY, $difficulte, $public,$solution) {
         if ($public == 1) {
-            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NOW() WHERE idGrille = ?";
-            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $idGrille];
+            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NOW(),solution = ? WHERE idGrille = ?";
+            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $solution, $idGrille];
         } else {
-            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NULL WHERE idGrille = ?";
-            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $idGrille];
+            $requete = "UPDATE Grilles SET nomGrille = ?, dimX = ?, dimY = ?, difficulte = ?, datePublication = NULL, solution = ?  WHERE idGrille = ?";
+            $attributes = [$nomGrille, $dimX, $dimY, $difficulte, $solution, $idGrille];
         }
     
         return App::getDb()->prepare($requete, $attributes, __CLASS__);

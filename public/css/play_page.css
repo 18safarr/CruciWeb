@@ -221,10 +221,24 @@ main {
     border: none;
     text-align: center;
     font-size: 16px;
+    font-weight: bold;
     background-color: transparent;
     outline: none;
+    text-transform: uppercase;
 }
 
+
+
+.grid .correct{
+    color:green;
+}
+.grid .incorrect{
+    color:#f44336;
+}
+
+.grid input[type="text"]:hover{
+    color:#000;
+}
 
 
 .grid #save-button, .grid #check-button {

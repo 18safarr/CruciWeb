@@ -22,6 +22,7 @@ CREATE TABLE Grilles (
     datePublication DATE,
     idAuteur INT,
     difficulte ENUM('Débutant','Intermédiaire','Expert') NOT NULL,
+    solution TEXT,
     FOREIGN KEY (idAuteur) REFERENCES Users(idUser)
     ON DELETE CASCADE
 );
@@ -75,8 +76,8 @@ INSERT INTO Users (email,motDePasse) VALUES("koundia@univ.fr","$2y$10$sVPuwbsZvT
 SET @last_idUser = LAST_INSERT_ID();
 
 -- Insert the crossword grid
-INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte) 
-VALUES ('Grille 1', 10, 10, '2024-12-15', @last_idUser, 'Intermédiaire');
+INSERT INTO Grilles (nomGrille, dimX, dimY, datePublication, idAuteur, difficulte,solution) 
+VALUES ('Grille 1', 10, 10, NULL, @last_idUser, 'Intermédiaire','{"1_1":"T","1_2":"E","1_3":"L","1_4":"E","1_5":"S","1_6":"C","1_7":"O","1_8":"P","1_9":"E","1_10":"S","2_1":"E","2_2":"T","2_3":"A","2_4":"T","2_5":"NOIRE","2_6":"O","2_7":"R","2_8":"I","2_9":"O","2_10":"N","3_1":"L","3_2":"NOIRE","3_3":"R","3_4":"A","3_5":"NOIRE","3_6":"U","3_7":"N","3_8":"C","3_9":"L","3_10":"E","4_1":"L","4_2":"U","4_3":"M","4_4":"I","4_5":"E","4_6":"R","4_7":"E","4_8":"NOIRE","4_9":"I","4_10":"O","5_1":"U","5_2":"R","5_3":"E","5_4":"S","5_5":"NOIRE","5_6":"O","5_7":"R","5_8":"E","5_9":"E","5_10":"NOIRE","6_1":"R","6_2":"A","6_3":"S","6_4":"NOIRE","6_5":"NOIRE","6_6":"N","6_7":"O","6_8":"N","6_9":"N","6_10":"E","7_1":"I","7_2":"N","7_3":"NOIRE","7_4":"B","7_5":"I","7_6":"N","7_7":"N","7_8":"I","7_9":"N","7_10":"G","8_1":"Q","8_2":"U","8_3":"A","8_4":"R","8_5":"T","8_6":"E","8_7":"T","8_8":"T","8_9":"E","8_10":"S","9_1":"U","9_2":"S","9_3":"I","9_4":"N","9_5":"E","9_6":"NOIRE","9_7":"NOIRE","9_8":"E","9_9":"NOIRE","9_10":"O","10_1":"E","10_2":"NOIRE","10_3":"L","10_4":"O","10_5":"M","10_6":"B","10_7":"A","10_8":"R","10_9":"D","10_10":"S"}');
 
 -- Retrieve the last inserted idGrille
 SET @last_idGrille = LAST_INSERT_ID();

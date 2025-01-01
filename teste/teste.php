@@ -30,15 +30,15 @@ use model\Definitions;
 use model\Cases;
 use model\Users;
 
-var_dump(Parties::savePartie(
-    "{\"5_7\":\"d\",\"8_2\":\"d\"}",
-    "Terminée",
-    1,
-    2
-));
+// var_dump(Parties::savePartie(
+//     "{\"5_7\":\"d\",\"8_2\":\"d\"}",
+//     "Terminée",
+//     1,
+//     2
+// ));
 $data = Parties::getPartie(2);
-var_dump($data);
-echo GrilleManager2::createTablePartieHTML(2);
+var_dump(GrilleManager2::addGrille("toi", 5, 5, 2, 'Débutant',"Débutant",1));
+// echo GrilleManager2::createTablePartieHTML(2);
 // foreach ($data as $partie) {
 //     $contenu = json_decode($partie->contenu, true);
 

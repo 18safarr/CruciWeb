@@ -23,14 +23,14 @@ if ($inputData) {
     $idGrille = $_SESSION["grille_id"];
     
     $resulat = GrilleManager2::verifierGrille($inputData);
-
     $rc = GrilleManager2::updateGrille(
         $idGrille,
         $inputData['nomGrille'], 
         $inputData['dimX'], 
         $inputData['dimY'],   
         $inputData['difficulte'],
-        $inputData['publiee']
+        $inputData['publiee'],
+        json_encode($resulat)
     );
     
     // // update les cases noires
