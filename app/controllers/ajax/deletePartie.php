@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once  (__DIR__ . '/../GrilleManager2.php');
+require_once  (__DIR__ . '/../GrilleManager.php');
 
 
-use controllers\GrilleManager2;
+use controllers\GrilleManager;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idPartie = intval($data['idPartie']);
         
         // Appeler la méthode de suppression
-        if (GrilleManager2::deletePartie($idPartie)) {
+        if (GrilleManager::deletePartie($idPartie)) {
             echo json_encode(['success' => true]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression.']);

@@ -1,8 +1,8 @@
 <?php
 session_start();
 error_reporting(E_ALL); // Activer l'enregistrement de toutes les erreurs
-require_once (__DIR__ . '/../../controllers/GrilleManager2.php');
-use controllers\GrilleManager2;
+require_once (__DIR__ . '/../../controllers/GrilleManager.php');
+use controllers\GrilleManager;
 header("Content-Type: application/json");
 
 if (!isset($_SESSION['grille_id'])) {
@@ -22,9 +22,9 @@ if ($data) {
             if(isset($_SESSION['grille_id'])){
             
                 if(isset($_SESSION['partie_id'])){
-                    $rc=GrilleManager2::updatePartie($_SESSION['partie_id'],$data['contenu']);
+                    $rc=GrilleManager::updatePartie($_SESSION['partie_id'],$data['contenu']);
                 }else{
-                    $rc = GrilleManager2::savePartie(
+                    $rc = GrilleManager::savePartie(
                         $data["contenu"],
                         "Terminée",
                         $_SESSION['grille_id'],

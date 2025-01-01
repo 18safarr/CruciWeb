@@ -1,48 +1,48 @@
 <?php
 session_start();
-require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
-require_once (__DIR__ . '/../controllers/UsersManager.php');
+require_once (__DIR__ . '/../controllers/GrilleManager.php');
+require_once (__DIR__ . '/../controllers/DefinitionManager.php');
+require_once (__DIR__ . '/../controllers/UserManager.php');
 
-use controllers\DefinitionManager2;
-use controllers\GrilleManager2;
-use controllers\UsersManager;
+use controllers\DefinitionManager;
+use controllers\GrilleManager;
+use controllers\UserManager;
 
 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
 
-    $test=GrilleManager2::initParamsGridFor($idGrille);
-    DefinitionManager2::setIdGrille($idGrille);
+    $test=GrilleManager::initParamsGridFor($idGrille);
+    DefinitionManager::setIdGrille($idGrille);
     #si l'id grille n'existe pas redirection vers la page daccueil
     if(isset($test))
         header("Location:index.php");
 
-    $solution = GrilleManager2::getSolutionGrille();
+    $solution = GrilleManager::getSolutionGrille();
 
     if (isset($_SESSION['user_id'])){
-        UsersManager::setIdUSer($_SESSION['user_id']);
+        UserManager::setIdUSer($_SESSION['user_id']);
         $_SESSION["grille_id"] = $idGrille;
     }
 
-    $grilleHTML = GrilleManager2::createGridHTML();
+    $grilleHTML = GrilleManager::createGridHTML();
 
 }elseif(isset($_GET["idPartie"])&&isset($_SESSION['user_id'])){
     $idPartie = $_GET["idPartie"];
-    $idGrille=GrilleManager2::getIdGrilleBy($idPartie);
-    $test=GrilleManager2::initParamsGridFor($idGrille);
+    $idGrille=GrilleManager::getIdGrilleBy($idPartie);
+    $test=GrilleManager::initParamsGridFor($idGrille);
     #si l'id grille n'existe pas redirection vers la page daccueil
     if(isset($test))
         header("Location:index.php");
-    DefinitionManager2::setIdGrille($idGrille);
-    GrilleManager2::setIdPartie($idPartie);
-    $solution = GrilleManager2::getSolutionGrille();
+    DefinitionManager::setIdGrille($idGrille);
+    GrilleManager::setIdPartie($idPartie);
+    $solution = GrilleManager::getSolutionGrille();
 
-    UsersManager::setIdUSer($_SESSION['user_id']);
+    UserManager::setIdUSer($_SESSION['user_id']);
     $_SESSION["grille_id"] = $idGrille;
     $_SESSION["partie_id"] = $idPartie;
 
-    $grilleHTML = GrilleManager2::createGridPartieHTML();
+    $grilleHTML = GrilleManager::createGridPartieHTML();
 
 
 }else{
@@ -137,7 +137,7 @@ if (isset($_GET["idGrille"])){
                 <!-- <h3>Horizontalement</h3> -->
                 <ul class="styled-list ">
                 <?php
-                    echo DefinitionManager2::getlistDefinitionsHTML("HORIZONTAL");
+                    echo DefinitionManager::getlistDefinitionsHTML("HORIZONTAL");
                   ?>
                 </ul>
                 
@@ -169,7 +169,7 @@ if (isset($_GET["idGrille"])){
                 <!--   <h3>Verticalement</h3> -->
                     <ul class="styled-list">
                         <?php
-                            echo DefinitionManager2::getlistDefinitionsHTML("VERTICAL");
+                            echo DefinitionManager::getlistDefinitionsHTML("VERTICAL");
                         ?>
                     </ul>
 

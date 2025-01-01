@@ -5,10 +5,10 @@ ini_set('display_errors', 1);
 
 
 
-require_once (__DIR__ . '/../../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../../controllers/DefinitionManager2.php');
-use controllers\GrilleManager2;
-use controllers\DefinitionManager2;
+require_once (__DIR__ . '/../../controllers/GrilleManager.php');
+require_once (__DIR__ . '/../../controllers/DefinitionManager.php');
+use controllers\GrilleManager;
+use controllers\DefinitionManager;
 
 
 if (!isset($_SESSION['user_id'])) {
@@ -21,11 +21,11 @@ $inputData = json_decode(file_get_contents('php://input'), true);
 
 if ($inputData) {
     try{
-        $resulat = GrilleManager2::verifierGrille($inputData);
+        $resulat = GrilleManager::verifierGrille($inputData);
         
             // Insérer la grille dans la table Grilles
     
-            $idGrille = GrilleManager2::addGrille(
+            $idGrille = GrilleManager::addGrille(
                 $inputData['nomGrille'], 
                 $inputData['dimX'], 
                 $inputData['dimY'], 
@@ -38,20 +38,20 @@ if ($inputData) {
             //$idGrille = Grilles::getLastId();
             // Insérer les cases noires
             foreach ($inputData['blackCells'] as $cell) {
-                $data = GrilleManager2::addCase($cell['x'], $cell['y'], $idGrille);
+                $data = GrilleManager::addCase($cell['x'], $cell['y'], $idGrille);
             }
     
             // // Insérer les définitions verticales
             foreach ($inputData['verticalDefs'] as $def) {
                 $posY= ord($def['posY']) - 96;
                 //Definitions::addDefinition('VERTICAL',$posX , $def['posY'], , ,$idGrille);
-                DefinitionManager2::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+                DefinitionManager::addDefinition('VERTICAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
             }
     
             // Insérer les définitions horizontales
             foreach ($inputData['horizontalDefs'] as $def) {
                 $posY= ord($def['posY']) - 96;
-                DefinitionManager2::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
+                DefinitionManager::addDefinition('HORIZONTAL',$def['posX'] ,$posY, $def['description'], $def['solution'],$idGrille);
             }
     
             echo json_encode(["success" => true,"message" => $resulat]);

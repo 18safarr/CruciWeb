@@ -1,16 +1,16 @@
 <?php
 session_start();
-require_once  (__DIR__ . '/../UsersManager.php');
+require_once  (__DIR__ . '/../UserManager.php');
 
-use controllers\UsersManager;
+use controllers\UserManager;
 
 if (isset($_POST['load-liste-user'])) {
     $type = $_POST['load-liste-user']; 
 
     if ($type=="admin") { 
-        echo UsersManager::createTableAllUsersHTML();
+        echo UserManager::createTableAllUsersHTML();
     }
 }elseif(isset($_POST['register'])){
-    echo UsersManager::createRegisterUserHTML();
+    echo UserManager::createRegisterUserHTML();
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
-use controllers\DefinitionManager2;
-use controllers\GrilleManager2;
+require_once (__DIR__ . '/../controllers/GrilleManager.php');
+require_once (__DIR__ . '/../controllers/DefinitionManager.php');
+use controllers\DefinitionManager;
+use controllers\GrilleManager;
 
 if (!isset($_SESSION['user_id'])){
  
@@ -11,12 +11,12 @@ if (!isset($_SESSION['user_id'])){
 } 
 if (isset($_GET["idGrille"])){
     $idGrille = $_GET["idGrille"];
-    GrilleManager2::initParamsGridFor($idGrille);
+    GrilleManager::initParamsGridFor($idGrille);
     list($nomGrille,
     $difficulte,
-    $date,$rows,$cols)= GrilleManager2::getAllData($idGrille);
+    $date,$rows,$cols)= GrilleManager::getAllData($idGrille);
 
-    $dm = new DefinitionManager2($idGrille,$rows,$cols);
+    $dm = new DefinitionManager($idGrille,$rows,$cols);
 
     $_SESSION["grille_id"] = $idGrille;
 
@@ -95,7 +95,7 @@ if (isset($_GET["idGrille"])){
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            echo GrilleManager2::createGridHTML(withInput:false)
+                            echo GrilleManager::createGridHTML(withInput:false)
                         ?>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ if (isset($_GET["idGrille"])){
                     
                     <div class="definitions-scroll">
                         <!-- <div class="definition" id="vertical-template"> -->
-                        <?php echo DefinitionManager2::getDefintionFormHTML("VERTICAL",true); ?>
+                        <?php echo DefinitionManager::getDefintionFormHTML("VERTICAL",true); ?>
                         <!-- </div> -->
                     </div>
                     
@@ -128,7 +128,7 @@ if (isset($_GET["idGrille"])){
                     </div>
                     <div class="definitions-scroll">
                         <!-- <div class="definition" id="horizontal-template"> -->
-                            <?php echo DefinitionManager2::getDefintionFormHTML("HORIZONTAL",true); ?>
+                            <?php echo DefinitionManager::getDefintionFormHTML("HORIZONTAL",true); ?>
                         <!-- </div> -->
                     </div>
                     

@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-require_once (__DIR__ . '/../controllers/DefinitionManager2.php');
-use controllers\DefinitionManager2;
-use controllers\GrilleManager2;
+require_once (__DIR__ . '/../controllers/GrilleManager.php');
+require_once (__DIR__ . '/../controllers/DefinitionManager.php');
+use controllers\DefinitionManager;
+use controllers\GrilleManager;
 
 if (!isset($_SESSION['user_id'])){
  
@@ -19,8 +19,8 @@ if (isset($_POST['cols'])&&(isset($_POST['rows']))){
     $rows = 5;
 }
 
-GrilleManager2::setDimension($rows,$cols);
-DefinitionManager2::setDimension($rows,$cols);
+GrilleManager::setDimension($rows,$cols);
+DefinitionManager::setDimension($rows,$cols);
 ?>
 
 
@@ -91,7 +91,7 @@ DefinitionManager2::setDimension($rows,$cols);
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            echo GrilleManager2::createGridHTML(withInput:false)
+                            echo GrilleManager::createGridHTML(withInput:false)
                         ?>
                     </div>
                 </div>
@@ -101,31 +101,32 @@ DefinitionManager2::setDimension($rows,$cols);
 
             <!-- Section des définitions -->
             <div class="definitions">
-                <!-- Définitions verticales -->
-                <div class="defVertical">
+                <!-- Définitions horizontal -->
+                <div class="defHorizontal">
                     <div class="more-def">
-                        <h2>Définitions Verticales</h2>
-                        <button id="add-vertical-definition">+</button>
+                        <h2>Définitions Horizontal</h2>
+                        <button id="add-horizontal-definition">+</button>
                     </div>
                     
                     <div class="definitions-scroll">
-                        <!-- <div class="definition" id="vertical-template"> -->
-                            <?php echo DefinitionManager2::getDefintionFormHTML("VERTICAL"); ?>
+                        <!-- <div class="definition" id="horizontal-template"> -->
+                        <?php echo DefinitionManager::getDefintionFormHTML("HORIZONTAL"); ?>
                         <!-- </div> -->
                     </div>
                     
                 </div>
 
-                <!-- Définitions horizontales -->
-                <div class="defHorizontal">
+                <!-- Définitions vertical -->
+                <div class="defVertical">
                     <div class="more-def">
-                        <h2>Définitions Horizontales</h2>
-                        <button id="add-horizontal-definition">+</button>
+                        <h2>Définitions Vertical</h2>
+                        <button id="add-vertical-definition">+</button>
                     </div>
                     <div class="definitions-scroll">
-                        <!-- <div class="definition" id="horizontal-template"> -->
-                            <?php echo DefinitionManager2::getDefintionFormHTML("HORIZONTAL"); ?>
+                         <!-- <div class="definition" id="vertical-template"> -->
+                         <?php echo DefinitionManager::getDefintionFormHTML("VERTICAL"); ?>
                         <!-- </div> -->
+                       
                     </div>
                     
                 </div>

@@ -5,7 +5,7 @@ use model\Users;
 use PDO;
 use PDOException;
 
-class UsersManager{
+class UserManager{
     private static $idUser;
 
     public static function setIdUSer($idUser){

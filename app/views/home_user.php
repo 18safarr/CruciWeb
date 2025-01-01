@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-use controllers\GrilleManager2;
-require_once (__DIR__ . '/../controllers/UsersManager.php');
-use controllers\UsersManager;
+require_once (__DIR__ . '/../controllers/GrilleManager.php');
+use controllers\GrilleManager;
+require_once (__DIR__ . '/../controllers/UserManager.php');
+use controllers\UserManager;
 
 
 
@@ -42,7 +42,7 @@ use controllers\UsersManager;
         <!-- Tableau des grilles -->
         <div class="table-container">
             <table id="grilleTable">
-                <?php echo GrilleManager2::createTablePublicGridHTML(); ?>
+                <?php echo GrilleManager::createTablePublicGridHTML(); ?>
             </table>
         </div>
 
@@ -57,14 +57,14 @@ use controllers\UsersManager;
                         <h1>Se connecter</h1>
                         <form id="login-form" method="post">
                             <div class="form-group">
-                                <label for="username">Identifiant ou e-mail</label>
-                                <input type="text" id="username" name="username" placeholder="Entrez votre identifiant" required>
+                                <label for="username">Votre e-mail</label>
+                                <input type="text" id="username" name="username" placeholder="Entrez votre e-mail" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Mot de passe</label>
+                                <label for="password">Votre mot de passe</label>
                                 <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
                             </div>
-                            <p class="error-message" style="display:none;">Identifiant ou mot de passe incorrect</p>
+                            <p class="error-message" style="display:none;">e-mail ou mot de passe incorrect</p>
                             <button type="submit" class="btn">Se connecter</button>
                         </form>
                         <div class="footer">

@@ -69,8 +69,9 @@ CREATE USER IF NOT EXISTS 'cruciweb'@'localhost' IDENTIFIED BY 'root';
 
 GRANT ALL PRIVILEGES ON `CRUCIWEB`.* TO 'cruciweb'@'localhost' WITH GRANT OPTION;
 
-INSERT INTO Users (email,motDePasse,isPlayer) VALUES("root","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei",'0');
+INSERT INTO Users (email,motDePasse,isPlayer) VALUES("sudoCruciWeb","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei",'0');
 INSERT INTO Users (email,motDePasse) VALUES("koundia@univ.fr","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei");
+INSERT INTO Users (email,motDePasse,isPlayer) VALUES("root","$2y$10$sVPuwbsZvTMksS55KSVFyuGgedaUaoPO8A5Q68j/huWZ.hqVbziei",'1');
 
 -- Retrieve the last inserted 
 SET @last_idUser = LAST_INSERT_ID();

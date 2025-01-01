@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/../UsersManager.php');
+require_once(__DIR__ . '/../UserManager.php');
 
-use controllers\UsersManager;
+use controllers\UserManager;
 
 // Vérification que la requête est POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification si l'utilisateur existe déjà
     
-    if (UsersManager::isUserExist($email)) {
+    if (UserManager::isUserExist($email)) {
         echo json_encode(['success' => false, 'message' => 'Cet e-mail est déjà utilisé.']);
         exit;
     }
 
-    $success = UsersManager::createUser($email, $password);
+    $success = UserManager::createUser($email, $password);
 
     if ($success==true) {
         echo json_encode(['success' => true]);

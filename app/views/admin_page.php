@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once (__DIR__ . '/../controllers/GrilleManager2.php');
-use controllers\GrilleManager2;
-require_once (__DIR__ . '/../controllers/UsersManager.php');
-use controllers\UsersManager;
+require_once (__DIR__ . '/../controllers/GrilleManager.php');
+use controllers\GrilleManager;
+require_once (__DIR__ . '/../controllers/UserManager.php');
+use controllers\UserManager;
  if (!isset($_SESSION['admin_id'])) { 
     $status = "hidden";
     $style = 'style=" width: 25% !important; margin: 0 auto;"';
@@ -46,7 +46,7 @@ use controllers\UsersManager;
         <!-- Tableau des grilles -->
          
         <div class="table-container" <?php echo $status;?>>
-            <?php echo UsersManager::createRegisterUserHTML();?>
+            <?php echo UserManager::createRegisterUserHTML();?>
         </div>
 
         <div class="right-container" id="right-container" >

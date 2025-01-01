@@ -1,8 +1,8 @@
 <?php
 session_start();
 error_reporting(E_ALL); // Activer l'enregistrement de toutes les erreurs
-require_once (__DIR__ . '/../../controllers/GrilleManager2.php');
-use controllers\GrilleManager2;
+require_once (__DIR__ . '/../../controllers/GrilleManager.php');
+use controllers\GrilleManager;
 header("Content-Type: application/json");
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['grille_id'])) {
@@ -18,7 +18,7 @@ if ($data) {
 
     try {
         
-        $rc = GrilleManager2::savePartie(
+        $rc = GrilleManager::savePartie(
             $data["contenu"],
             $data["statut"],
             $_SESSION['grille_id'],

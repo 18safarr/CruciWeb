@@ -4,7 +4,7 @@ require_once (__DIR__ . '/../model/Definitions.php');
 use model\Definitions;
 
 
-class DefinitionManager2 {
+class DefinitionManager {
     
     private static $rows;
     private static $cols;

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../UsersManager.php');
-use controllers\UsersManager;
+require_once(__DIR__ . '/../UserManager.php');
+use controllers\UserManager;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     
@@ -16,14 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     
         if(!isset($_POST["role"])){
 
-            if (UsersManager::isUserParamCorrect($email, $pass,"player")) {
-                $_SESSION["user_id"] = UsersManager::getIdByEmail($email); // L'identifiant utilisateur peut être dynamique.
+            if (UserManager::isUserParamCorrect($email, $pass,"player")) {
+                $_SESSION["user_id"] = UserManager::getIdByEmail($email); // L'identifiant utilisateur peut être dynamique.
                 $response["success"] = true;
             }
             
         }else{
-            if (UsersManager::isUserParamCorrect($email, $pass,"admin")) {
-                $_SESSION["admin_id"] = UsersManager::getIdByEmail($email);
+            if (UserManager::isUserParamCorrect($email, $pass,"admin")) {
+                $_SESSION["admin_id"] = UserManager::getIdByEmail($email);
                 $response["success"] = true;
             }
             
