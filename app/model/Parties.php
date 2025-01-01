@@ -21,6 +21,14 @@ class Parties{
         $attributes = [$idAuteur];
         return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
     }
+
+    public static function deletePartie($idPartie){
+        // Requête SQL pour récupérer toutes les Parties avec une date de publication non nulle
+        $requete = "DELETE  FROM Parties WHERE idPartie = ?";
+        $attributes = [$idPartie];
+    
+        return App::getDb()->prepare($requete, $attributes, __CLASS__, true);
+    }
 }
 
 ?>

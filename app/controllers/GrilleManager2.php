@@ -120,6 +120,10 @@ class GrilleManager2 {
         return Grilles::deleteGrille($idGrille);
     }
 
+    public static function deletePartie($idPartie){
+        return Parties::deletePartie($idPartie);
+    }
+
     public static function deleteBlackCases($idGrille){
         $rc=Cases::deleteBlackCases($idGrille);
     }
@@ -283,7 +287,7 @@ class GrilleManager2 {
                     <td>' . htmlspecialchars($grille->difficulte) .'</td>
                     <td>' . htmlspecialchars($partie->dateEnregistrement).'</td>
                     <td>' . htmlspecialchars($partie->statut).'</td>
-                    <td><a href="?p=play&idPartie='.htmlspecialchars($partie->idPartie).'" class="play-link">Reprendre</a></td>
+                    <td><a href="?p=play&idPartie='.htmlspecialchars($partie->idPartie).'" class="play-link">Reprendre</a> | | <a href="#" class="del-link"  onclick="deletePartie(' . htmlspecialchars($partie->idPartie) . ')">X</a></td>
                 </tr>
             ';
             }

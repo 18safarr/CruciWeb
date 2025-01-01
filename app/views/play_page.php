@@ -23,6 +23,8 @@ if (isset($_GET["idGrille"])){
         $_SESSION["grille_id"] = $idGrille;
     }
 
+    $grilleHTML = GrilleManager2::createGridHTML();
+
 }elseif(isset($_GET["idPartie"])&&isset($_SESSION['user_id'])){
     $idPartie = $_GET["idPartie"];
     $idGrille=GrilleManager2::getIdGrilleBy($idPartie);
@@ -37,6 +39,8 @@ if (isset($_GET["idGrille"])){
     UsersManager::setIdUSer($_SESSION['user_id']);
     $_SESSION["grille_id"] = $idGrille;
     $_SESSION["partie_id"] = $idPartie;
+
+    $grilleHTML = GrilleManager2::createGridPartieHTML();
 
 
 }else{
@@ -145,7 +149,8 @@ if (isset($_GET["idGrille"])){
                     <div class="scrollable-grid">
                         <div id="crossword">
                         <?php
-                            echo GrilleManager2::createGridPartieHTML();
+
+                            echo $grilleHTML;
                         ?>
                         </div>
                     </div>
