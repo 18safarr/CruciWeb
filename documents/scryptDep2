@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Variables
+REMOTE_USER="urouen"             # Nom de l'utilisateur sans privilèges root
+REMOTE_HOST="192.168.76.76"       # Adresse IP de la machine virtuelle
+REMOTE_PROJECT_DIR="/var/www/CruciWeb" # Répertoire distant où déployer le site
+LOCAL_PROJECT_DIR="./CruciWeb" # Chemin local du projet
+APACHE_CONFIG="/etc/apache2/sites-available/CruciWeb.conf" # Fichier de configuration Apache
+DOMAIN_NAME="CruciWeb.local"   # Nom de domaine pour l'accès local (facultatif)
+SQL_FILE="dataBase.sql"       # Nom du fichier SQL pour l'importation de la base de données
+DB_USER="phpmyadmin"                 # Utilisateur MySQL
+DB_PASSWORD="7Zg72if4NoCaKzRv30T" # Mot de passe MySQL
+
+# Étape 1 : Transférer les fichiers du projet
+echo "Transfert des fichiers vers la machine virtuelle..."
+scp -r $LOCAL_PROJECT_DIR $REMOTE_USER@$REMOTE_HOST:$REMOTE_PROJECT_DIR
+if [ $? -ne 0 ]; then
+    echo "Erreur lors du transfert des fichiers. Vérifiez les informations et réessayez."
+    exit 1
+fi
+
+# Étape 2 : Configurer les permissions et Apache (en tant que root)
+echo "Connexion en tant que root pour configurer Apache, MySQL et les permissions..."
+ssh root@$REMOTE_HOST << EOF
+    # Configuration des permissions
+    echo "Configuration des permissions pour le répertoire du projet..."
+    chown -R $REMOTE_USER:$REMOTE_USER $REMOTE_PROJECT_DIR
+    chmod -R 755 $REMOTE_PROJECT_DIR
+
+    # Création du fichier de configuration Apache
+    echo "Configuration d'Apache..."
+    cat << APACHE_CONF > $APACHE_CONFIG
+<VirtualHost $REMOTE_HOST:80>
+    ServerName $DOMAIN_NAME
+    DocumentRoot $REMOTE_PROJECT_DIR
+
+    <Directory $REMOTE_PROJECT_DIR>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+</VirtualHost>
+APACHE_CONF
+
+    # Activer le site et redémarrer Apache
+    echo "Activation du site et redémarrage d'Apache..."
+    a2ensite CruciWeb.conf
+    systemctl restart apache2
+
+    # Importation de la base de données
+    echo "Importation de la base de données..."
+    export MYSQL_PWD=$DB_PASSWORD
+    mysql -u $DB_USER -h localhost  < $REMOTE_PROJECT_DIR/$SQL_FILE
+    if [ $? -ne 0 ]; then
+        echo "Erreur lors de l'importation de la base de données."
+        exit 1
+    fi
+
+    echo "Configuration MySQL terminée."
+EOF
+
+if [ $? -eq 0 ]; then
+    echo "Déploiement terminé avec succès. Accédez à votre site via http://$DOMAIN_NAME ou http://$REMOTE_HOST."
+else
+    echo "Erreur lors du déploiement. Vérifiez les logs pour plus d'informations."
+fi

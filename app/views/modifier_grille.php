@@ -95,7 +95,7 @@ if (isset($_GET["idGrille"])){
                 <div class="scrollable-grid">
                     <div id="crossword">
                         <?php
-                            echo GrilleManager::createGridHTML(withInput:false)
+                            echo GrilleManager::createGridHTML(false);
                         ?>
                     </div>
                 </div>
