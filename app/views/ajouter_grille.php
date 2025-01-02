@@ -65,7 +65,7 @@ DefinitionManager::setDimension($rows,$cols);
                         <input type="number" id="grid-size-y" class="grid-size" value="<?php echo $rows ?>" min="5" max=15>
                     </div>
 
-                    <button id="generate-grid">Générer grille</button>
+                    <!-- <button id="generate-grid">Générer grille</button> -->
 
                     <!-- Sauvegarde de la grille -->
                 <div class="save">

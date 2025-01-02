@@ -3,12 +3,9 @@ namespace controllers;
 require_once (__DIR__ . '/../model/Grilles.php');
 require_once (__DIR__ . '/../model/Parties.php');
 require_once (__DIR__ . '/../model/Cases.php');
-require_once (__DIR__ . '/UserManager.php');
 use model\Grilles;
 use model\Parties;
 use model\Cases;
-use controllers\UserManager;
-use model\Definitions;
 use PDOException;
 use Exception;
 

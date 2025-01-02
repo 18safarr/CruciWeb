@@ -170,7 +170,7 @@ class DefinitionManager {
         $html .= '<label>Solution</label>';
         $html .= '<input type="text" class="def-sol" value="' . htmlspecialchars($solution) . '" placeholder="Solution">';
         $html .= '<button class="supp-def">X</button>';
-        $html .= '<button class="valider-def">&#x2713;</button>';
+        // $html .= '<button class="valider-def">&#x2713;</button>';
         $html .= '</div>';
         return $html;
     }

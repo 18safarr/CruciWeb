@@ -2,7 +2,6 @@
 namespace controllers;
 require_once (__DIR__ . '/../model/Users.php');
 use model\Users;
-use PDO;
 use PDOException;
 
 class UserManager{

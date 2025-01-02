@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("password", password);
 
             // Envoi des données via fetch (AJAX)
-            fetch("app/controllers/ajax/register.php", {
+            fetch("app/controllers/ajax/save_user.php", {
                 method: "POST",
                 body: formData,
             })

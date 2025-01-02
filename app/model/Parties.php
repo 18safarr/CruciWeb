@@ -1,6 +1,5 @@
 <?php
 namespace model;
-// require_once '../app/App.php';
 require_once (__DIR__ . '/../config/App.php');
 use config\App;
 class Parties{

@@ -24,18 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    /**
-     * Générer une nouvelle grille
-     * Ce bouton envoie une requête POST au serveur pour générer une grille.
-     * Les dimensions de la grille (colonnes et lignes) sont saisies par l'utilisateur.
-     * 
-     * La grille est ensuite affichée dans le conteneur #crossword.
+      /**
+     * Générer une nouvelle grille à partir des listes déroulantes
+     * Ce script remplace le bouton "Générer" par l'interaction directe avec les listes déroulantes.
+     * Lorsqu'une des listes est modifiée, une nouvelle grille est générée.
      */
-    document.addEventListener("click", function (e) {
-        if (e.target && e.target.id === "generate-grid") {
+
+      document.addEventListener("change", function (e) {
+        // Vérifier si l'événement provient des listes déroulantes
+        if (e.target && (e.target.id === "grid-size-x" || e.target.id === "grid-size-y")) {
             const cols = document.getElementById('grid-size-x').value; // Nombre de colonnes
             const rows = document.getElementById('grid-size-y').value; // Nombre de lignes
-        
+
             // Envoyer les données au serveur
             fetch('app/controllers/ajax/loadGrille.php', {
                 method: 'POST',
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('crossword').innerHTML = html; // Injection de la grille reçue du serveur
             })
             .catch(error => console.error('Erreur lors du chargement de la grille:', error)); // Gestion des erreurs
-    
         }
     });
+
    
 
     /**
